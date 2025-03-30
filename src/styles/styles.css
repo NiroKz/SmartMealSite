@@ -6,7 +6,7 @@
 @import url('footer.css');
 
 :root {
-    --color-primary-1: #fff9ea;
+    --color-primary-1: #f8e9e0;
     --color-primary-2: #ffe8b4;
     --color-primary-3: #f8d477;
     --color-primary-4: #ffe100;
@@ -53,6 +53,25 @@ section {
 .btn-default:hover {
     background-color: var(--color-primary-3);
 }
+
+.btn-name {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-5);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 600;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.btn-name:hover {
+    background-color: var(--color-primary-3);
+}
+
 
 .social-media-buttons {
     display: flex;

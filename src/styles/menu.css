@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    background-image: url('/src/images/background3.png');
+    background-size: cover;
 }
 
 #dishes {

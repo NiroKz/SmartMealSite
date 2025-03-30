@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     gap: 48px;
+    background-image: url('/src/images/background2.png');
+    background-size: cover;
 }
 
 #testimonial_chef {
