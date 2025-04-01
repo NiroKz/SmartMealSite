@@ -58,38 +58,45 @@ $(document).ready(function() {
         distance: '20%'
     })
 
-const controls = document.querySelectorAll(".control");
-let currentItem = 0;
-const items = document.querySelectorAll(".item");
-const maxItems = items.length;
-
-controls.forEach((control) => {
-    control.addEventListener("click", (e) => {
-        const isLeft = e.target.classList.contains("arrow-left");
-
-        if (isLeft) {
-            currentItem -= 1;
-        } else {
-            currentItem += 1;
-        }
-
-        if (currentItem >= maxItems) {
-            currentItem = 0;
-        }
-
-        if (currentItem < 0) {
-            currentItem = maxItems - 1;
-        }
-
-        items.forEach((item) => item.classList.remove("current-item"));
-
-        items[currentItem].scrollIntoView({
-            behavior: "smooth",
-            inline: "center",
+    const controls = document.querySelectorAll(".control");
+    let currentItem = 0;
+    const items = document.querySelectorAll(".item");
+    const maxItems = items.length;
+    
+    // Função para atualizar o item ativo
+    const updateCurrentItem = (index) => {
+        items.forEach((item) => item.classList.remove("current-item")); // Remove a classe de todos os itens
+        items[index].classList.add("current-item"); // Adiciona a classe ao item selecionado
+    };
+    
+    // Evento para as setas de navegação
+    controls.forEach((control) => {
+        control.addEventListener("click", (e) => {
+            const isLeft = e.target.classList.contains("arrow-left");
+    
+            if (isLeft) {
+                currentItem -= 1;
+            } else {
+                currentItem += 1;
+            }
+    
+            if (currentItem >= maxItems) {
+                currentItem = 0;
+            }
+    
+            if (currentItem < 0) {
+                currentItem = maxItems - 1;
+            }
+    
+            updateCurrentItem(currentItem); // Atualiza o item ativo
         });
-
-        items[currentItem].classList.add("current-item");
     });
-});
-
+    
+    // Evento para selecionar o card ao clicar
+    items.forEach((item, index) => {
+        item.addEventListener("click", () => {
+            currentItem = index; // Atualiza o índice atual para o card clicado
+            updateCurrentItem(currentItem); // Atualiza o item ativo
+        });
+    });
 });

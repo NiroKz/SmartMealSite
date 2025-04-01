@@ -114,69 +114,96 @@ section {
 
 .container {
     position: relative;
-    padding: 15px;
-    max-width: 640px;
+    padding: 23px;
+    max-width: 960px; /* Aumente a largura máxima do carrossel */
     margin: 0 auto;
 }
 
 .gallery-wrapper {
-    overflow-x: auto;
-}
-
-.arrow-left,
-.arrow-right {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: auto;
-    bottom: 0;
-    font-size: 20px;
-    line-height: 250px;
-    width: 40px;
-    color: #fff;
-    transition: all 600ms ease-in-out;
-    background: linear-gradient(to left, transparent 0%, black 200%);
-    opacity: 0.1;
-    cursor: pointer;
-    border: none;
-}
-
-.arrow-left:hover,
-.arrow-right:hover {
-    opacity: 1;
-}
-
-.arrow-right {
-    right: 0;
-    left: auto;
-    text-align: right;
-    background: linear-gradient(to right, transparent 0%, black 200%);
+    overflow: hidden; /* Oculta a barra de rolagem e impede que os itens sejam cortados */
+    position: relative;
+    width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
 }
 
 .gallery {
     display: flex;
     flex-flow: row nowrap;
-    gap: 15px;
+    gap: 20px; /* Espaçamento entre os itens */
+    justify-content: center; /* Centraliza os itens no contêiner */
+    scroll-behavior: smooth; /* Rolagem suave */
+    
 }
 
 .item {
-    width: 250px;
-    height: 250px;
+    width: 300px; /* Largura fixa para os cards */
+    height: auto;
     flex-shrink: 0;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
     transition: all 600ms ease-in-out;
     opacity: 0.5;
 }
 
+.item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
 .current-item {
     opacity: 1;
+    transform: scale(1.1); /* Aumenta o tamanho do item ativo */
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Esconde a barra de rolagem */
-.gallery-wrapper::-webkit-scrollbar {
-    display: none;
+.dish-title {
+    font-size: 1.5rem; /* Aumente o tamanho da fonte do título */
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
 }
 
-.gallery-wrapper {
-    -ms-overflow-style: none; /* IE e Edge */
-    scrollbar-width: none; /* Firefox */
+.dish-description {
+    font-size: 1rem; /* Aumente o tamanho da fonte da descrição */
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.dish-price {
+    font-size: 1.2rem; /* Aumente o tamanho da fonte do preço */
+    font-weight: bold;
+    color: #e63946;
+}
+
+.current-item {
+    opacity: 1;
+    transform: scale(1.1); /* Destaque o item ativo */
+}
+
+.arrow-left,
+.arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px; /* Aumente o tamanho dos botões de navegação */
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.arrow-left {
+    left: 10px;
+}
+
+.arrow-right {
+    right: 10px;
 }
