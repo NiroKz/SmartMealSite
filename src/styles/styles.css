@@ -115,12 +115,12 @@ section {
 .container {
     position: relative;
     padding: 23px;
-    max-width: 960px; /* Aumente a largura máxima do carrossel */
+    max-width: 1100px; /* Aumente a largura máxima do carrossel */
     margin: 0 auto;
 }
 
 .gallery-wrapper {
-    overflow: hidden; /* Oculta a barra de rolagem e impede que os itens sejam cortados */
+    overflow: visible; /* Permite que os itens não sejam cortados */
     position: relative;
     width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
 }
@@ -128,7 +128,7 @@ section {
 .gallery {
     display: flex;
     flex-flow: row nowrap;
-    gap: 20px; /* Espaçamento entre os itens */
+gap: 40px; /* Increased spacing between items */
     justify-content: center; /* Centraliza os itens no contêiner */
     scroll-behavior: smooth; /* Rolagem suave */
     
@@ -160,6 +160,11 @@ section {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.current-item:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+}
+
 .dish-title {
     font-size: 1.5rem; /* Aumente o tamanho da fonte do título */
     font-weight: bold;
@@ -186,24 +191,23 @@ section {
 
 .arrow-left,
 .arrow-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px; /* Aumente o tamanho dos botões de navegação */
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
+    display: none;
 }
 
 .arrow-left {
-    left: 10px;
+    display: none;
 }
 
-.arrow-right {
-    right: 10px;
+.item {
+    width: 40%; /* Increased width for larger cards */
+    flex-grow: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.5;
 }
+
+.item:hover {
+    transform: scale(1.05);
+    opacity: 1;
+    cursor: pointer;
+}
+
