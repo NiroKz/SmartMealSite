@@ -57,7 +57,7 @@ nav ul li a {
 }
 
 h2 {
-    font-size: 64px;
+    font-size: 80px;
     font-weight: bold;
 }
 
@@ -80,4 +80,138 @@ h2 {
     width: 100%; 
     height: auto; 
     border-radius: 8%;
+}
+
+.custom-section .card-wrapper {
+    position: relative;
+    width: 340px;
+    height: 220px;
+}
+
+.custom-section .card {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: white;
+    border-radius: 36px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+.custom-section .card:hover {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.custom-section .card-2 {
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transform: translate(-80px, -80px);
+    opacity: 0.9;
+}
+
+
+.custom-section .card-1 {
+    top: 200px;
+    left: 350px;
+    z-index: 2;
+}
+
+.custom-section .card h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.custom-section .card p {
+    color: #666;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.custom-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 300px auto; /* Centraliza horizontalmente */
+    margin-bottom: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    min-height: 600px; /* Ajuste a altura mínima para caber a imagem */
+}
+
+.custom-section::before {
+    content: '';
+    position: absolute;
+    top: -140px; /* Move a imagem para cima */
+    left: -230px; /* Move a imagem para a esquerda */
+    width: 160%; /* Faz a imagem ser maior que a largura da seção */
+    height: 160%; /* Faz a imagem ser maior que a altura da seção */
+    background-image: url('../images/Plate.png');
+    background-size: contain; /* Garante que a imagem seja exibida inteira */
+    background-repeat: no-repeat;
+    background-position: center; /* Centraliza a imagem */
+    opacity: 0.5; /* Reduz a opacidade apenas da imagem */
+    z-index: -2; /* Coloca a imagem atrás do conteúdo */
+}
+
+footer {
+    background-image: url('../images/footer.png'); /* Caminho relativo para a imagem */
+    background-size: 100% 100%; /* Estica a imagem para ocupar toda a área */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    background-position: center; /* Centraliza a imagem */
+    background-color: #fde8bd; /* Define uma cor de fundo para a área transparente */
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 250px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    display: flex;
+    justify-content:space-between;
+    margin: 0 auto;
+    gap: 65%;
+    align-items: flex-end; 
+    height: 100%;
+}
+
+.footer-container p {
+    margin: 0; /* Remove margens extras */
+    text-align: left; /* Alinha o texto à esquerda */
+    font-size: 20px; /* Ajusta o tamanho da fonte */
+}
+
+footer nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+}
+
+footer nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px; /* Reduz a distância entre os ícones */
+    padding: 0;
+    justify-content: center; /* Centraliza os ícones */
+}
+
+footer nav ul li a {
+    color: black;
+    font-size: 32px; /* Aumenta o tamanho dos ícones */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer nav ul li a:hover {
+    color: #333; /* Cor ao passar o mouse */
 }
