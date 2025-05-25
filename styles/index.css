@@ -64,9 +64,9 @@ h2 {
 
 .carousel {
     position: relative;
-    overflow: visible; /* Permite que o fundo ultrapasse os limites da section */
+    overflow: visible; 
     z-index: 0;
-    background: none; /* Remove o background-image direto */
+    background: none; 
 }
 
 .carousel::before {
@@ -74,16 +74,16 @@ h2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 1500px;   /* absurdamente grande */
-    height: 1000px;  /* absurdamente grande */
+    width: 1500px; 
+    height: 1000px;  
     transform: translate(-50%, -50%);
     background-image: url('../images/Tablet.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: -1; /* Fica atrás dos cards */
+    z-index: -1; 
     pointer-events: none;
-    opacity: 0.3; /* ajuste se quiser transparência */
+    opacity: 0.3; 
 }
 
 .card {
@@ -133,8 +133,8 @@ h2 {
     left: 0;
     z-index: 1;
     transform: translate(-80px, -80px);
-    text-align: left;        /* Alinha à esquerda */
-    padding: 2.5rem;         /* Espaço interno maior, opcional */
+    text-align: left;       
+    padding: 2.5rem;         
 }
 
 
@@ -162,36 +162,36 @@ h2 {
 .custom-section {
     width: 100%;
     max-width: 800px;
-    margin: 300px auto; /* Centraliza horizontalmente */
+    margin: 300px auto; 
     margin-bottom: 400px;
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
     position: relative;
-    min-height: 600px; /* Ajuste a altura mínima para caber a imagem */
+    min-height: 600px; 
 }
 
 .custom-section::before {
     content: '';
     position: absolute;
-    top: -140px; /* Move a imagem para cima */
-    left: -230px; /* Move a imagem para a esquerda */
-    width: 160%; /* Faz a imagem ser maior que a largura da seção */
-    height: 160%; /* Faz a imagem ser maior que a altura da seção */
+    top: -140px; 
+    left: -230px; 
+    width: 160%; 
+    height: 160%; 
     background-image: url('../images/Plate.png');
-    background-size: contain; /* Garante que a imagem seja exibida inteira */
+    background-size: contain; 
     background-repeat: no-repeat;
-    background-position: center; /* Centraliza a imagem */
-    opacity: 0.5; /* Reduz a opacidade apenas da imagem */
-    z-index: -2; /* Coloca a imagem atrás do conteúdo */
+    background-position: center; 
+    opacity: 0.5; 
+    z-index: -2; 
 }
 
 footer {
-    background-image: url('../images/footer.png'); /* Caminho relativo para a imagem */
-    background-size: 100% 100%; /* Estica a imagem para ocupar toda a área */
-    background-repeat: no-repeat; /* Evita repetição da imagem */
-    background-position: center; /* Centraliza a imagem */
-    background-color: #fde8bd; /* Define uma cor de fundo para a área transparente */
+    background-image: url('../images/footer.png'); 
+    background-size: 100% 100%; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-color: #fde8bd; 
     color: black;
     text-align: center;
     padding: 20px 0;
@@ -212,9 +212,9 @@ footer {
 }
 
 .footer-container p {
-    margin: 0; /* Remove margens extras */
-    text-align: left; /* Alinha o texto à esquerda */
-    font-size: 20px; /* Ajusta o tamanho da fonte */
+    margin: 0; 
+    text-align: left; 
+    font-size: 20px; 
 }
 
 footer nav ul {
@@ -227,20 +227,20 @@ footer nav ul {
 footer nav ul {
     list-style: none;
     display: flex;
-    gap: 10px; /* Reduz a distância entre os ícones */
+    gap: 10px; 
     padding: 0;
-    justify-content: center; /* Centraliza os ícones */
+    justify-content: center; 
 }
 
 footer nav ul li a {
     color: black;
-    font-size: 32px; /* Aumenta o tamanho dos ícones */
+    font-size: 32px; 
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 footer nav ul li a:hover {
-    color: #333; /* Cor ao passar o mouse */
+    color: #333; 
 }
 
 .carousel .card {
@@ -252,8 +252,8 @@ footer nav ul li a:hover {
     opacity: 0;
     z-index: 1;
     pointer-events: none;
-    width: 380px;      /* Mais estreito */
-    height: 500px;     /* Mais alto */
+    width: 380px;      
+    height: 500px;     
     font-size: 1.3rem;
     padding: 32px;
     box-sizing: border-box;
@@ -277,7 +277,7 @@ footer nav ul li a:hover {
 .carousel-track {
     position: relative;
     width: 100%;
-    height: 540px; /* igual ou maior que o card */
+    height: 540px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -292,14 +292,14 @@ footer nav ul li a:hover {
 
 .carousel .card.left {
     transform: translateX(-450px) scale(0.8);
-    opacity: 0.9; /* Menos transparente */
+    opacity: 0.9; 
     z-index: 2;
     pointer-events: auto;
 }
 
 .carousel .card.right {
     transform: translateX(450px) scale(0.8);
-    opacity: 0.9; /* Menos transparente */
+    opacity: 0.9; 
     z-index: 2;
     pointer-events: auto;
 }
