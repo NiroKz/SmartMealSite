@@ -9,6 +9,7 @@ body {
     text-align: center;
     background-color: #fde8bd;
     padding-top: 15.7vh;
+    align-items: center;
 }
 
 header {
@@ -240,7 +241,7 @@ footer nav ul li a {
 }
 
 footer nav ul li a:hover {
-    color: #333; 
+    color: #ff0000; 
 }
 
 .carousel .card {
