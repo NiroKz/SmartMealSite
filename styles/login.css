@@ -1,5 +1,4 @@
 @import "./index.css";
-
 * {
   margin: 0;
   padding: 0;
@@ -113,6 +112,10 @@ button:hover {
   color: #c0392b;
   text-decoration: none;
   font-weight: bold;
+}
+
+.tiny-text u{
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
