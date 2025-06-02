@@ -1,1 +1,220 @@
 @import "./index.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fde8bd;
+    color: #2d2d2d;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #645949;
+}
+
+main {
+    padding: 30px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.access-control {
+    background-color: #F2E4C8;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.access-control .percentage {
+    font-size: 4em;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.access-control .info {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.info div {
+    background-color: #ecdab4;
+    padding: 15px;
+    border-radius: 8px;
+    flex: 1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.icons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.icons a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.icons a:hover {
+    color: #645949;
+}
+
+.access-content {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.graph, .permission {
+    flex: 1;
+    min-width: 400px;
+    background-color: #F2E4C8;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.graph {
+    text-align: center;
+}
+
+.graph-image img {
+    max-width: 400px;
+    width: 100%;
+}
+
+.permission form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.permission input,
+.permission textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ecdab4;
+}
+
+.permission textarea {
+    height: 100px;
+    resize: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.buttons button {
+    flex: 1;
+    padding: 10px;
+    background-color: #645949;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #4a4237;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: #f2e4c8;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.radio-container label {
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+.radio-container input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #645949;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.radio-container input[type="radio"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: scale(0);
+    background-color: #645949;
+    transition: transform 0.2s ease-in-out;
+}
+
+.radio-container input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+.radio-container input[type="radio"]:hover {
+    border-color: #4a4237;
+}
+
+@media (max-width: 900px) {
+    .access-control .info {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
