@@ -12,7 +12,7 @@ body {
 }
 
 header {
-    font-family: Helvetica, Arial, sans-serif;  
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;  
     width: 100%;
     position: absolute;
     top: 0;
@@ -25,17 +25,41 @@ header {
     background-color: #f6ebd5;
     color: black;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
-}
-
-img {
-    width: 14%; 
-    height: auto;
+    z-index: 10;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.logo-container img {
+    width: 100px;
+    height: auto;
+}
+
+
+nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #645949;
+}
+
+img {
+    width: 14%; 
+    height: auto;
 }
 
 nav ul {
@@ -74,16 +98,16 @@ h2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 1500px; 
-    height: 1000px;  
+    width: 1500px;
+    height: 1000px;
     transform: translate(-50%, -50%);
     background-image: url('../images/Tablet.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: -1; 
+    z-index: -1;
     pointer-events: none;
-    opacity: 0.3; 
+    opacity: 0.3;
 }
 
 .card {
@@ -106,43 +130,40 @@ h2 {
     border-radius: 36px;
 }
 
+/* DESKTOP: cards grandes e sobrepostos */
 .custom-section .card-wrapper {
     position: relative;
-    width: 340px;
-    height: 220px;
+    width: 1200px;
+    height: 800px;
+    margin: 0 auto;
 }
 
 .custom-section .card {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 700px;
+    height: 700px;
     background: white;
     border-radius: 36px;
     box-shadow: 0 20px 30px rgba(0,0,0,0.1);
-    padding: 1.5rem;
+    padding: 3.5rem;
     box-sizing: border-box;
     transition: box-shadow 0.3s ease;
-}
-
-.custom-section .card:hover {
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
 .custom-section .card-2 {
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2 !important;
     transform: translate(-80px, -80px);
-    text-align: left;       
-    padding: 2.5rem;         
+    text-align: left;
+    padding: 4rem;
 }
 
-
 .custom-section .card-1 {
-    padding: 0%;
-    top: 200px;
-    left: 350px;
-    z-index: 2;
+    top: 320px;
+    left: 420px;
+    z-index: 1 !important;
+    padding: 2rem;
 }
 
 .custom-section .card h2 {
@@ -174,16 +195,16 @@ h2 {
 .custom-section::before {
     content: '';
     position: absolute;
-    top: -140px; 
-    left: -230px; 
-    width: 160%; 
-    height: 160%; 
+    top: -140px;
+    left: -230px;
+    width: 160%;
+    height: 160%;
     background-image: url('../images/Plate.png');
-    background-size: contain; 
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center; 
-    opacity: 0.5; 
-    z-index: -2; 
+    background-position: center;
+    opacity: 0.5;
+    z-index: -2;
 }
 
 footer {
@@ -199,14 +220,15 @@ footer {
     bottom: 0;
     width: 100%;
     height: 250px;
+    min-height: 120px;
 }
 
 .footer-container {
     max-width: 1200px;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     margin: 0 auto;
-    gap: 65%;
+    gap: 40px;
     align-items: flex-end; 
     height: 100%;
 }
@@ -221,13 +243,6 @@ footer nav ul {
     list-style: none;
     display: flex;
     gap: 10px;
-    padding: 0;
-}
-
-footer nav ul {
-    list-style: none;
-    display: flex;
-    gap: 10px; 
     padding: 0;
     justify-content: center; 
 }
@@ -302,4 +317,108 @@ footer nav ul li a:hover {
     opacity: 0.9; 
     z-index: 2;
     pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .logo-container img {
+        width: 80px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .control {
+        padding: 15px;
+    }
+
+    .form-box input {
+        width: 100%;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    footer {
+        height: auto;
+        padding: 30px 10px;
+        background-size: cover;
+    }
+
+    .carousel-track {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        gap: 16px;
+    }
+
+    .carousel .card,
+    .custom-section .card,
+    .custom-section .card-1,
+    .custom-section .card-2 {
+        position: static !important;
+        width: 85vw;
+        max-width: 85vw;
+        min-width: 120px;
+        height: auto;
+        min-height: 180px;
+        margin: 0 auto;
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: 1 !important;
+        pointer-events: auto;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel .card.left,
+    .carousel .card.right,
+    .carousel .card.active {
+        transform: none !important;
+        opacity: 1 !important;
+        z-index: 1 !important;
+    }
+
+    .custom-section .card-2,
+    .custom-section .card-1 {
+        min-height: 180px;
+    }
+
+    .custom-section .card-wrapper {
+        width: 98vw;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .carousel::before,
+    .custom-section::before {
+        background-image: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .add-button {
+        flex-direction: column;
+        gap: 5px;
+    }
 }
