@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <title>Smart Meal</title>
+        <link rel="stylesheet" href="../styles/login.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    </head>
+<body>
+    <header>
+        <div class="logo-container">
+        <img src="../images/SmartMealLogo.png"> 
+        <h1>Smart Meal</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html"><b>Home</b> </a></li>
+                <li><a href="/html/register.html"><b>Começar agora</b></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <div class="page-wrapper">
+      <div class="container">
+        <div class="left-panel">
+          <div class="logo">
+            <img src="../images/SmartMealLogo.png" alt="Smart Meal Logo" style="width:100%; height:100%;">
+          </div>
+        </div>
+        <div class="right-panel">
+          <h1>Faça seu Login:</h1>
+          <form action="/login" method="POST">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
+            
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <p class="tiny-text"><u>Senha foi gerada no cadastro e enviada por email.</u></p>
+
+            <button type="submit">Entrar</button>
+          </form>
+          <p class="tiny-text">Ainda não tem uma conta? <a href="/html/register.html">Criar</a></p>
+        </div>
+      </div>
+    </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p><b>&copy; 2025 Smart Meal</b></p>
+            <nav>
+                <ul>
+                    <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
