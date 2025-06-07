@@ -27,7 +27,7 @@ main {
 .container {
   display: flex;
   width: 800px;
-  height: 600px; /*Quando o role da senha estiver certa tem q mudar o valor desse campo pra 500px*/
+  height: 500px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
