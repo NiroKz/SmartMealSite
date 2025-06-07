@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   cpf VARCHAR(14) NOT NULL UNIQUE,
   email VARCHAR(100) NOT NULL,
   telefone VARCHAR(20),
-  senha VARCHAR(255) NOT NULL
+  senha VARCHAR(255) DEFAULT NULL
 );
+
+select * from usuarios;
