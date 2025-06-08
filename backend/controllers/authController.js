@@ -3,6 +3,7 @@ const tempPasswords = {}; // { [email]: senha_temporaria }
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const axios = require("axios");
+const jwt = require("jsonwebtoken");
 const User = require("../models/UserModel");
 
 exports.register = (req, res) => {
@@ -30,7 +31,8 @@ exports.prelogin = async (req, res) => {
 
   User.findUserByEmail(email, async (err, results) => {
     if (err) return res.status(500).send("Erro no servidor.");
-    if (results.length === 0) return res.status(404).send("Email não encontrado.");
+    if (results.length === 0)
+      return res.status(404).send("Email não encontrado.");
 
     const user = results[0];
     const tempPassword = crypto.randomBytes(4).toString("hex");
@@ -51,14 +53,17 @@ exports.prelogin = async (req, res) => {
           headers: {
             Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
             "Content-Type": "application/json",
-          }
+          },
         }
       );
 
       res.redirect("/html/login.html");
       console.log("Prelogin realizado com sucesso");
     } catch (emailErr) {
-      console.error("Erro ao enviar email:", emailErr.response?.data || emailErr);
+      console.error(
+        "Erro ao enviar email:",
+        emailErr.response?.data || emailErr
+      );
       res.status(500).send("Erro ao enviar email.");
     }
   });
@@ -80,16 +85,40 @@ exports.login = (req, res) => {
     const tempPassword = tempPasswords[email];
 
     if (!tempPassword) {
-      return res.status(400).send("Nenhuma senha temporária foi gerada. Tente novamente.");
+      return res
+        .status(400)
+        .send("Nenhuma senha temporária foi gerada. Tente novamente.");
     }
 
+    const secret = process.env.JWT_SECRET || "chave_super_secreta"; // ideal usar variável de ambiente
+
     if (password === tempPassword) {
-      // Libera acesso
       delete tempPasswords[email]; // apaga após uso
-      res.redirect("/html/hall.html");
+
+      const token = jwt.sign(
+        {
+          id_usuario: user.id_usuario,
+          email: user.email,
+          nome: user.nome_usuario,
+        },
+        secret,
+        { expiresIn: "2h" }
+      );
+
       console.log("Login realizado com sucesso");
+
+      return res.json({
+        mensagem: "Login bem-sucedido.",
+        token,
+        usuario: {
+          id: user.id_usuario,
+          nome: user.nome_usuario,
+          email: user.email,
+        },
+      });
     } else {
-      res.status(401).send('<h2>Senha incorreta.</h2><a href="/html/login.html">Tentar novamente</a>');
+      // Se senha incorreta, responder erro
+      return res.status(401).send("Senha incorreta.");
     }
   });
 };

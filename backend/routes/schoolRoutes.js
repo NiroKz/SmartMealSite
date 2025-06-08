@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Escola = require('../models/schoolModel');
 const db = require('../config/db');
+const autenticarToken = require('../middleware/authMiddleware'); // Adicione isso
 
-router.post('/addSchools', (req, res) => {
-    const { id_usuario, nome_escola, rua_endereco, fone } = req.body;
+// POST: Adicionar escola (usa id_usuario do token)
+router.post('/addSchools', autenticarToken, (req, res) => {
+    const { nome_escola, rua_endereco, fone } = req.body;
+    const id_usuario = req.usuario.id_usuario; // extraído do token
 
     if (!id_usuario || !nome_escola || !rua_endereco || !fone) {
         return res.status(400).json({ erro: 'Preencha todos os campos!' });
@@ -23,10 +26,12 @@ router.post('/addSchools', (req, res) => {
     });
 });
 
-router.get('/listSchool', (req, res) => {
-    const sql = 'SELECT nome_escola, rua_endereco, fone FROM escola';
+// GET: Listar apenas escolas do usuário logado
+router.get('/listSchool', autenticarToken, (req, res) => {
+    const id_usuario = req.usuario.id_usuario;
 
-    db.query(sql, (err, results) => {
+    const sql = 'SELECT nome_escola, rua_endereco, fone FROM escola WHERE id_usuario = ?';
+    db.query(sql, [id_usuario], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ erro: 'Erro ao buscar escolas.' });
@@ -35,6 +40,5 @@ router.get('/listSchool', (req, res) => {
         res.json(results);
     });
 });
-
 
 module.exports = router;
