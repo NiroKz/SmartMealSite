@@ -13,6 +13,7 @@
         .perms-content { display: none; }
         .perms-content.active { display: block; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -69,7 +70,7 @@
         <section class="graph">
             <h2>Gráfico de Acesso</h2>
             <div class="graph-image">
-                <img src="../images/Graph.png" alt="Access graph">
+                <canvas id="graficoAlunosPorCurso" width="300px" height="150px"></canvas>
             </div>
         </section>
         <section class="permission">
@@ -306,6 +307,7 @@
 
     <div id="modulos-container" style="display:none;"></div>
     <script src="../js/accessControl.js"></script>
+    <script src="../js/graficoAlunos.js"></script>
 </body>
 
     <footer>
