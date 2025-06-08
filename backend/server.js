@@ -16,8 +16,11 @@ app.use(express.static("public"));
 const authRoutes = require("./routes/authRoutes");
 app.use("/auth", authRoutes);
 
-const graficoRoutes = require('./routes/graficoRoutes');
-app.use('/api', graficoRoutes);
+const graphicRoutes = require('./routes/graphicRoutes');
+app.use('/graphic', graphicRoutes);
+
+const schoolRoutes = require('./routes/schoolRoutes');
+app.use('/school', schoolRoutes);
 
 // Inicia o servidor
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
-async function criarGrafico() {
+async function createGraphic() {
   try {
-    const response = await fetch("/api/alunos-por-curso");
+    const response = await fetch("/graphic/studentsCurses");
     const dados = await response.json();
 
     // Extrair labels e dados do resultado
@@ -19,7 +19,7 @@ async function criarGrafico() {
     const borderColors = bgColors.map((c) => c.replace("0.6", "1"));
 
     const ctx = document
-      .getElementById("graficoAlunosPorCurso")
+      .getElementById("graphicStudents")
       .getContext("2d");
 
     new Chart(ctx, {
@@ -51,4 +51,4 @@ async function criarGrafico() {
 }
 
 // Chama a função para criar o gráfico assim que a página carregar
-window.onload = criarGrafico;
+window.onload = createGraphic;

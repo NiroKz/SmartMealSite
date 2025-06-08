@@ -1,6 +1,6 @@
 const db = require('../config/db');
 
-exports.alunosPorCurso = (req, res) => {
+exports.studentsCurses = (req, res) => {
   const query = `
     SELECT t.curso, COUNT(a.id_rm) AS total_alunos
     FROM aluno a
