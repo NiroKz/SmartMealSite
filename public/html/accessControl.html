@@ -6,7 +6,7 @@
     <title>Controle de Acesso</title>
     <link rel="stylesheet" href="../styles/accessControl.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -63,7 +63,7 @@
         <section class="graph">
             <h2>Gráfico de Acesso</h2>
             <div class="graph-image">
-                <img src="../images/Graph.png" alt="Access graph">
+                <canvas id="graphicStudents" width="300px" height="150px"></canvas>
             </div>
         </section>
         <section class="permission">
@@ -282,6 +282,7 @@
     </main>
 <div id="modulos-container" style="display:none;"></div>
 <script src="../js/accessControl.js"></script>
+    <script src="../js/graphicStudent.js"></script>
 
 <footer>
     <div class="footer-container">
