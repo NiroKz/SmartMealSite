@@ -46,3 +46,80 @@ function irParaSecao(secaoId) {
     document.querySelectorAll('.access-control2 a')[tabMap[secaoId]].classList.add('selected');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function renderCalendar(month, year) {
+    const calendar = document.getElementById('calendar');
+    calendar.innerHTML = '';
+
+    const date = new Date(year, month, 1);
+    const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+    const monthNames = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
+    const header = document.createElement('div');
+    header.className = 'calendar-header';
+    header.innerHTML = `
+        <button id="prevMonth">&lt;</button>
+        <span>${monthNames[month]} ${year}</span>
+        <button id="nextMonth">&gt;</button>
+    `;
+    calendar.appendChild(header);
+
+    const table = document.createElement('table');
+    table.className = 'calendar-table';
+    let thead = '<thead><tr>';
+    days.forEach(d => thead += `<th>${d}</th>`);
+    thead += '</tr></thead>';
+    table.innerHTML = thead;
+
+    let tbody = '<tbody><tr>';
+    let firstDay = date.getDay();
+    let lastDate = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+        tbody += '<td></td>';
+    }
+
+    for (let day = 1; day <= lastDate; day++) {
+        if ((firstDay + day - 1) % 7 === 0 && day !== 1) tbody += '</tr><tr>';
+        tbody += `<td class="calendar-day" data-day="${day}">${day}</td>`;
+    }
+
+    let lastCell = (firstDay + lastDate) % 7;
+    if (lastCell !== 0) {
+        for (let i = lastCell; i < 7; i++) {
+            tbody += '<td></td>';
+        }
+    }
+    tbody += '</tr></tbody>';
+    table.innerHTML += tbody;
+    calendar.appendChild(table);
+
+    document.getElementById('prevMonth').onclick = () => {
+        let m = month - 1, y = year;
+        if (m < 0) { m = 11; y--; }
+        renderCalendar(m, y);
+    };
+    document.getElementById('nextMonth').onclick = () => {
+        let m = month + 1, y = year;
+        if (m > 11) { m = 0; y++; }
+        renderCalendar(m, y);
+    };
+
+    document.querySelectorAll('.calendar-day').forEach(td => {
+        td.onclick = () => {
+            document.querySelectorAll('.calendar-day.selected').forEach(e => e.classList.remove('selected'));
+            td.classList.add('selected');
+        };
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarDiv = document.getElementById('calendar');
+    if (calendarDiv) {
+        const today = new Date();
+        renderCalendar(today.getMonth(), today.getFullYear());
+    }
+});

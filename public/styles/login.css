@@ -1,4 +1,7 @@
 @import "./index.css";
+@import "./header.css";
+@import "./footer.css";
+
 * {
   margin: 0;
   padding: 0;
@@ -166,34 +169,4 @@ button:hover {
     font-size: 14px;
     padding: 10px;
   }
-}
-
-.footer {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-bottom: 50px;
-}
-
-.footer-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.footer-content {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
-  align-items: center;
-  font-weight: bold;
-}
-
-.social-icons i {
-  margin-left: 15px;
-  font-size: 1.5rem;
 }

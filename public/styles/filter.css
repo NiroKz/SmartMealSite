@@ -1,4 +1,6 @@
 @import "./index.css";
+@import "./header.css";
+@import "./footer.css";
 
 body {
     font-family: 'Montserrat', Arial, sans-serif;
