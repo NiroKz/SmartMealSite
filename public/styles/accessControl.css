@@ -622,6 +622,24 @@ h2 {
     font-size: 1.5rem;
     margin-left: 18px;
 }
+.tab-section { 
+    display: none; 
+}
+
+.tab-section.active { 
+    display: block; 
+}
+.access-control2 a.selected { 
+    color: #fff; 
+    background: #645949;
+    border-radius: 8px; 
+}
+.perms-content { 
+    display: none; 
+}
+.perms-content.active { 
+    display: block; 
+}
 
 @media (max-width: 600px) {
     .access-control2 {
