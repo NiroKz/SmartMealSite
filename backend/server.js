@@ -25,6 +25,9 @@ app.use("/school", schoolRoutes);
 const studentAccessRoutes = require("./routes/studentAccessRoutes");
 app.use("/studentAccess", studentAccessRoutes);
 
+const studentLiberationRoute = require('./routes/liberationRoutes');
+app.use("/studentLiberation", studentLiberationRoute);
+
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
   console.error(err.stack);

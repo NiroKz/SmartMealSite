@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -20,7 +22,7 @@
             </ul>
         </nav>
     </header>
-<br><br><br><br><br><br>
+    <br><br><br><br><br><br>
     <main>
         <section class="access-control2">
             <a class="selected" href="#" onclick="showTab(event, 'acesso')">Controle de Acesso</a>
@@ -31,270 +33,272 @@
         <br>
 
         <section id="acesso" class="tab-section active">
-    <section class="access-control">
-        <h2>Controle de Acesso</h2>
-        <div class="icons">
-            <a href="#"><i class="fas fa-calendar-alt"></i></a>
-            <a href="./filter.html"><i class="fas fa-filter"></i></a>
-        </div>
-        <p>Alunos que comeram hoje:</p>
-        <div class="percentage">
-            <span> %</span>
-        </div>
-        <div class="info">
-            <div>
-                <h3>Almoço</h3>
-                <p>Qtd: </p>
-                <p>Inicio: 12:00</p>
-                <p>Fim: 13:00</p>
-            </div>
-            <div>
-                <h3>Janta</h3>
-                <p>Qtd: </p>
-                <p>Inicio: 17:30</p>
-                <p>Fim: 19:00</p>
-            </div>
-        </div>
-        <div class="buttons" style="margin-top: 32px;">
-            <button type="button">Gerar Relatório</button>
-        </div>
-    </section>
-    <div class="access-content">
-        <section class="graph">
-            <h2>Gráfico de Acesso</h2>
-            <div class="graph-image">
-                <canvas id="graphicStudents" width="300px" height="150px"></canvas>
+            <section class="access-control">
+                <h2>Controle de Acesso</h2>
+                <div class="icons">
+                    <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                    <a href="./filter.html"><i class="fas fa-filter"></i></a>
+                </div>
+                <p>Alunos que comeram hoje:</p>
+                <div class="percentage">
+                    <span> %</span>
+                </div>
+                <div class="info">
+                    <div>
+                        <h3>Almoço</h3>
+                        <p>Qtd: </p>
+                        <p>Inicio: 12:00</p>
+                        <p>Fim: 13:00</p>
+                    </div>
+                    <div>
+                        <h3>Janta</h3>
+                        <p>Qtd: </p>
+                        <p>Inicio: 17:30</p>
+                        <p>Fim: 19:00</p>
+                    </div>
+                </div>
+                <div class="buttons" style="margin-top: 32px;">
+                    <button type="button">Gerar Relatório</button>
+                </div>
+            </section>
+            <div class="access-content">
+                <section class="graph">
+                    <h2>Gráfico de Acesso</h2>
+                    <div class="graph-image">
+                        <canvas id="graphicStudents" width="300px" height="150px"></canvas>
+                    </div>
+                </section>
+                <section class="permission">
+                    <h2>Permissão de Acesso</h2>
+                    <form id="liberation-form">
+                        <label>RM:
+                            <input type="text" name="rm">
+                        </label>
+                        <label>Almoço:
+                            <input type="date" name="lunch">
+                        </label>
+                        <label>Janta:
+                            <input type="date" name="dinner">
+                        </label>
+                        <label>Justificativa:
+                            <textarea name="justification"></textarea>
+                        </label>
+                        <div class="radio-container">
+                            <label for="repetition">Repetição</label>
+                            <input type="radio" id="repetition" name="option">
+                        </div>
+                        <div class="buttons">
+                            <button type="button">Alterar Permissão Temporariamente</button>
+                            <button type="submit">Alterar Permissão</button>
+                        </div>
+                        <div class="buttons">
+                            <button type="reset">Limpar</button>
+                        </div>
+                    </form>
+                </section>
             </div>
         </section>
-        <section class="permission">
-            <h2>Permissão de Acesso</h2>
-            <form>
-                <label>RM:
-                    <input type="text" name="rm">
-                </label>
-                <label>Almoço:
-                    <input type="date" name="lunch">
-                </label>
-                <label>Janta:
-                    <input type="date" name="dinner">
-                </label>
-                <label>Justificativa:
-                    <textarea name="justification"></textarea>
-                </label>
-                <div class="radio-container">
-                    <label for="repetition">Repetição</label>
-                    <input type="radio" id="repetition" name="option">
-                </div>
-                <div class="buttons">
-                    <button type="button">Alterar Permissão Temporariamente</button>
-                    <button type="submit">Alterar Permissão</button>
-                </div>
-                <div class="buttons">
-                    <button type="reset">Limpar</button>
-                </div>
-            </form>
+
+        <section id="refeicao" class="tab-section">
+            <section class="access-control">
+                <h2>Controle de Refeições</h2>
+                <div class="meal-flex">
+                    <form class="meal-form">
+                        <label>Refeição do dia:
+                            <input type="text" name="refeicao-dia" placeholder="Ex: Almoço">
+                        </label>
+                        <label>Quanto foi feito:
+                            <input type="text" name="feito" placeholder="Ex: 200 refeições">
+                        </label>
+                        <label>Quanto sobrou:
+                            <input type="text" name="sobrou" placeholder="Ex: 80 refeições">
+                        </label>
+                        <label>OBS:
+                            <input type="text" name="obs" placeholder="Observações">
+                        </label>
+                    </form>
+                    <div class="meal-calendar">
+                        <div id="calendar"></div>
+                    </div>
+                    <div class="meal-graph">
+                        <svg width="300" height="300" viewBox="0 0 32 32">
+                            <circle r="16" cx="16" cy="16" fill="#f4c542" />
+                            <path d="M16 16 L16 0 A16 16 0 1 1 4.7 27.3 Z" fill="#c62828" />
+                        </svg>
+                        <div class="graph-labels">
+                            <span style="position:absolute; left:0; top:60%;">Sobra<br>40%</span>
+                            <span style="position:absolute; right:0; top:60%;">Feito<br>60%</span>
+                        </div>
+                    </div>
+            </section>
         </section>
-    </div>
-</section>
 
-<section id="refeicao" class="tab-section">
-    <section class="access-control">
-        <h2>Controle de Refeições</h2>
-        <div class="meal-flex">
-            <form class="meal-form">
-                <label>Refeição do dia:
-                    <input type="text" name="refeicao-dia" placeholder="Ex: Almoço">
-                </label>
-                <label>Quanto foi feito:
-                    <input type="text" name="feito" placeholder="Ex: 200 refeições">
-                </label>
-                <label>Quanto sobrou:
-                    <input type="text" name="sobrou" placeholder="Ex: 80 refeições">
-                </label>
-                <label>OBS:
-                    <input type="text" name="obs" placeholder="Observações">
-                </label>
-            </form>
-            <div class="meal-calendar">
-    <div id="calendar"></div>
-        </div>
-        <div class="meal-graph">
-            <svg width="300" height="300" viewBox="0 0 32 32">
-                <circle r="16" cx="16" cy="16" fill="#f4c542"/>
-                <path d="M16 16 L16 0 A16 16 0 1 1 4.7 27.3 Z" fill="#c62828"/>
-            </svg>
-            <div class="graph-labels">
-                <span style="position:absolute; left:0; top:60%;">Sobra<br>40%</span>
-                <span style="position:absolute; right:0; top:60%;">Feito<br>60%</span>
-            </div>
-        </div>
-    </section>
-</section>
-
-<section id="estoque" class="tab-section">
-    <section class="access-control">
-        <h2>Controle de Estoque</h2>
-        <div class="estoque-table-container">
-            <table class="estoque-table">
-                <thead>
-                    <tr>
-                        <th>Lote</th>
-                        <th>Data</th>
-                        <th>Quantd.</th>
-                        <th>Validade</th>
-                        <th>Produto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>12347</td>
-                        <td>22/05</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>45689</td>
-                        <td>22/05</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>20478</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>27320</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>10569</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>29806</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>47698</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-</section>
-
-<section id="admin" class="tab-section">
-    <section class="access-control">
-        <h2>Escolas</h2>
-        <div class="admin-escolas-flex">
-            <div class="admin-escolas-list">
-                <div class="admin-escola-card" onclick="mostrarModulos('ETEC Jorge Street')">
-                    <div>
-                        <b>ETEC Jorge Street</b><br>
-                        Rua Bel Aliance, 149<br>
-                        +55 11 4328-7935
-                    </div>
-                    <button class="admin-escola-btn">&#9654;</button>
+        <section id="estoque" class="tab-section">
+            <section class="access-control">
+                <h2>Controle de Estoque</h2>
+                <div class="estoque-table-container">
+                    <table class="estoque-table">
+                        <thead>
+                            <tr>
+                                <th>Lote</th>
+                                <th>Data</th>
+                                <th>Quantd.</th>
+                                <th>Validade</th>
+                                <th>Produto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12347</td>
+                                <td>22/05</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>45689</td>
+                                <td>22/05</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>20478</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>27320</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>10569</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>29806</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>47698</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="admin-escola-card" onclick="mostrarModulos('EMEF Maria da Conceição')">
-                    <div>
-                        <b>EMEF Bartolomeu Bueno da Silva</b><br>
-                        R. Maranhão, 82<br>
-                        +55 11 4242-0083
-                    </div>
-                    <button class="admin-escola-btn">&#9654;</button>
-                </div>
-                <div class="admin-escola-card" >
-                    <span>Adicionar uma Escola</span>
-                    <button class="admin-escola-btn">+</button>
-                </div>
-            </div>
-            <div class="admin-escola-form">
-                <label>Nome:<input type="text"></label>
-                <label>Endereço:<input type="text"></label>
-                <label>Telefone:<input type="text"></label>
-            </div>
-        </div>
+            </section>
+        </section>
 
-        <h2 class="admin-func-title">Funcionários</h2>
-        <div class="admin-func-flex">
-            <div class="admin-func-perms">
-    <button class="perms-toggle" onclick="togglePerms(this)">
-        <b>Permissões <span class="arrow">&#9650;</span></b>
-    </button>
-    <div class="perms-content">
-        <div><u>Controle de Acesso</u><br>Maria Silva<br>Pedro Quito</div>
-        <div><u>Controle de Refeições</u><br>Olindo Freitas<br>Maria Bonita<br>Dário Pinto</div>
-        <div><u>Controle de Estoque</u><br>Maria Silva<br>Pedro Quito</div>
-        <div><u>Administrador</u><br>Olindo Freitas<br>Maria Bonita<br>Dário Pinto</div>
-    </div>
-</div>
-            <div class="admin-func-add">
-                <b>Adicionar Funcionários</b>
-                <form>
-                    <label>CPF:
-                        <input type="text" placeholder="Digite o CPF">
-                    </label>
-                    <label>Permissão de telas:
-                        <select>
-                            <option>Controle de Acesso</option>
-                            <option>Controle de Refeições</option>
-                            <option>Controle de Estoque</option>
-                            <option>Administração</option>
-                        </select>
-                    </label>
-                    <div class="admin-func-telas">
-                        <div>Controle de Acesso</div>
-                        <div>Controle de Refeições</div>
-                        <div>Controle de Estoque</div>
-                        <div>Administração</div>
+        <section id="admin" class="tab-section">
+            <section class="access-control">
+                <h2>Escolas</h2>
+                <div class="admin-escolas-flex">
+                    <div class="admin-escolas-list">
+                        <div class="admin-escola-card" onclick="mostrarModulos('ETEC Jorge Street')">
+                            <div>
+                                <b>ETEC Jorge Street</b><br>
+                                Rua Bel Aliance, 149<br>
+                                +55 11 4328-7935
+                            </div>
+                            <button class="admin-escola-btn">&#9654;</button>
+                        </div>
+                        <div class="admin-escola-card" onclick="mostrarModulos('EMEF Maria da Conceição')">
+                            <div>
+                                <b>EMEF Bartolomeu Bueno da Silva</b><br>
+                                R. Maranhão, 82<br>
+                                +55 11 4242-0083
+                            </div>
+                            <button class="admin-escola-btn">&#9654;</button>
+                        </div>
+                        <div class="admin-escola-card">
+                            <span>Adicionar uma Escola</span>
+                            <button class="admin-escola-btn">+</button>
+                        </div>
                     </div>
-                    <div class="buttons" style="margin-top: 14px;">
-                        <button type="submit">Adicionar</button>
-                        <button type="reset">Limpar</button>
+                    <div class="admin-escola-form">
+                        <label>Nome:<input type="text"></label>
+                        <label>Endereço:<input type="text"></label>
+                        <label>Telefone:<input type="text"></label>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div class="admin-relatorio-btn-wrap">
-            <button class="admin-relatorio-btn">Gerar Relatório (PDF)</button>
-        </div>
-    </section>
-</section>
+                </div>
+
+                <h2 class="admin-func-title">Funcionários</h2>
+                <div class="admin-func-flex">
+                    <div class="admin-func-perms">
+                        <button class="perms-toggle" onclick="togglePerms(this)">
+                            <b>Permissões <span class="arrow">&#9650;</span></b>
+                        </button>
+                        <div class="perms-content">
+                            <div><u>Controle de Acesso</u><br>Maria Silva<br>Pedro Quito</div>
+                            <div><u>Controle de Refeições</u><br>Olindo Freitas<br>Maria Bonita<br>Dário Pinto</div>
+                            <div><u>Controle de Estoque</u><br>Maria Silva<br>Pedro Quito</div>
+                            <div><u>Administrador</u><br>Olindo Freitas<br>Maria Bonita<br>Dário Pinto</div>
+                        </div>
+                    </div>
+                    <div class="admin-func-add">
+                        <b>Adicionar Funcionários</b>
+                        <form>
+                            <label>CPF:
+                                <input type="text" placeholder="Digite o CPF">
+                            </label>
+                            <label>Permissão de telas:
+                                <select>
+                                    <option>Controle de Acesso</option>
+                                    <option>Controle de Refeições</option>
+                                    <option>Controle de Estoque</option>
+                                    <option>Administração</option>
+                                </select>
+                            </label>
+                            <div class="admin-func-telas">
+                                <div>Controle de Acesso</div>
+                                <div>Controle de Refeições</div>
+                                <div>Controle de Estoque</div>
+                                <div>Administração</div>
+                            </div>
+                            <div class="buttons" style="margin-top: 14px;">
+                                <button type="submit">Adicionar</button>
+                                <button type="reset">Limpar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="admin-relatorio-btn-wrap">
+                    <button class="admin-relatorio-btn">Gerar Relatório (PDF)</button>
+                </div>
+            </section>
+        </section>
     </main>
-<div id="modulos-container" style="display:none;"></div>
-<script src="../js/accessControl.js"></script>
+    <div id="modulos-container" style="display:none;"></div>
+    <script src="../js/accessControl.js"></script>
     <script src="../js/graphicStudent.js"></script>
+    <script src="../js/liberation.js"></script>
 
-<footer>
-    <div class="footer-container">
-        <p><b>&copy; 2025 Smart Meal</b></p>
-        <nav>
-            <ul>
-                <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-            </ul>
-        </nav>
-    </div>
-</footer>
+    <footer>
+        <div class="footer-container">
+            <p><b>&copy; 2025 Smart Meal</b></p>
+            <nav>
+                <ul>
+                    <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
 </body>
+
 </html>

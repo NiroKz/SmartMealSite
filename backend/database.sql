@@ -14,6 +14,8 @@ foreign key(id_turma) references turma(id_turma),
 foreign key(id_biometria) references biometria(id_biometria)
 );
 
+select * from aluno;
+
 create table biometria (
 id_biometria int auto_increment primary key,
 hash_digital1 varchar(256),
@@ -81,6 +83,11 @@ motivo varchar(140),
 foreign key(id_rm) references aluno(id_rm)
 );
 
+ALTER TABLE liberacao_excecao
+ADD COLUMN tipo_refeicao ENUM('almoço', 'jantar') AFTER id_rm,
+ADD COLUMN tipo_permissao ENUM('temporária', 'permanente') AFTER tipo_refeicao,
+ADD COLUMN data_permitida DATE AFTER tipo_permissao;
+
 create table turma (
 id_turma int auto_increment primary key,
 curso varchar(4),
@@ -123,7 +130,7 @@ fone char(11), -- 99 99999-9999 --
 foreign key(id_usuario) references usuario(id_usuario)
 );
 
-select nome_escola, rua_endereco, fone from escola;
+-- inserts fictícios (gerson cleida tairone)
 
 INSERT INTO turma (curso, periodo, grade, date_matricula)
 VALUES
@@ -198,4 +205,17 @@ INSERT INTO refeicao (id_rm, data_hora, tipo_refeicao)
 SELECT id_rm, NOW(), 'jantar'
 FROM aluno
 WHERE RAND() <= 0.5;
+
+SELECT
+  (SELECT COUNT(DISTINCT id_rm) FROM refeicao WHERE DATE(data_hora) = CURDATE()) AS total_today,
+  (SELECT COUNT(*) FROM aluno) AS total_students,
+  (SELECT COUNT(*) FROM refeicao WHERE tipo_refeicao = 'almoço' AND DATE(data_hora) = CURDATE()) AS lunch_count,
+  (SELECT COUNT(*) FROM refeicao WHERE tipo_refeicao = 'jantar' AND DATE(data_hora) = CURDATE()) AS dinner_count;
+  
+  SELECT le.id_excecao, le.id_rm, a.nome_aluno, le.data_horario, le.motivo, le.tipo_refeicao, le.tipo_permissao, le.data_permitida
+FROM liberacao_excecao le
+JOIN aluno a ON le.id_rm = a.id_rm
+WHERE le.id_rm BETWEEN 10001 AND 10005
+ORDER BY le.data_horario DESC;
+
 
