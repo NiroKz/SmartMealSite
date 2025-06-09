@@ -1,88 +1,23 @@
+@import "./header.css";
+@import "./footer.css";
+
 *{
     margin: 0%;
     padding: 0%;
     text-decoration: none;
     box-sizing: border-box;
 }
+html,
 body {
     font-family: Helvetica, Arial, sans-serif;
     text-align: center;
     background-color: #fde8bd;
     padding-top: 15.7vh;
-}
-
-header {
-    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;  
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 34px 10px 40px;
-    background-color: #f6ebd5;
-    color: black;
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-container img {
-    width: 100px;
-    height: auto;
-}
-
-
-nav ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #645949;
-}
-
-img {
-    width: 14%; 
-    height: auto;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.intro {
-    margin: 20px;
-}
-
-h2 {
-    font-size: 80px;
-    font-weight: bold;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -130,7 +65,6 @@ h2 {
     border-radius: 36px;
 }
 
-/* DESKTOP: cards grandes e sobrepostos */
 .custom-section .card-wrapper {
     position: relative;
     width: 1200px;
@@ -204,58 +138,7 @@ h2 {
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.5;
-    z-index: -2;
-}
-
-footer {
-    background-image: url('../images/footer.png'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    background-color: #fde8bd; 
-    color: black;
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 250px;
-    min-height: 120px;
-}
-
-.footer-container {
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    gap: 40px;
-    align-items: flex-end; 
-    height: 100%;
-}
-
-.footer-container p {
-    margin: 0; 
-    text-align: left; 
-    font-size: 20px; 
-}
-
-footer nav ul {
-    list-style: none;
-    display: flex;
-    gap: 10px;
-    padding: 0;
-    justify-content: center; 
-}
-
-footer nav ul li a {
-    color: black;
-    font-size: 32px; 
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-footer nav ul li a:hover {
-    color: #ff0000; 
+    z-index: 0;
 }
 
 .carousel .card {
@@ -320,40 +203,11 @@ footer nav ul li a:hover {
 }
 
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .logo-container img {
-        width: 80px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
 
     .control {
         padding: 15px;
     }
 
-    .form-box input {
-        width: 100%;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    footer {
-        height: auto;
-        padding: 30px 10px;
-        background-size: cover;
-    }
 
     .carousel-track {
         flex-direction: column;
@@ -409,16 +263,5 @@ footer nav ul li a:hover {
     .carousel::before,
     .custom-section::before {
         background-image: none !important;
-    }
-}
-
-@media (max-width: 480px) {
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    .add-button {
-        flex-direction: column;
-        gap: 5px;
     }
 }

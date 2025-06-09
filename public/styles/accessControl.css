@@ -1,4 +1,6 @@
 @import "./index.css";
+@import "./header.css";
+@import "./footer.css";
 
 * {
     margin: 0;
@@ -639,6 +641,52 @@ h2 {
 }
 .perms-content.active { 
     display: block; 
+}
+
+.tab-section {
+    display: none;
+}
+.tab-section.active {
+    display: block;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background: #222;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 0 10px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.calendar-header span {
+    font-size: 1.15rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.calendar-header button {
+    background: #fff;
+    color: #222;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 14px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.calendar-header button:hover {
+    background: #645949;
+    color: #fff;
 }
 
 @media (max-width: 600px) {
