@@ -5,16 +5,29 @@ const formatDateTimeForMySQL = (date) => {
   return d.toISOString().slice(0, 19).replace('T', ' ');
 };
 
-const createLiberation = (studentId, datetime, reason) => {
+const createLiberation = (studentId, datetime, reason, mealType, permissionType, canRepeat) => {
   return new Promise((resolve, reject) => {
     const formattedDateTime = formatDateTimeForMySQL(datetime);
-    const query = 'INSERT INTO liberacao_excecao (id_rm, data_horario, motivo) VALUES (?, ?, ?)';
-    connection.query(query, [studentId, formattedDateTime, reason], (err, results) => {
+    const query = `
+      INSERT INTO liberacao_excecao 
+      (id_rm, tipo_refeicao, tipo_permissao, data_permitida, data_horario, motivo, permitir_repeticao)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    
+    const values = [
+      studentId,
+      mealType,
+      permissionType === "temporary" ? "temporária" : "permanente",
+      formattedDateTime.split(" ")[0],
+      formattedDateTime,
+      reason,
+      canRepeat ? 1 : 0,
+    ];
+
+    connection.query(query, values, (err, results) => {
       if (err) return reject(err);
       resolve(results);
     });
   });
 };
-
 
 module.exports = { createLiberation };
