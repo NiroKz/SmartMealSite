@@ -1,59 +1,6 @@
 create database tcc_relacao;
 use tcc_relacao;
 
-/* 
--> Inserção dos dados fictícios (gerson chico trindade)
-INSERT INTO turma (curso, periodo, grade, date_matricula)
-VALUES
-('INFO', 'M', 'A', CURDATE()),
-('MEC',  'T', 'B', CURDATE()),
-('ADM',  'N', 'C', CURDATE()),
-('AUTO', 'M', 'D', CURDATE()),
-('PTEC', 'T', 'E', CURDATE());
-
--- id_turma = 1 → INFO
--- id_turma = 2 → MEC
--- id_turma = 3 → ADM
--- id_turma = 4 → AUTO
--- id_turma = 5 → PTEC
-
-DELIMITER $$
-
-CREATE PROCEDURE inserir_alunos()
-BEGIN
-  DECLARE i INT DEFAULT 1;
-  DECLARE rm INT DEFAULT 10001;
-  WHILE i <= 200 DO
-    INSERT INTO aluno (id_rm, id_turma, id_biometria, nome_aluno, autorizacao_biometrica, data_autorizacao, aluno)
-    VALUES (
-      rm,
-      FLOOR(1 + RAND() * 5), -- id_turma aleatório de 1 a 5
-      NULL,
-      CONCAT('Aluno', i),
-      TRUE,
-      CURDATE(),
-      CONCAT('Aluno', i)
-    );
-    SET i = i + 1;
-    SET rm = rm + 1;
-  END WHILE;
-END $$
-
-DELIMITER ;
-
--- Executa o procedimento
-CALL inserir_alunos();
-
--- Remove o procedimento se desejar
-DROP PROCEDURE inserir_alunos;
-
--> Consulta do dados fictícios dos alunos para o gráfico 
-SELECT t.curso, COUNT(*) AS total_alunos
-FROM aluno a
-JOIN turma t ON a.id_turma = t.id_turma
-GROUP BY t.curso;
-*/
-
 create table aluno (
 id_rm int(5) primary key,
 id_turma int,
@@ -151,7 +98,6 @@ email varchar(320),
 is_usuario_admin boolean
 );
 
-select * from usuario;
 
 create table acesso(
 id_acess int auto_increment primary key,
@@ -176,3 +122,80 @@ rua_endereco varchar(35),
 fone char(11), -- 99 99999-9999 --
 foreign key(id_usuario) references usuario(id_usuario)
 );
+
+select nome_escola, rua_endereco, fone from escola;
+
+INSERT INTO turma (curso, periodo, grade, date_matricula)
+VALUES
+('INFO', 'M', '1', CURDATE()),
+('MEC',  'T', '2', CURDATE()),
+('ADM',  'N', '3', CURDATE()),
+('AUTO', 'M', '2', CURDATE()),
+('PTEC', 'T', '3', CURDATE());
+
+DELIMITER $$
+
+CREATE PROCEDURE inserir_alunos_variados()
+BEGIN
+  DECLARE turma_id INT DEFAULT 1;
+  DECLARE min_alunos INT;
+  DECLARE max_alunos INT;
+  DECLARE total_alunos INT;
+  DECLARE i INT;
+  DECLARE rm INT DEFAULT 10001;
+
+  WHILE turma_id <= 5 DO
+    CASE turma_id
+      WHEN 1 THEN BEGIN SET min_alunos=30; SET max_alunos=60; END;
+      WHEN 2 THEN BEGIN SET min_alunos=20; SET max_alunos=50; END;
+      WHEN 3 THEN BEGIN SET min_alunos=15; SET max_alunos=40; END;
+      WHEN 4 THEN BEGIN SET min_alunos=20; SET max_alunos=50; END;
+      WHEN 5 THEN BEGIN SET min_alunos=10; SET max_alunos=30; END;
+    END CASE;
+
+    -- total_alunos aleatório entre min e max
+    SET total_alunos = FLOOR(RAND() * (max_alunos - min_alunos + 1)) + min_alunos;
+
+    SET i = 1;
+    WHILE i <= total_alunos DO
+      INSERT INTO aluno (id_rm, id_turma, id_biometria, nome_aluno, autorizacao_biometrica, data_autorizacao, aluno)
+      VALUES (
+        rm,
+        turma_id,
+        NULL,
+        CONCAT('Aluno', rm),
+        TRUE,
+        CURDATE(),
+        CONCAT('Aluno', rm)
+      );
+      SET i = i + 1;
+      SET rm = rm + 1;
+    END WHILE;
+
+    SET turma_id = turma_id + 1;
+  END WHILE;
+END $$
+
+DELIMITER ;
+
+-- Executar o procedimento
+CALL inserir_alunos_variados();
+
+-- Depois pode apagar o procedimento se quiser
+DROP PROCEDURE inserir_alunos_variados;
+
+-- Apaga refeições do dia atual
+DELETE FROM refeicao WHERE DATE(data_hora) = CURDATE();
+
+-- Inserir refeições de almoço com 70% de chance para cada aluno
+INSERT INTO refeicao (id_rm, data_hora, tipo_refeicao)
+SELECT id_rm, NOW(), 'almoço'
+FROM aluno
+WHERE RAND() <= 0.7;
+
+-- Inserir refeições de jantar com 50% de chance para cada aluno
+INSERT INTO refeicao (id_rm, data_hora, tipo_refeicao)
+SELECT id_rm, NOW(), 'jantar'
+FROM aluno
+WHERE RAND() <= 0.5;
+
