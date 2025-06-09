@@ -212,10 +212,11 @@ SELECT
   (SELECT COUNT(*) FROM refeicao WHERE tipo_refeicao = 'almoço' AND DATE(data_hora) = CURDATE()) AS lunch_count,
   (SELECT COUNT(*) FROM refeicao WHERE tipo_refeicao = 'jantar' AND DATE(data_hora) = CURDATE()) AS dinner_count;
   
-  SELECT le.id_excecao, le.id_rm, a.nome_aluno, le.data_horario, le.motivo, le.tipo_refeicao, le.tipo_permissao, le.data_permitida
+  SELECT le.id_excecao, le.id_rm, a.nome_aluno, le.data_horario, le.motivo, le.tipo_refeicao, le.tipo_permissao, le.data_permitida, le.permitir_repeticao
 FROM liberacao_excecao le
 JOIN aluno a ON le.id_rm = a.id_rm
-WHERE le.id_rm BETWEEN 10001 AND 10005
+WHERE le.id_rm BETWEEN 10001 AND 10009
 ORDER BY le.data_horario DESC;
 
-
+ALTER TABLE liberacao_excecao
+ADD COLUMN permitir_repeticao BOOLEAN AFTER data_permitida;

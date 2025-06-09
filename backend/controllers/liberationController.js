@@ -3,7 +3,7 @@ const { createLiberation } = require("../models/liberationModel");
 const handleLiberation = async (req, res) => {
   console.log("Received liberation request body:", req.body);
   try {
-    const { rm, lunch, dinner, justification, option, repetir } = req.body;
+    const { rm, lunch, dinner, justification, option, repeat } = req.body;
 
     if (!rm || !justification || (!lunch && !dinner)) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -22,7 +22,7 @@ const handleLiberation = async (req, res) => {
 
     for (const item of liberations) {
       const datetime = new Date(item.date);
-      await createLiberation(rm, datetime, justification, item.type, option, repetir);
+      await createLiberation(rm, datetime, justification, item.type, option, repeat);
     }
 
     res.status(200).json({ message: "Liberation successfully created" });

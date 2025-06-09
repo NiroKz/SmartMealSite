@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lunchDate = form.lunch.value;
     const dinnerDate = form.dinner.value;
     const justification = form.justification.value;
+    const repeat = form.repeat.checked; 
 
     const meals = [];
     const mealDates = {};
@@ -26,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
       studentId,
       mealDates,
       meals,
-      justification
+      justification,
+      repeat,
     };
   };
 
@@ -37,9 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
         lunch: data.mealDates["lunch"] || null,
         dinner: data.mealDates["dinner"] || null,
         justification: data.justification,
-        option: permissionType === "temporary" ? "temporary" : "permanent"
+        option: permissionType === "temporary" ? "temporary" : "permanent",
+        repeat: data.repeat
       };
-      console.log(requestBody)
+      console.log(requestBody);
       const response = await fetch("/studentLiberation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
