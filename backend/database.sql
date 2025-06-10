@@ -75,6 +75,11 @@ foreign key(id_produto) references produto(id_produto),
 foreign key(id_refeicao) references refeicao(id_refeicao)
 );
 
+ALTER TABLE producao
+ADD COLUMN sobra DECIMAL(5,3),
+ADD COLUMN observacao VARCHAR(140);
+
+
 create table liberacao_excecao (
 id_excecao int auto_increment primary key,
 id_rm int(5),
@@ -87,6 +92,11 @@ ALTER TABLE liberacao_excecao
 ADD COLUMN tipo_refeicao ENUM('almoço', 'jantar') AFTER id_rm,
 ADD COLUMN tipo_permissao ENUM('temporária', 'permanente') AFTER tipo_refeicao,
 ADD COLUMN data_permitida DATE AFTER tipo_permissao;
+
+ALTER TABLE liberacao_excecao
+ADD COLUMN permitir_repeticao BOOLEAN AFTER data_permitida;
+
+desc liberacao_excecao;
 
 create table turma (
 id_turma int auto_increment primary key,
@@ -218,5 +228,3 @@ JOIN aluno a ON le.id_rm = a.id_rm
 WHERE le.id_rm BETWEEN 10001 AND 10009
 ORDER BY le.data_horario DESC;
 
-ALTER TABLE liberacao_excecao
-ADD COLUMN permitir_repeticao BOOLEAN AFTER data_permitida;

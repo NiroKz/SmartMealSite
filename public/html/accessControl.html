@@ -103,32 +103,26 @@
             <section class="access-control">
                 <h2>Controle de Refeições</h2>
                 <div class="meal-flex">
-                    <form class="meal-form">
+                    <form class="meal-form" id="mealForm">
                         <label>Refeição do dia:
-                            <input type="text" name="refeicao-dia" placeholder="Ex: Almoço">
+                            <input type="text" name="mealType" placeholder="Ex: Almoço" required>
                         </label>
                         <label>Quanto foi feito:
-                            <input type="text" name="feito" placeholder="Ex: 200 refeições">
+                            <input input type="number" step="0.001" name="quantityProduced" placeholder="Ex: 80kg" required>
                         </label>
                         <label>Quanto sobrou:
-                            <input type="text" name="sobrou" placeholder="Ex: 80 refeições">
+                            <input type="number" step="0.001" name="leftovers" placeholder="Ex: 10kg" required>
                         </label>
                         <label>OBS:
-                            <input type="text" name="obs" placeholder="Observações">
+                            <input type="text" name="notes" placeholder="Observações">
                         </label>
+                        <button type="submit">Save</button>
                     </form>
                     <div class="meal-calendar">
                         <div id="calendar"></div>
                     </div>
                     <div class="meal-graph">
-                        <svg width="300" height="300" viewBox="0 0 32 32">
-                            <circle r="16" cx="16" cy="16" fill="#f4c542" />
-                            <path d="M16 16 L16 0 A16 16 0 1 1 4.7 27.3 Z" fill="#c62828" />
-                        </svg>
-                        <div class="graph-labels">
-                            <span style="position:absolute; left:0; top:60%;">Sobra<br>40%</span>
-                            <span style="position:absolute; right:0; top:60%;">Feito<br>60%</span>
-                        </div>
+                        <canvas id="productionChart" width="600px" height="800px"></canvas>
                     </div>
             </section>
         </section>
@@ -286,6 +280,7 @@
     <script src="../js/accessControl.js"></script>
     <script src="../js/graphicStudent.js"></script>
     <script src="../js/liberation.js"></script>
+    <script src="../js/production.js"></script>
 
     <footer>
         <div class="footer-container">
