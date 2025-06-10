@@ -36,14 +36,6 @@ async function createGraphic() {
           },
         ],
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            precision: 0, // para não mostrar valores decimais
-          },
-        },
-      },
     });
   } catch (error) {
     console.error("Erro ao carregar dados do gráfico:", error);

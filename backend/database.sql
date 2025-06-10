@@ -79,6 +79,8 @@ ALTER TABLE producao
 ADD COLUMN sobra DECIMAL(5,3),
 ADD COLUMN observacao VARCHAR(140);
 
+select * from producao;
+
 
 create table liberacao_excecao (
 id_excecao int auto_increment primary key,
@@ -115,6 +117,10 @@ email varchar(320),
 is_usuario_admin boolean
 );
 
+select * from usuario;
+
+select * from escola;
+
 
 create table acesso(
 id_acess int auto_increment primary key,
@@ -139,6 +145,8 @@ rua_endereco varchar(35),
 fone char(11), -- 99 99999-9999 --
 foreign key(id_usuario) references usuario(id_usuario)
 );
+
+select * from escola;
 
 -- inserts fictícios (gerson cleida tairone)
 
@@ -225,6 +233,6 @@ SELECT
   SELECT le.id_excecao, le.id_rm, a.nome_aluno, le.data_horario, le.motivo, le.tipo_refeicao, le.tipo_permissao, le.data_permitida, le.permitir_repeticao
 FROM liberacao_excecao le
 JOIN aluno a ON le.id_rm = a.id_rm
-WHERE le.id_rm BETWEEN 10001 AND 10009
+WHERE le.id_rm BETWEEN 10001 AND 10012
 ORDER BY le.data_horario DESC;
 
