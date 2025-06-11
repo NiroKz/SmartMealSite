@@ -62,7 +62,7 @@ function createSchoolCard(school) {
       <span>${school.rua_endereco}</span>
       <span>${school.fone}</span>
     </div>
-    <div class="icon">▶</div>
+    <div class="icon"><a href="accessControl.html">▶</a></div>
   `;
 
   schoolList.appendChild(card);
