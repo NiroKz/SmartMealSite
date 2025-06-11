@@ -57,7 +57,6 @@ function createSchoolCard(school) {
   card.className = "school-card";
 
   card.innerHTML = `
-  <a href="accessControl.html">
     <div class="info">
       <b>${school.nome_escola}</b>
       <span>${school.rua_endereco}</span>
@@ -67,7 +66,6 @@ function createSchoolCard(school) {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
     <polygon points="30,20 80,50 30,80" fill="#333" />
     </svg>
-    </a>
   `;
 
   schoolList.appendChild(card);
