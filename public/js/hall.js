@@ -57,12 +57,14 @@ function createSchoolCard(school) {
   card.className = "school-card";
 
   card.innerHTML = `
+  <a href="accessControl.html">
     <div class="info">
       <b>${school.nome_escola}</b>
       <span>${school.rua_endereco}</span>
       <span>${school.fone}</span>
     </div>
-    <div class="icon"><a href="accessControl.html">▶</a></div>
+    <div class="icon">▶</div>
+  </a>
   `;
 
   schoolList.appendChild(card);
