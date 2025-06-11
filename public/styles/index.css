@@ -87,7 +87,7 @@ body {
 .custom-section .card-2 {
     top: 0;
     left: 0;
-    z-index: 2 !important;
+    z-index: 1 !important;
     transform: translate(-80px, -80px);
     text-align: left;
     padding: 4rem;
@@ -96,7 +96,7 @@ body {
 .custom-section .card-1 {
     top: 320px;
     left: 420px;
-    z-index: 1 !important;
+    z-index: 2 !important;
     padding: 2rem;
 }
 
