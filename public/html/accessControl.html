@@ -72,7 +72,7 @@
                     <h2>Permissão de Acesso</h2>
                     <form id="liberation-form">
                         <label>RM:
-                            <input type="text" name="rm">
+                            <input type="text" name="rm" maxlength="5" required>
                         </label>
                         <label>Almoço:
                             <input type="date" name="lunch">
@@ -81,7 +81,7 @@
                             <input type="date" name="dinner">
                         </label>
                         <label>Justificativa:
-                            <textarea name="justification"></textarea>
+                            <textarea name="justification" maxlength="140"></textarea>
                         </label>
                         <div class="checkbox-container">
                             <label for="repetition">Repetição</label>
