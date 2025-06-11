@@ -24,7 +24,19 @@
     </header>
     <br><br><br><br><br><br>
     <main>
-        <section class="access-control2">
+        <section id="modulos-section">
+            <div class="modulos-header">
+                <h1>${nomeEscola}</h1>
+                <h3>Você é diretor(a) desta escola</h3>
+            </div>
+            <div class="modulos-botoes">
+                <button class="modulo-btn" onclick="irParaSecao('acesso')">Controle de Acesso <span class="modulo-icone">&#9654;</span></button>
+                <button class="modulo-btn" onclick="irParaSecao('refeicao')">Controle de Refeições <span class="modulo-icone">&#9654;</span></button>
+                <button class="modulo-btn" onclick="irParaSecao('estoque')">Controle de Estoque <span class="modulo-icone">&#9654;</span></button>
+                <button class="modulo-btn" onclick="irParaSecao('admin')">Administração <span class="modulo-icone">&#9654;</span></button>
+            </div>
+        </section>
+        <section class="access-control2 tab-section">
             <a class="selected" href="#" onclick="showTab(event, 'acesso')">Controle de Acesso</a>
             <a href="#" class="tab" onclick="showTab(event, 'refeicao')">Controle de Refeições</a>
             <a href="#" class="tab" onclick="showTab(event, 'estoque')">Controle de Estoque</a>
@@ -32,7 +44,7 @@
         </section>
         <br>
 
-        <section id="acesso" class="tab-section active">
+        <section id="acesso" class="tab-section">
             <section class="access-control">
                 <h2>Controle de Acesso</h2>
                 <div class="icons">

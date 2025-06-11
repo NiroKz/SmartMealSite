@@ -1,13 +1,23 @@
-function showTab(event, tabId) {
-  event.preventDefault();
-  document
-    .querySelectorAll(".tab-section")
-    .forEach((sec) => sec.classList.remove("active"));
-  document.getElementById(tabId).classList.add("active");
-  document
-    .querySelectorAll(".access-control2 a")
-    .forEach((a) => a.classList.remove("selected"));
-  event.target.classList.add("selected");
+function showTab(event, secao) {
+    event.preventDefault();
+
+    // Atualiza a seleção visual das abas
+    document.querySelectorAll('.access-control2 a').forEach(function(tab) {
+        tab.classList.remove('selected');
+    });
+    event.target.classList.add('selected');
+
+    // Esconde todas as seções de conteúdo (menos a barra de abas)
+    document.querySelectorAll('.tab-section').forEach(function(section) {
+        if (!section.classList.contains('access-control2')) {
+            section.style.display = 'none';
+        }
+    });
+
+    // Mostra a barra de abas e a seção correspondente como bloco
+    document.querySelector('.access-control2').style.display = 'flex';
+    const secaoEl = document.getElementById(secao);
+    if (secaoEl) secaoEl.style.display = 'block';
 }
 
 function togglePerms(btn) {
@@ -17,66 +27,36 @@ function togglePerms(btn) {
   arrow.classList.toggle("down");
 }
 
-function mostrarModulos(nomeEscola) {
-  document.querySelector("main").style.display = "none";
-  const container = document.getElementById("modulos-container");
-  container.style.display = "block";
-  container.innerHTML = `
-        <div class="modulos-header">
-            <h1>${nomeEscola}</h1>
-            <h3>Você é diretor(a) desta escola</h3>
-        </div>
-        <div class="modulos-botoes">
-            <button class="modulo-btn" onclick="irParaSecao('acesso')">Controle de Acesso <span class="modulo-icone">&#9654;</span></button>
-            <button class="modulo-btn" onclick="irParaSecao('refeicao')">Controle de Refeições <span class="modulo-icone">&#9654;</span></button>
-            <button class="modulo-btn" onclick="irParaSecao('estoque')">Controle de Estoque <span class="modulo-icone">&#9654;</span></button>
-            <button class="modulo-btn" onclick="irParaSecao('admin')">Administração <span class="modulo-icone">&#9654;</span></button>
-        </div>
-    `;
-}
+function irParaSecao(secao) {
+    // Esconde o bloco de módulos
+    const modulosSection = document.getElementById('modulos-section');
+    if (modulosSection) modulosSection.style.display = 'none';
 
-function irParaSecao(secaoId) {
-  document.getElementById("modulos-container").style.display = "none";
-  document.querySelector("main").style.display = "block";
-  document
-    .querySelectorAll(".tab-section")
-    .forEach((sec) => sec.classList.remove("active"));
-  document.getElementById(secaoId).classList.add("active");
-  document
-    .querySelectorAll(".access-control2 a")
-    .forEach((a) => a.classList.remove("selected"));
-  const tabMap = {
-    acesso: 0,
-    refeicao: 1,
-    estoque: 2,
-    admin: 3,
-  };
-  document
-    .querySelectorAll(".access-control2 a")
-    [tabMap[secaoId]].classList.add("selected");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+    // Mostra a barra de abas
+    const accessControl2 = document.querySelector('.access-control2');
+    if (accessControl2) accessControl2.style.display = 'flex';
 
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("/studentAccess/today")
-    .then((res) => res.json())
-    .then((data) => {
-      const { total_today, total_students, lunch_count, dinner_count } = data;
-
-      const percentage =
-        total_students > 0
-          ? Math.round((total_today / total_students) * 100)
-          : 0;
-
-      document.querySelector(".percentage span").textContent = `${percentage}%`;
-
-      const infoDivs = document.querySelectorAll(".info > div");
-      if (infoDivs.length >= 2) {
-        infoDivs[0].querySelector("p").textContent = `Qtd: ${lunch_count}`;
-        infoDivs[1].querySelector("p").textContent = `Qtd: ${dinner_count}`;
-      }
-    })
-    .catch((error) => {
-      console.error("Failed to load student access data:", error);
+    // Mostra a seção correspondente
+    document.querySelectorAll('.tab-section').forEach(el => {
+        if (!el.classList.contains('access-control2')) {
+            el.style.display = 'none';
+        }
     });
+    const secaoEl = document.getElementById(secao);
+    if (secaoEl) secaoEl.style.display = 'block';
+
+    // Atualiza a seleção das abas
+    document.querySelectorAll('.access-control2 a').forEach(a => a.classList.remove('selected'));
+    const tab = Array.from(document.querySelectorAll('.access-control2 a')).find(a => a.getAttribute('onclick') && a.getAttribute('onclick').includes(secao));
+    if (tab) tab.classList.add('selected');
+}
+
+// Inicializa mostrando apenas o bloco de módulos ao carregar
+window.addEventListener('DOMContentLoaded', () => {
+    // Mostra só o bloco de módulos
+    const modulosSection = document.getElementById('modulos-section');
+    if (modulosSection) modulosSection.style.display = '';
+    // Esconde todas as seções de abas e a barra de abas
+    document.querySelectorAll('.tab-section').forEach(el => el.style.display = 'none');
+    document.querySelector('.access-control2').style.display = 'none';
 });
