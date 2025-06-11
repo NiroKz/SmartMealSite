@@ -89,6 +89,17 @@ h2 {
     color: #645949;
 }
 
+.play {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url('play.svg') no-repeat center;
+    background-size: contain;
+}
+
+.play:hover {
+    background: url('play-hover.svg') no-repeat center;
+}
 .access-content {
     display: flex;
     gap: 20px;

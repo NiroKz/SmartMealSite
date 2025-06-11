@@ -63,8 +63,11 @@ function createSchoolCard(school) {
       <span>${school.rua_endereco}</span>
       <span>${school.fone}</span>
     </div>
-    <div class="icon">▶</div>
-  </a>
+    <a class="play" href="accessControl.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
+    <polygon points="30,20 80,50 30,80" fill="#333" />
+    </svg>
+    </a>
   `;
 
   schoolList.appendChild(card);
