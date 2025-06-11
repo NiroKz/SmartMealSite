@@ -22,7 +22,7 @@ document.getElementById("mealForm").addEventListener("submit", async (e) => {
   });
 
   if (response.ok) {
-    alert("Production saved!");
+    //alert("Production saved!");
     renderChart(data.quantityProduced, data.leftovers);
   } else {
     alert("Error saving data.");

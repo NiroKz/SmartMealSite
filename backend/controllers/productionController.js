@@ -28,7 +28,7 @@ const registerProduction = async (req, res) => {
     };
 
     await insertProduction(productionData);
-    res.status(201).json({ message: 'Production registered successfully' });
+    //res.status(201).json({ message: 'Production registered successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });

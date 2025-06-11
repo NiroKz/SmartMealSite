@@ -22,7 +22,7 @@ router.post('/addSchools', autenticarToken, (req, res) => {
         }
 
         console.log('Escola cadastrada com sucesso');
-        res.status(201).json({ sucesso: 'Escola cadastrada com sucesso!' });
+        //res.status(201).json({ sucesso: 'Escola cadastrada com sucesso!' });
     });
 });
 
