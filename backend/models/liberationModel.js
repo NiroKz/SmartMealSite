@@ -1,18 +1,28 @@
-const connection = require('../config/db');
+const connection = require("../config/db");
 
 const formatDateTimeForMySQL = (date) => {
   const d = new Date(date);
-  return d.toISOString().slice(0, 19).replace('T', ' ');
+  return d.toISOString().slice(0, 19).replace("T", " ");
 };
 
-const createLiberation = (studentId, datetime, reason, mealType, permissionType, canRepeat) => {
+const createLiberation = (
+  studentId,
+  datetime,
+  reason,
+  mealType,
+  permissionType,
+  canRepeat
+) => {
   return new Promise((resolve, reject) => {
     const formattedDateTime = formatDateTimeForMySQL(datetime);
     const query = `
-      INSERT INTO liberacao_excecao 
-      (id_rm, tipo_refeicao, tipo_permissao, data_permitida, data_horario, motivo, permitir_repeticao)
-      VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    
+        INSERT INTO release_exception
+        (id-rm, meal_type, type_release, date_time, reason, allow_repeat)
+        VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+    //INSERT INTO liberacao_excecao
+    //(id_rm, tipo_refeicao, tipo_permissao, data_permitida, data_horario, motivo, permitir_repeticao)
+
     const values = [
       studentId,
       mealType,

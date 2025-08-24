@@ -5,7 +5,7 @@ const school = {
         const { id_usuario, nome_escola, rua_endereco, fone } = dados;
 
         const sql = `
-            INSERT INTO escola (id_usuario, nome_escola, rua_endereco, fone)
+            INSERT INTO school (id_user, school_name, address_road, phone)
             VALUES (?, ?, ?, ?)
         `;
 
