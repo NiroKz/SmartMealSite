@@ -1,41 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.carousel-track');
-    if (!track) return;
-    const cards = Array.from(track.children);
-    let currentIndex = 0;
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = Array.from(document.querySelectorAll('.carousel-track .card'));
+    let centerIndex = 1;
 
-    function updateCarousel() {
-        cards.forEach((card, idx) => {
-            card.classList.remove('active', 'left', 'right');
-            card.style.position = 'absolute';
-            card.style.opacity = '';
-            card.style.pointerEvents = '';
-            if (idx === currentIndex) {
-                card.classList.add('active');
-            } else if (idx === (currentIndex - 1 + cards.length) % cards.length) {
-                card.classList.add('left');
-            } else if (idx === (currentIndex + 1) % cards.length) {
-                card.classList.add('right');
-            } else {
-                card.style.opacity = 0;
-                card.style.pointerEvents = 'none';
-            }
+    function updatePositions() {
+        cards.forEach((card, i) => {
+            card.classList.remove('left', 'center', 'right');
         });
+        cards[(centerIndex + cards.length - 1) % cards.length].classList.add('left');
+        cards[centerIndex % cards.length].classList.add('center');
+        cards[(centerIndex + 1) % cards.length].classList.add('right');
     }
 
-    cards.forEach((card, idx) => {
+    cards.forEach((card, i) => {
         card.addEventListener('click', () => {
-            if (idx !== currentIndex) {
-                currentIndex = idx;
-                updateCarousel();
-            }
+            centerIndex = i;
+            updatePositions();
         });
     });
 
     setInterval(() => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        updateCarousel();
+        centerIndex = (centerIndex + 1) % cards.length;
+        updatePositions();
     }, 10000);
 
-    updateCarousel();
+    updatePositions();
 });

@@ -1,77 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Meal</title>
+    <link rel="icon" href="img/SmartMealLogo.png" type="image/png">
+    <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/index.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/footer.css">
 </head>
-
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="images/SmartMealLogo.png">
-            <h1>Smart Meal</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="html/register.html"><b>Começar agora</b> </a></li>
-                <li><a href="html/prelogin.html"><b>Entrar</b></a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="intro">
-        <br><br><br><br><br><br><br><br><br><br>
-        <h2>Apresentando a <br> Smart Meal</h2>
-        <br><br><br><br><br><br><br>
-    </section>
-    <section class="carousel" id="carousel">
-        <div class="carousel-track">
-            <div class="card">
-                <img class="pictures" src="images/moderno.png" alt="">
-                <br>
-                <h1>MODERNO</h1>Tecnologias<br> atuais
-            </div>
-            <div class="card">
-                <img class="pictures" src="images/pratico.png" alt="">
-                <br>
-                <h1>PRÁTICO</h1>Sistema<br>unificado
-            </div>
-            <div class="card">
-                <img class="pictures" src="images/compromisso.png" alt="">
-                <br>
-                <h1>COMPROMISSO</h1>Responsabilidade<br> social
-            </div>
-        </div>
-    </section>
-    <section class="custom-section">
-        <div class="card-wrapper">
-            <div class="card card-2">
-                <h2>NOSSA MISSÃO</h2>
-                <p>Em ambientes como refeitórios escolares, esse controle permite planejar
-                    a quantidade certa de comida a ser preparada, evitando desperdícios e
-                    garantindo que todos os alunos sejam atendidos. </p>
-            </div>
-            <div class="card card-1">
-                <img class="Specialpictures" src="images/Missão.jpg" alt="">
-            </div>
-        </div>
-    </section>
-    <footer>
-        <div class="footer-container">
-            <p><b>&copy; 2025 Smart Meal</b></p>
-            <nav>
-                <ul>
-                    <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                </ul>
-            </nav>
-        </div>
-    </footer>
-    <script src="js/script.js"></script>
-</body>
+    
+<header>
+    <div class="header-title">
+        <img src="images/SmartMealLogo.png" class="logo">
+        <h2>Smart Meal</h2>
+    </div>
+    <div class="header-buttons">
+       <a href="#home"><button class="button1"><b>Home</b></button></a>
+        <a href="html/register.html"><button class="button1"><b>Começar agora</b></button></a>
+       <a href="html/login.html"> <button><b>ENTRAR</b></button></a>
+    </div>
+</header>
 
+<section class="intro-section" id="home">
+    <div class="intro-text">
+        <h1>Apresentando <br>Smart Meal</h1>
+        <a href="#info"><button><b>SAIBA MAIS</b></button></a>
+    </div>
+    <div class="intro-image">
+        <img src="images/Image1.png" alt="Smart Meal" />
+    </div>
+</section>
+
+<section class="cards-section carousel">
+    <div class="carousel-track">
+        <div class="card">
+            <img src="images/moderno.png" alt="Receita 1"><br><br>
+            <h3><b>MODERNO</b></h3>
+            <p>Tecnologias <br>Atuais</p>
+        </div>
+        <div class="card">
+            <img src="images/pratico.png" alt="Receita 2"><br><br>
+            <h3><b>PRÁTICO</b></h3>
+            <p>Sistema <br>Unificado</p>
+        </div>
+        <div class="card">
+            <img src="images/compromisso.png" alt="Receita 3"><br><br>
+            <h3><b>COMPROMISSO</b></h3>
+            <p>Responsabilidade <br>Social</p>
+        </div>
+    </div>
+</section>
+
+<section class="info-section" id="info">
+    <div class="info-text">
+        <h2><b>NOSSA MISSÃO</b></h2>
+        <p>Em ambientes como refeitórios escolares, esse controle permite planejar a quantidade certa de comida
+         a ser preparada, evitando desperdícios e garantindo que todos os alunos sejam atendidos.</p>
+    </div>
+    <div class="info-image">
+        <img src="images/Missão.jpg" />
+    </div>
+
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-text">
+    <h2><b>Entre em contato</b></h2>
+    <p>Escolha o canal que preferir:</p>
+
+    <div class="contact">
+          <div class="contact-icon">
+     <a href="https://wa.me/5511943337834" target="_blank">
+        <img src="images/Whatsapp-icon.png" alt="WhatsApp">
+         <span class="contact-label">Whatsapp</span>
+      </a>
+  </div>
+  <div class="contact-icon">
+      <a href="https://instagram.com/smartmeal_ejs" target="_blank">
+        <img src="images/Instagram-icon.png" alt="Instagram">
+        <span class="contact-label">Instagram</span>
+      </a>
+    
+  </div>
+  <div class="contact-icon">
+      <a href="mailto:flavoroverview@gmail.com" target="_blank">
+        <img src="images/Gmail-icon.png" alt="Gmail">
+        <span class="contact-label">Gmail</span>
+      </a>
+  </div>
+</div>
+  </div>
+</section>
+
+<script src="js/script.js"></script>
+
+<footer>
+    <b><p>© 2025 Smart Meal.</p></b>
+</footer>
+</body>
 </html>
