@@ -47,7 +47,7 @@ exports.prelogin = async (req, res) => {
           from: "SmartMeal <onboarding@resend.dev>",
           to: email,
           subject: "Sua senha temporária",
-          html: `<p>Olá ${user.nome_usuario},</p><p>Sua senha temporária é: <strong>${tempPassword}</strong></p>`,
+          html: `<p>Olá ${user.user_name},</p><p>Sua senha temporária é: <strong>${tempPassword}</strong></p>`,
         },
         {
           headers: {
@@ -97,9 +97,9 @@ exports.login = (req, res) => {
 
       const token = jwt.sign(
         {
-          id_usuario: user.id_usuario,
+          id_user: user.id_user, // ✅ mudou de id_usuario para id_user
           email: user.email,
-          nome: user.nome_usuario,
+          name: user.user_name,
         },
         secret,
         { expiresIn: "2h" }
@@ -111,8 +111,8 @@ exports.login = (req, res) => {
         mensagem: "Login bem-sucedido.",
         token,
         usuario: {
-          id: user.id_usuario,
-          nome: user.nome_usuario,
+          id_user: user.id_user, // ✅ consistente
+          name: user.user_name,
           email: user.email,
         },
       });

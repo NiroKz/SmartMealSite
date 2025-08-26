@@ -131,6 +131,8 @@ foreign key(id_user) references school_user(id_user)
 );
 
 
+
+
 INSERT INTO biometrics (hash_digital1, hash_digital2, hash_digital3) VALUES
 ('abc123def456ghi789jkl000aaa111bbb222ccc333ddd444eee555fff666', 'eee999zzz888yyy777xxx666www555vvv444uuu333ttt222sss111rrr000', '123abc456def789ghi000jkl111mno222pqr333stu444vwx555yz666abc'),
 ('987xyz654wvu321tsr000qpo111nml222kjh333gfe444dcb555aaa666bbb', '654qwe321asd000zxc111rty222fgh333vbn444uio555jkl666mnb777lkj', '321cba654fed987ihg000lkj111onm222rqp333uts444vwx555zyx666wvu'),
@@ -286,5 +288,4 @@ select * from production;
 select * from release_exception;
 select * from school_user;
 select * from access;
-select * from school;
-
+select * from school;
