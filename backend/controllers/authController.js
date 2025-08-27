@@ -57,7 +57,8 @@ exports.prelogin = async (req, res) => {
         }
       );
 
-      res.redirect("/html/login.html");
+      //res.redirect("/html/login.html");
+      res.json({ sucesso: true, mensagem: "Email enviado com sucesso! Verifique sua caixa de entrada." });
       console.log("Prelogin realizado com sucesso");
     } catch (emailErr) {
       console.error(

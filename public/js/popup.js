@@ -1,15 +1,32 @@
-function showPopup(title, message) {
-  document.getElementById("popup-title").innerText = title;
-  document.getElementById("popup-message").innerText = message;
-  document.getElementById("popup").classList.remove("hidden");
+function showPopup(title, message, duration = 3000) {
+  const popup = document.getElementById("popup");
+  const titleEl = document.getElementById("popup-title");
+  const msgEl = document.getElementById("popup-message");
 
- 
+  titleEl.innerText = title;
+  msgEl.innerText = message;
+
+  // Remove barrinha antiga (se existir)
+  const oldBar = popup.querySelector(".progress-bar");
+  if (oldBar) oldBar.remove();
+
+  // Cria nova barrinha com duração
+  const progressBar = document.createElement("div");
+  progressBar.classList.add("progress-bar");
+  progressBar.style.animationDuration = duration + "ms";
+
+  popup.querySelector(".popup-content").appendChild(progressBar);
+
+  // Mostra o popup
+  popup.style.display = "block";
+
+  // Fecha sozinho após o tempo
   setTimeout(() => {
     closePopup();
-  }, 3000);
+  }, duration);
 }
 
-
 function closePopup() {
-  document.getElementById("popup").classList.add("hidden");
+  const popup = document.getElementById("popup");
+  popup.style.display = "none";
 }
