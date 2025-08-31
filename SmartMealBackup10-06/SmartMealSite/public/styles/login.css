@@ -1,0 +1,172 @@
+@import "./index.css";
+@import "./header.css";
+@import "./footer.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  width: 800px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #F2E4C8;
+}
+
+.left-panel {
+  background-color: #6A5F4E;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-panel .logo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #F2E4C8;
+  padding: 0px;
+}
+
+.right-panel {
+  background-color: #F2E4C8;
+  width: 60%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right-panel h1 {
+  margin-bottom: 20px;
+  color: #3A2F1E;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  color: #3A2F1E;
+  text-align: left;
+}
+
+input {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  width: 100%;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #6A5F4E;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #5c5346;
+}
+
+.button {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #6A5F4E;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: #5c5346;
+}
+
+.tiny-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+}
+
+.tiny-text a {
+  color: #c0392b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tiny-text u{
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
+  }
+
+  .left-panel {
+    justify-content: center;
+    padding: 30px 0;
+  }
+
+  .left-panel .logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .right-panel h1 {
+    font-size: 24px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
