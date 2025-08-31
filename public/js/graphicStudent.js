@@ -4,8 +4,8 @@ async function createGraphic() {
     const dados = await response.json();
 
     // Extrair labels e dados do resultado
-    const labels = dados.map((item) => item.curso);
-    const totalAlunos = dados.map((item) => item.total_alunos);
+    const labels = dados.map((item) => item.course);
+    const totalAlunos = dados.map((item) => item.total_students);
 
     const cores = {
       INFO: "rgba(255, 99, 132, 0.6)",

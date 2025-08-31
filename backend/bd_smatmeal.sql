@@ -132,7 +132,6 @@ foreign key(id_user) references school_user(id_user)
 
 
 
-
 INSERT INTO biometrics (hash_digital1, hash_digital2, hash_digital3) VALUES
 ('abc123def456ghi789jkl000aaa111bbb222ccc333ddd444eee555fff666', 'eee999zzz888yyy777xxx666www555vvv444uuu333ttt222sss111rrr000', '123abc456def789ghi000jkl111mno222pqr333stu444vwx555yz666abc'),
 ('987xyz654wvu321tsr000qpo111nml222kjh333gfe444dcb555aaa666bbb', '654qwe321asd000zxc111rty222fgh333vbn444uio555jkl666mnb777lkj', '321cba654fed987ihg000lkj111onm222rqp333uts444vwx555zyx666wvu'),
@@ -145,7 +144,7 @@ INSERT INTO biometrics (hash_digital1, hash_digital2, hash_digital3) VALUES
 ('c4ca4238a0b923820dcc509a6f75849b', 'c81e728d9d4c2f636f067f89cc14862c', 'eccbc87e4b5ce2fe28308fd9f2a7baf3'),
 ('a87ff679a2f3e71d9181a67b7542122c', 'e4da3b7fbbce2345d7772b0674a318d5', '1679091c5a880faf6fb5e6087eb1b2dc');
 
-INSERT INTO class (course, period, grade, date_registration) VALUES
+/* INSERT INTO class (course, period, grade, date_registration) VALUES
 ('INF', 'M', 'A', '2023-02-10'),
 ('MAT', 'T', 'B', '2023-03-15'),
 ('BIO', 'N', 'C', '2023-04-20'),
@@ -155,9 +154,33 @@ INSERT INTO class (course, period, grade, date_registration) VALUES
 ('BIO', 'M', 'A', '2025-01-08'),
 ('QUI', 'T', 'B', '2025-05-20'),
 ('INF', 'N', 'C', '2025-07-04'),
-('MAT', 'M', 'A', '2025-08-10');
+('MAT', 'M', 'A', '2025-08-10'); */
 
-INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
+
+-- Inserindo novas turmas (5 cursos × 3 turnos = 15 turmas)
+INSERT INTO class (course, period, grade, date_registration) VALUES
+('INFO', 'M', 'A', '2025-01-10'),
+('INFO', 'T', 'B', '2025-01-11'),
+('INFO', 'N', 'C', '2025-01-12'),
+
+('ADM', 'M', 'A', '2025-01-13'),
+('ADM', 'T', 'B', '2025-01-14'),
+('ADM', 'N', 'C', '2025-01-15'),
+
+('PTEC', 'M', 'A', '2025-01-16'),
+('PTEC', 'T', 'B', '2025-01-17'),
+('PTEC', 'N', 'C', '2025-01-18'),
+
+('MECA', 'M', 'A', '2025-01-19'),
+('MECA', 'T', 'B', '2025-01-20'),
+('MECA', 'N', 'C', '2025-01-21'),
+
+('AUTO', 'M', 'A', '2025-01-22'),
+('AUTO', 'T', 'B', '2025-01-23'),
+('AUTO', 'N', 'C', '2025-01-24');
+
+
+/* INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
 (10000, 1, 1, 'Lucas Silva', TRUE, '2023-03-01', 'Carlos Silva', 'Nenhuma'),
 (10001, 2, 2, 'Ana Souza', TRUE, '2023-03-02', 'Maria Souza', 'Glúten'),
 (10002, 3, 3, 'Pedro Oliveira', FALSE, '2023-03-03', 'João Oliveira', 'Lactose'),
@@ -167,7 +190,71 @@ INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_au
 (10006, 7, 7, 'Fernando Rocha', TRUE, '2023-03-07', 'Elaine Rocha', 'Glúten'),
 (10007, 8, 8, 'Mariana Teixeira', FALSE, '2023-03-08', 'Ricardo Teixeira', 'Lactose'),
 (10008, 9, 9, 'Rafael Martins', TRUE, '2023-03-09', 'Tatiane Martins', 'Nenhuma'),
-(10009, 10, 10, 'Isabela Lima', TRUE, '2023-03-10', 'Roberto Lima', 'Ovos');
+(10009, 10, 10, 'Isabela Lima', TRUE, '2023-03-10', 'Roberto Lima', 'Ovos'); */
+
+
+
+-- Inserindo 50 alunos fictícios
+INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
+(10000, 1, NULL, 'Lucas Pereira', TRUE, '2025-02-01', 'Carlos Pereira', 'Nenhuma'),
+(10001, 2, NULL, 'Ana Oliveira', TRUE, '2025-02-02', 'Maria Oliveira', 'Glúten'),
+(10002, 3, NULL, 'Pedro Souza', FALSE, '2025-02-03', 'João Souza', 'Lactose'),
+(10003, 4, NULL, 'Juliana Costa', TRUE, '2025-02-04', 'Marcos Costa', 'Ovos'),
+(10004, 5, NULL, 'Gabriel Rocha', FALSE, '2025-02-05', 'Sandra Rocha', 'Nenhuma'),
+(10005, 6, NULL, 'Camila Lima', TRUE, '2025-02-06', 'Paulo Lima', 'Glúten'),
+(10006, 7, NULL, 'Rafael Martins', TRUE, '2025-02-07', 'Tatiane Martins', 'Nenhuma'),
+(10007, 8, NULL, 'Isabela Almeida', FALSE, '2025-02-08', 'Roberto Almeida', 'Lactose'),
+(10008, 9, NULL, 'Fernando Santos', TRUE, '2025-02-09', 'Elaine Santos', 'Nenhuma'),
+(10009, 10, NULL, 'Mariana Teixeira', TRUE, '2025-02-10', 'Ricardo Teixeira', 'Amendoim'),
+
+(10010, 11, NULL, 'João Gabriel', TRUE, '2025-02-11', 'Paula Gabriel', 'Nenhuma'),
+(10011, 12, NULL, 'Clara Fernandes', FALSE, '2025-02-12', 'Luiz Fernandes', 'Glúten'),
+(10012, 13, NULL, 'Rodrigo Nunes', TRUE, '2025-02-13', 'Sônia Nunes', 'Lactose'),
+(10013, 14, NULL, 'Beatriz Ribeiro', TRUE, '2025-02-14', 'Hugo Ribeiro', 'Nenhuma'),
+(10014, 15, NULL, 'Matheus Carvalho', FALSE, '2025-02-15', 'Fernanda Carvalho', 'Ovos'),
+
+(10015, 1, NULL, 'Carolina Mendes', TRUE, '2025-02-16', 'Marcelo Mendes', 'Nenhuma'),
+(10016, 2, NULL, 'Thiago Lopes', FALSE, '2025-02-17', 'Patrícia Lopes', 'Glúten'),
+(10017, 3, NULL, 'Larissa Gomes', TRUE, '2025-02-18', 'José Gomes', 'Nenhuma'),
+(10018, 4, NULL, 'Eduardo Araujo', TRUE, '2025-02-19', 'Cláudia Araujo', 'Lactose'),
+(10019, 5, NULL, 'Sofia Barros', FALSE, '2025-02-20', 'André Barros', 'Nenhuma'),
+
+(10020, 6, NULL, 'Leonardo Castro', TRUE, '2025-02-21', 'Rosa Castro', 'Amendoim'),
+(10021, 7, NULL, 'Gabriela Duarte', TRUE, '2025-02-22', 'Mariana Duarte', 'Nenhuma'),
+(10022, 8, NULL, 'Bruno Farias', FALSE, '2025-02-23', 'Henrique Farias', 'Nenhuma'),
+(10023, 9, NULL, 'Débora Silveira', TRUE, '2025-02-24', 'Luciana Silveira', 'Ovos'),
+(10024, 10, NULL, 'Gustavo Araújo', TRUE, '2025-02-25', 'Paulo Araújo', 'Nenhuma'),
+
+(10025, 11, NULL, 'Amanda Melo', TRUE, '2025-02-26', 'Silvia Melo', 'Glúten'),
+(10026, 12, NULL, 'Ricardo Monteiro', FALSE, '2025-02-27', 'Carlos Monteiro', 'Nenhuma'),
+(10027, 13, NULL, 'Juliana Batista', TRUE, '2025-02-28', 'Marta Batista', 'Nenhuma'),
+(10028, 14, NULL, 'Diego Correia', TRUE, '2025-03-01', 'Eduardo Correia', 'Lactose'),
+(10029, 15, NULL, 'Patrícia Reis', FALSE, '2025-03-02', 'Fábio Reis', 'Nenhuma'),
+
+(10030, 1, NULL, 'Anderson Lima', TRUE, '2025-03-03', 'Luciana Lima', 'Nenhuma'),
+(10031, 2, NULL, 'Marina Pires', TRUE, '2025-03-04', 'Renato Pires', 'Nenhuma'),
+(10032, 3, NULL, 'Felipe Cardoso', FALSE, '2025-03-05', 'Roberta Cardoso', 'Ovos'),
+(10033, 4, NULL, 'Natália Vieira', TRUE, '2025-03-06', 'Fernando Vieira', 'Nenhuma'),
+(10034, 5, NULL, 'Henrique Souza', TRUE, '2025-03-07', 'Carla Souza', 'Glúten'),
+
+(10035, 6, NULL, 'Alice Ribeiro', TRUE, '2025-03-08', 'Antônio Ribeiro', 'Nenhuma'),
+(10036, 7, NULL, 'Rafaela Lopes', FALSE, '2025-03-09', 'Daniel Lopes', 'Nenhuma'),
+(10037, 8, NULL, 'Caio Martins', TRUE, '2025-03-10', 'Tatiane Martins', 'Nenhuma'),
+(10038, 9, NULL, 'Bruna Fernandes', TRUE, '2025-03-11', 'Felipe Fernandes', 'Lactose'),
+(10039, 10, NULL, 'José Henrique', FALSE, '2025-03-12', 'André Henrique', 'Nenhuma'),
+
+(10040, 11, NULL, 'Fernanda Lima', TRUE, '2025-03-13', 'Eduarda Lima', 'Nenhuma'),
+(10041, 12, NULL, 'Marcelo Gomes', TRUE, '2025-03-14', 'Raquel Gomes', 'Glúten'),
+(10042, 13, NULL, 'Tatiane Silva', FALSE, '2025-03-15', 'Mário Silva', 'Nenhuma'),
+(10043, 14, NULL, 'Paulo Henrique', TRUE, '2025-03-16', 'Sueli Henrique', 'Nenhuma'),
+(10044, 15, NULL, 'Letícia Rocha', TRUE, '2025-03-17', 'Márcio Rocha', 'Nenhuma'),
+
+(10045, 1, NULL, 'Vinícius Almeida', TRUE, '2025-03-18', 'Renata Almeida', 'Ovos'),
+(10046, 2, NULL, 'Carla Mendes', FALSE, '2025-03-19', 'Bruno Mendes', 'Nenhuma'),
+(10047, 3, NULL, 'Eduarda Castro', TRUE, '2025-03-20', 'Sérgio Castro', 'Glúten'),
+(10048, 4, NULL, 'Felipe Barbosa', TRUE, '2025-03-21', 'Patrícia Barbosa', 'Nenhuma'),
+(10049, 5, NULL, 'Amanda Souza', FALSE, '2025-03-22', 'Lucas Souza', 'Nenhuma');
+
 
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (10000, '2025-08-01 11:40:00', 'lunch', 'allowed'),
@@ -179,7 +266,51 @@ INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (10006, '2025-08-04 12:00:00', 'lunch', 'allowed'),
 (10007, '2025-08-04 18:05:00', 'dinner', 'blocked'),
 (10008, '2025-08-05 12:10:00', 'lunch', 'allowed'),
-(10009, '2025-08-05 18:10:00', 'dinner', 'exception');
+(10009, '2025-08-05 18:10:00', 'dinner', 'exception'),
+(10010, '2025-08-05 18:10:00', 'dinner', 'exception'),
+
+(10011, '2025-08-01 11:40:00', 'lunch', 'allowed'),
+(10012, '2025-08-01 17:50:00', 'dinner', 'allowed'),
+(10013, '2025-08-02 11:45:00', 'lunch', 'blocked'),
+(10014, '2025-08-02 18:00:00', 'dinner', 'exception'),
+(10015, '2025-08-03 11:50:00', 'lunch', 'allowed'),
+(10016, '2025-08-03 17:55:00', 'dinner', 'allowed'),
+(10017, '2025-08-04 12:00:00', 'lunch', 'allowed'),
+(10018, '2025-08-04 18:05:00', 'dinner', 'blocked'),
+(10019, '2025-08-05 12:10:00', 'lunch', 'allowed'),
+(10020, '2025-08-05 18:10:00', 'dinner', 'exception'),
+
+(10021, '2025-08-01 11:40:00', 'lunch', 'allowed'),
+(10022, '2025-08-01 17:50:00', 'dinner', 'allowed'),
+(10023, '2025-08-02 11:45:00', 'lunch', 'blocked'),
+(10024, '2025-08-02 18:00:00', 'dinner', 'exception'),
+(10025, '2025-08-03 11:50:00', 'lunch', 'allowed'),
+(10026, '2025-08-03 17:55:00', 'dinner', 'allowed'),
+(10027, '2025-08-04 12:00:00', 'lunch', 'allowed'),
+(10028, '2025-08-04 18:05:00', 'dinner', 'blocked'),
+(10029, '2025-08-05 12:10:00', 'lunch', 'allowed'),
+(10030, '2025-08-05 18:10:00', 'dinner', 'exception'),
+
+(10031, '2025-08-01 11:40:00', 'lunch', 'allowed'),
+(10032, '2025-08-01 17:50:00', 'dinner', 'allowed'),
+(10033, '2025-08-02 11:45:00', 'lunch', 'blocked'),
+(10034, '2025-08-02 18:00:00', 'dinner', 'exception'),
+(10035, '2025-08-03 11:50:00', 'lunch', 'allowed'),
+(10036, '2025-08-03 17:55:00', 'dinner', 'allowed'),
+(10037, '2025-08-04 12:00:00', 'lunch', 'allowed'),
+(10038, '2025-08-04 18:05:00', 'dinner', 'blocked'),
+(10039, '2025-08-05 12:10:00', 'lunch', 'allowed'),
+(10040, '2025-08-05 18:10:00', 'dinner', 'exception'),
+
+(10041, '2025-08-01 11:40:00', 'lunch', 'allowed'),
+(10042, '2025-08-01 17:50:00', 'dinner', 'allowed'),
+(10043, '2025-08-02 11:45:00', 'lunch', 'blocked'),
+(10044, '2025-08-02 18:00:00', 'dinner', 'exception'),
+(10045, '2025-08-03 11:50:00', 'lunch', 'allowed'),
+(10046, '2025-08-03 17:55:00', 'dinner', 'allowed'),
+(10047, '2025-08-04 12:00:00', 'lunch', 'allowed'),
+(10048, '2025-08-04 18:05:00', 'dinner', 'blocked'),
+(10049, '2025-08-05 12:10:00', 'lunch', 'allowed');
 
 INSERT INTO feedback (id_rm, date_feedback, rating, comment) VALUES
 (10000, '2025-08-01', 'good', 'Muito bom o almoço!'),
@@ -191,7 +322,51 @@ INSERT INTO feedback (id_rm, date_feedback, rating, comment) VALUES
 (10006, '2025-08-04', 'mid', 'Poderia ser melhor.'),
 (10007, '2025-08-04', 'good', 'Delicioso e bem servido.'),
 (10008, '2025-08-05', 'bad', 'Pouca quantidade.'),
-(10009, '2025-08-05', 'mid', 'Estava ok.');
+(10009, '2025-08-05', 'mid', 'Estava ok.'),
+(10010, '2025-08-05', 'mid', 'Estava ok.'),
+
+(10011, '2025-08-01', 'good', 'Muito bom o almoço!'),
+(10012, '2025-08-01', 'mid', 'Estava razoável.'),
+(10013, '2025-08-02', 'bad', 'Comida fria e sem gosto.'),
+(10014, '2025-08-02', 'good', 'Gostei da salada.'),
+(10015, '2025-08-03', 'good', 'Excelente refeição hoje.'),
+(10016, '2025-08-03', 'bad', 'Não gostei do tempero.'),
+(10017, '2025-08-04', 'mid', 'Poderia ser melhor.'),
+(10018, '2025-08-04', 'good', 'Delicioso e bem servido.'),
+(10019, '2025-08-05', 'bad', 'Pouca quantidade.'),
+(10020, '2025-08-05', 'mid', 'Estava ok.'),
+
+(10021, '2025-08-01', 'good', 'Muito bom o almoço!'),
+(10022, '2025-08-01', 'mid', 'Estava razoável.'),
+(10023, '2025-08-02', 'bad', 'Comida fria e sem gosto.'),
+(10024, '2025-08-02', 'good', 'Gostei da salada.'),
+(10025, '2025-08-03', 'good', 'Excelente refeição hoje.'),
+(10026, '2025-08-03', 'bad', 'Não gostei do tempero.'),
+(10027, '2025-08-04', 'mid', 'Poderia ser melhor.'),
+(10028, '2025-08-04', 'good', 'Delicioso e bem servido.'),
+(10029, '2025-08-05', 'bad', 'Pouca quantidade.'),
+(10030, '2025-08-05', 'mid', 'Estava ok.'),
+
+(10031, '2025-08-01', 'good', 'Muito bom o almoço!'),
+(10032, '2025-08-01', 'mid', 'Estava razoável.'),
+(10033, '2025-08-02', 'bad', 'Comida fria e sem gosto.'),
+(10034, '2025-08-02', 'good', 'Gostei da salada.'),
+(10035, '2025-08-03', 'good', 'Excelente refeição hoje.'),
+(10036, '2025-08-03', 'bad', 'Não gostei do tempero.'),
+(10037, '2025-08-04', 'mid', 'Poderia ser melhor.'),
+(10038, '2025-08-04', 'good', 'Delicioso e bem servido.'),
+(10039, '2025-08-05', 'bad', 'Pouca quantidade.'),
+(10040, '2025-08-05', 'mid', 'Estava ok.'),
+
+(10041, '2025-08-01', 'good', 'Muito bom o almoço!'),
+(10042, '2025-08-01', 'mid', 'Estava razoável.'),
+(10043, '2025-08-02', 'bad', 'Comida fria e sem gosto.'),
+(10044, '2025-08-02', 'good', 'Gostei da salada.'),
+(10045, '2025-08-03', 'good', 'Excelente refeição hoje.'),
+(10046, '2025-08-03', 'bad', 'Não gostei do tempero.'),
+(10047, '2025-08-04', 'mid', 'Poderia ser melhor.'),
+(10048, '2025-08-04', 'good', 'Delicioso e bem servido.'),
+(10049, '2025-08-05', 'bad', 'Pouca quantidade.');
 
 INSERT INTO product (product_name, current_quantity, unit, minimum_quantity) VALUES
 ('Arroz', 120.500, 'kg', 10.000),
