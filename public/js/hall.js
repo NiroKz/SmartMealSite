@@ -58,9 +58,9 @@ function createSchoolCard(school) {
 
   card.innerHTML = `
     <div class="info">
-      <b>${school.nome_escola}</b>
-      <span>${school.rua_endereco}</span>
-      <span>${school.fone}</span>
+      <b>${school.school_name}</b>
+      <span>${school.address_road}</span>
+      <span>${school.phone}</span>
     </div>
     <a class="play" href="accessControl.html">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">

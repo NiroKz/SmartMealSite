@@ -1,19 +1,16 @@
-const db = require('../config/db');
+const db = require("../config/db");
 
 const school = {
-    criar: (dados, callback) => {
-        const { id_usuario, nome_escola, rua_endereco, fone } = dados;
+  criar: (dados, callback) => {
+    const { id_user, nome_escola, rua_endereco, fone } = dados;
 
-        const sql = `
-            INSERT INTO school (id_user, school_name, address_road, phone)
-            VALUES (?, ?, ?, ?)
-        `;
+    const sql = `
+      INSERT INTO school (id_user, school_name, address_road, phone)
+      VALUES (?, ?, ?, ?)
+    `;
 
-        db.query(sql, [id_usuario, nome_escola, rua_endereco, fone], (err, result) => {
-            if (err) return callback(err);
-            callback(null, result);
-        });
-    }
+    db.query(sql, [id_user, nome_escola, rua_endereco, fone], callback);
+  },
 };
 
 module.exports = school;
