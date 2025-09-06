@@ -17,6 +17,7 @@ const fetchStudentAccessDataToday = () => {
   return new Promise((resolve, reject) => {
     db.query(query, (err, results) => {
       if (err) return reject(err);
+      console.log("Resultado da query studentAccess:", results[0]);
       resolve(results[0]);
     });
   });
