@@ -44,24 +44,27 @@ document.getElementById("filterBtn").addEventListener("click", async () => {
       return;
     }
 
+    // Função para formatar hora ou deixar "--/--"
+    const formatTime = (time, status) => {
+      if (status === "green" && time) {
+        const date = new Date(time);
+        return date.toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+      return "--/--";
+    };
+
     // Preenche a tabela
     data.forEach((student) => {
       const tr = document.createElement("tr");
 
-      const colorClass =
-        student.status === "green"
-          ? "green"
-          : student.status === "yellow"
-          ? "yellow"
-          : "red";
-
       tr.innerHTML = `
         <td>${student.id_rm}</td>
         <td>${student.student_name}</td>
-        <td class="${colorClass}">--/--</td>
-        <td class="${colorClass}">--/--</td>
-        <td class="${colorClass}">--/--</td>
-        <td class="${colorClass}">--/--</td>
+        <td class="${student.lunch.status}">${formatTime(student.lunch.time, student.lunch.status)}</td>
+        <td class="${student.dinner.status}">${formatTime(student.dinner.time, student.dinner.status)}</td>
       `;
       tbody.appendChild(tr);
     });
