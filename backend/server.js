@@ -25,11 +25,15 @@ app.use("/school", schoolRoutes);
 const studentAccessRoutes = require("./routes/studentAccessRoutes");
 app.use("/studentAccess", studentAccessRoutes);
 
-const studentLiberationRoute = require('./routes/liberationRoutes');
+const studentLiberationRoute = require("./routes/liberationRoutes");
 app.use("/studentLiberation", studentLiberationRoute);
 
-const productionRoutes = require('./routes/productionRoutes');
-app.use('/production', productionRoutes);
+const productionRoutes = require("./routes/productionRoutes");
+app.use("/production", productionRoutes);
+
+const filterRoutes = require("./routes/filterRoutes");
+app.use("/filter", filterRoutes);
+
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

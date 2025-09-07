@@ -40,6 +40,11 @@ access_status enum('allowed', 'blocked', 'exception'),
 foreign key(id_rm) references student(id_rm)
 );
 
+
+
+SELECT * FROM meal WHERE DATE(date_time) = CURDATE();
+
+
 create table feedback (
 id_feedback int auto_increment primary key NOT NULL,
 id_rm int(5) NOT NULL,
@@ -178,6 +183,34 @@ INSERT INTO class (course, period, grade, date_registration) VALUES
 ('AUTO', 'M', 'A', '2025-01-22'),
 ('AUTO', 'T', 'B', '2025-01-23'),
 ('AUTO', 'N', 'C', '2025-01-24');
+
+-- Exemplo de inserção para 'grade' como ano letivo
+INSERT INTO class (course, period, grade, date_registration) VALUES
+('INFO', 'M', '1', '2025-01-10'),
+('INFO', 'T', '1', '2025-01-11'),
+
+('INFO', 'M', '2', '2025-01-10'),
+('INFO', 'T', '2', '2025-01-11'),
+
+('INFO', 'M', '3', '2025-01-10'),
+('INFO', 'T', '3', '2025-01-11');
+
+select * from class;
+
+SELECT
+    s.id_rm,
+    s.student_name,
+    m.type_meal,
+    m.access_status
+FROM student s
+JOIN class c
+    ON s.id_class = c.id_class
+LEFT JOIN meal m
+    ON m.id_rm = s.id_rm
+    AND DATE(m.date_time) = CURDATE()
+WHERE c.course = 'INFO'
+  AND c.period = 'M'
+  AND c.grade = '1';
 
 
 /* INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
@@ -464,3 +497,49 @@ select * from release_exception;
 select * from school_user;
 select * from access;
 select * from school;
+
+SELECT 
+    s.id_rm, 
+    s.student_name, 
+    m.type_meal, 
+    m.access_status
+FROM student s
+JOIN class c 
+    ON s.id_class = c.id_class
+LEFT JOIN meal m 
+    ON m.id_rm = s.id_rm 
+    AND DATE(m.date_time) = CURDATE()
+WHERE c.course = ?
+  AND c.`period` = ?
+  AND c.`grade` = ?;
+
+
+-- Alunos novos para teste de filtro
+INSERT INTO student (id_rm, id_class, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
+(20010, 16, 'Lucas Teste', TRUE, '2025-09-01', 'Carlos Teste', 'Nenhuma'),
+(20011, 17, 'Ana Teste', TRUE, '2025-09-01', 'Maria Teste', 'Glúten'),
+(20012, 18, 'Pedro Teste', TRUE, '2025-09-01', 'João Teste', 'Lactose'),
+(20013, 19, 'Juliana Teste', TRUE, '2025-09-01', 'Marcos Teste', 'Ovos'),
+(20014, 20, 'Gabriel Teste', TRUE, '2025-09-01', 'Sandra Teste', 'Nenhuma'),
+(20015, 21, 'Camila Teste', TRUE, '2025-09-01', 'Paulo Teste', 'Glúten');
+
+-- Refeições para teste de filtro
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+-- 06/09/2025
+(20010, '2025-09-06 11:30:00', 'lunch', 'allowed'),
+(20011, '2025-09-06 11:40:00', 'lunch', 'blocked'),
+(20012, '2025-09-06 12:00:00', 'lunch', 'exception'),
+(20013, '2025-09-06 12:10:00', 'lunch', 'allowed'),
+(20014, '2025-09-06 18:00:00', 'dinner', 'blocked'),
+(20015, '2025-09-06 18:10:00', 'dinner', 'allowed'),
+
+-- 07/09/2025 (outro dia)
+(20010, '2025-09-07 11:30:00', 'lunch', 'allowed'),
+(20011, '2025-09-07 11:40:00', 'lunch', 'allowed'),
+(20012, '2025-09-07 12:00:00', 'lunch', 'blocked'),
+(20013, '2025-09-07 12:10:00', 'lunch', 'exception'),
+(20014, '2025-09-07 18:00:00', 'dinner', 'allowed'),
+(20015, '2025-09-07 18:10:00', 'dinner', 'blocked');
+
+
+

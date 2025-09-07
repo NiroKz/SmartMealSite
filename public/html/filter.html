@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../styles/filter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -19,27 +21,43 @@
         <div class="filter-container">
             <button class="filter-close" onclick="window.history.back()">&times;</button>
             <h1 class="filter-title">Filtro</h1>
+
+            <!-- Opções de Filtro -->
             <div class="filter-options">
                 <div>
                     <b>Curso</b>
-                    <div><span class="dot green"></span> Ds</div>
-                    <div><span class="dot red"></span> Meca</div>
-                    <div><span class="dot red"></span> Adm</div>
+                    <select id="course">
+                        <option value="">Selecione</option>
+                        <!-- Opções serão carregadas dinamicamente pelo JS -->
+                    </select>
                 </div>
                 <div>
                     <b>Turno</b>
-                    <div><span class="dot red"></span> Matutino</div>
-                    <div><span class="dot green"></span> tarde</div>
-                    <div><span class="dot red"></span> Noite</div>
+                    <select id="period">
+                        <option value="">Selecione</option>
+                        <option value="M">Matutino</option>
+                        <option value="T">Tarde</option>
+                        <option value="N">Noite</option>
+                    </select>
                 </div>
                 <div>
                     <b>Ano</b>
-                    <div><span class="dot red"></span> 1</div>
-                    <div><span class="dot red"></span> 2</div>
-                    <div><span class="dot green"></span> 3</div>
+                    <select id="grade">
+                        <option value="">Selecione</option>
+                        <option value="1">1º</option>
+                        <option value="2">2º</option>
+                        <option value="3">3º</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="filterBtn" class="filter-apply">Aplicar Filtro</button>
                 </div>
             </div>
-            <div class="filter-table-title">3GT</div>
+
+            <!-- Título da tabela -->
+            <div class="filter-table-title">Resultado</div>
+
+            <!-- Tabela dinâmica -->
             <div class="filter-table-wrapper">
                 <table class="filter-table">
                     <thead>
@@ -52,31 +70,8 @@
                             <th>Repetição Janta</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>33286</td>
-                            <td>Marcelo Korin</td>
-                            <td class="green">12:10</td>
-                            <td class="yellow">--/--</td>
-                            <td class="green">12:23</td>
-                            <td class="yellow">--/--</td>
-                        </tr>
-                        <tr>
-                            <td>33357</td>
-                            <td>Pedro Lopes</td>
-                            <td class="yellow">--/--</td>
-                            <td class="red">--/--</td>
-                            <td class="red">--/--</td>
-                            <td class="red">--/--</td>
-                        </tr>
-                        <tr>
-                            <td>33679</td>
-                            <td>Tiago Bondezan</td>
-                            <td class="green">12:11</td>
-                            <td class="green">18:23</td>
-                            <td class="yellow">--/--</td>
-                            <td class="green">18:33</td>
-                        </tr>
+                    <tbody id="studentsTableBody">
+                        <!-- Linhas geradas dinamicamente pelo JS -->
                     </tbody>
                 </table>
             </div>
@@ -95,5 +90,9 @@
             </nav>
         </div>
     </footer>
+
+    <!-- Script JS -->
+    <script src="../js/filter.js"></script>
 </body>
+
 </html>
