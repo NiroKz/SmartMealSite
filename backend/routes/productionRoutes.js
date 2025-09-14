@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { registerProduction } = require('../controllers/productionController');
+const { registerProduction, getProductionByDate } = require('../controllers/productionController');
 
 router.post('/', registerProduction);
+
+router.get('/', getProductionByDate);
 
 module.exports = router;

@@ -34,6 +34,9 @@ app.use("/production", productionRoutes);
 const filterRoutes = require("./routes/filterRoutes");
 app.use("/filter", filterRoutes);
 
+const productRoutes = require("./routes/productRoutes");
+app.use("/product", productRoutes);
+
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

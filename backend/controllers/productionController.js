@@ -1,38 +1,82 @@
-const { insertProduction } = require('../models/productionModel');
+const { insertProduction, fetchProductionByDate } = require("../models/productionModel");
+const db = require("../config/db");
 
-// Função para obter a data de hoje no formato "YYYY-MM-DD"
+// Função para obter data atual do servidor (YYYY-MM-DD)
 function getCurrentDateFormatted() {
   const now = new Date();
-  const yyyy = now.getFullYear();
-  const mm = String(now.getMonth() + 1).padStart(2, '0');
-  const dd = String(now.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
+  return now.toISOString().split("T")[0];
 }
 
+// Função para criar ou obter id_meal do dia
+async function getOrCreateMeal(mealType, shift) {
+  const today = getCurrentDateFormatted();
+
+  return new Promise((resolve, reject) => {
+    db.execute(
+      `SELECT id_meal FROM meal WHERE DATE(date_time) = ? AND type_meal = ?`,
+      [today, mealType],
+      (err, results) => {
+        if (err) return reject(err);
+
+        if (results.length > 0) {
+          resolve(results[0].id_meal);
+        } else {
+          const now = new Date().toISOString().slice(0, 19).replace("T", " ");
+          db.execute(
+            `INSERT INTO meal (date_time, type_meal, access_status) VALUES (?, ?, ?)`,
+            [now, mealType, "allowed"],
+            (err2, result) => {
+              if (err2) return reject(err2);
+              resolve(result.insertId);
+            }
+          );
+        }
+      }
+    );
+  });
+}
+
+// Registrar produção
 const registerProduction = async (req, res) => {
   try {
-    // Validação simples (você pode usar um middleware depois se quiser algo mais robusto)
-    const { quantityProduced, mealType, shift, leftovers, notes } = req.body;
-    if (!quantityProduced || !mealType || !shift) {
-      return res.status(400).json({ message: 'Required fields are missing.' });
+    const { items, mealType, shift, notes } = req.body;
+
+    if (!items || items.length === 0 || !mealType || !shift) {
+      return res.status(400).json({ message: "Campos obrigatórios ausentes." });
     }
 
-    const productionData = {
-      mealId: req.body.mealId || 1,  // Fixo ou determinado por outra lógica
-      productionDate: getCurrentDateFormatted(),  // Data formatada
-      quantityProduced,
-      mealType,
-      shift,
-      leftovers: leftovers || 0,  // Padrão se vazio
-      notes: notes || ''
-    };
+    const id_meal = await getOrCreateMeal(mealType, shift);
 
-    await insertProduction(productionData);
-    //res.status(201).json({ message: 'Production registered successfully' });
+    for (const item of items) {
+      const productionData = {
+        id_meal,
+        id_product: item.id_product,
+        quantityProduced: item.quantityProduced,
+        mealType,
+        shift,
+        leftovers: item.leftovers,
+        notes: notes || ""
+      };
+      await insertProduction(productionData);
+    }
+
+    res.status(201).json({ message: "Produção registrada com sucesso." });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Erro interno do servidor." });
   }
 };
 
-module.exports = { registerProduction };
+// Consultar produção por data
+const getProductionByDate = async (req, res) => {
+  try {
+    const date = req.query.date || getCurrentDateFormatted();
+    const production = await fetchProductionByDate(date);
+    res.status(200).json(production);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erro ao buscar produção." });
+  }
+};
+
+module.exports = { registerProduction, getProductionByDate };
