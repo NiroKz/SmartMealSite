@@ -165,9 +165,48 @@
                 </form>
 
                 <div class="meal-graph">
-                    <canvas id="productionChart" width="600px" height="400px"></canvas>
-                </div>
+                    <h3>Produção Manhã</h3>
+                    <canvas id="morningChart"></canvas>
+                    <table id="morningTable" border="1">
+                        <thead>
+                            <tr>
+                                <th>Comida</th>
+                                <th>Produzido (kg)</th>
+                                <th>Sobrou (kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
 
+                    <h3>Produção Tarde</h3>
+                    <canvas id="eveningChart"></canvas>
+                    <table id="eveningTable" border="1">
+                        <thead>
+                            <tr>
+                                <th>Comida</th>
+                                <th>Produzido (kg)</th>
+                                <th>Sobrou (kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <h3>Produção Noite</h3>
+                    <canvas id="nightChart"></canvas>
+                    <table id="nightTable" border="1">
+                        <thead>
+                            <tr>
+                                <th>Comida</th>
+                                <th>Produzido (kg)</th>
+                                <th>Sobrou (kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <h3>Produção Geral</h3>
+                    <canvas id="totalChart"></canvas>
+                </div>
                 <label>Escolher data:
                     <input type="date" id="productionDate">
                 </label>

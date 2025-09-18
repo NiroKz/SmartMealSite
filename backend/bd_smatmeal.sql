@@ -526,20 +526,20 @@ INSERT INTO student (id_rm, id_class, student_name, biometrics_authorization, da
 -- Refeições para teste de filtro
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 -- 06/09/2025
-(20010, '2025-09-06 11:30:00', 'lunch', 'allowed'),
-(20011, '2025-09-06 11:40:00', 'lunch', 'blocked'),
-(20012, '2025-09-06 12:00:00', 'lunch', 'exception'),
-(20013, '2025-09-06 12:10:00', 'lunch', 'allowed'),
-(20014, '2025-09-06 18:00:00', 'dinner', 'blocked'),
-(20015, '2025-09-06 18:10:00', 'dinner', 'allowed'),
+(20010, '2025-09-18 11:30:00', 'lunch', 'allowed'),
+(20011, '2025-09-18 11:40:00', 'lunch', 'blocked'),
+(20012, '2025-09-18 12:00:00', 'lunch', 'exception'),
+(20013, '2025-09-18 12:10:00', 'lunch', 'allowed'),
+(20014, '2025-09-18 18:00:00', 'dinner', 'blocked'),
+(20015, '2025-09-18 18:10:00', 'dinner', 'allowed'),
 
 -- 07/09/2025 (outro dia)
-(20010, '2025-09-07 11:30:00', 'lunch', 'allowed'),
-(20011, '2025-09-07 11:40:00', 'lunch', 'allowed'),
-(20012, '2025-09-07 12:00:00', 'lunch', 'blocked'),
-(20013, '2025-09-07 12:10:00', 'lunch', 'exception'),
-(20014, '2025-09-07 18:00:00', 'dinner', 'allowed'),
-(20015, '2025-09-07 18:10:00', 'dinner', 'blocked');
+(20010, '2025-09-18 11:30:00', 'lunch', 'allowed'),
+(20011, '2025-09-18 11:40:00', 'lunch', 'allowed'),
+(20012, '2025-09-18 12:00:00', 'lunch', 'blocked'),
+(20013, '2025-09-18 12:10:00', 'lunch', 'exception'),
+(20014, '2025-09-18 18:00:00', 'dinner', 'allowed'),
+(20015, '2025-09-18 18:10:00', 'dinner', 'blocked');
 
 
 
