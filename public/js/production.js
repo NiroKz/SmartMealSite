@@ -1,61 +1,46 @@
 // public/js/production.js
-// ----------------------------------------------------
-// Gestão do form de produção e visualização por turno
-// ----------------------------------------------------
+console.log("✅ production.js carregado!");
 
-const container = document.getElementById("foodsContainer");
-const addFoodBtn = document.getElementById("addFoodBtn");
+const form = document.getElementById("mealForm");
+const loadDataBtn = document.getElementById("loadDataBtn");
+const productionDate = document.getElementById("productionDate");
+const foodsContainer = document.getElementById("foodsContainer");
 
-// -------------------------
-// Carrega produtos em um select específico
-// -------------------------
-async function loadProducts(selectElement) {
+// Guarda os gráficos ativos
+const charts = {};
+
+// ------------------- Carregar produtos no select -------------------
+async function loadProducts() {
   try {
-    if (selectElement.dataset.loaded === "true") return;
-
     const response = await fetch("http://localhost:3000/product");
     if (!response.ok) throw new Error("Erro ao carregar produtos!");
-
     const products = await response.json();
 
-    const unique = new Map();
-    products.forEach((prod) => {
-      if (!unique.has(String(prod.id_product))) {
-        unique.set(String(prod.id_product), prod.product_name);
-      }
+    // Preenche todos os selects de comida
+    const selects = Array.from(document.getElementsByName("id_product[]"));
+    selects.forEach((select) => {
+      select.innerHTML = "";
+      products.forEach((prod) => {
+        const option = document.createElement("option");
+        option.value = prod.id_product;
+        option.textContent = prod.product_name;
+        select.appendChild(option);
+      });
     });
-
-    selectElement.innerHTML = "";
-    const placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    placeholder.textContent = "Selecione um produto";
-    selectElement.appendChild(placeholder);
-
-    unique.forEach((name, id) => {
-      const option = document.createElement("option");
-      option.value = id;
-      option.textContent = name;
-      selectElement.appendChild(option);
-    });
-
-    selectElement.dataset.loaded = "true";
   } catch (err) {
     console.error(err);
-    alert(err.message);
   }
 }
 
-// -------------------------
-// Cria um novo bloco de comida
-// -------------------------
-async function createFoodItem() {
+// ------------------- Adicionar novo campo de comida -------------------
+document.getElementById("addFoodBtn").addEventListener("click", () => {
   const div = document.createElement("div");
   div.classList.add("food-item");
   div.innerHTML = `
     <label>Comida:
-      <select name="id_product[]" required></select>
+      <select name="id_product[]" required>
+        <option value="" disabled selected>Carregando produtos...</option>
+      </select>
     </label>
     <label>Produzido (kg):
       <input type="number" step="0.001" name="quantityProduced[]" required>
@@ -64,195 +49,163 @@ async function createFoodItem() {
       <input type="number" step="0.001" name="leftovers[]" required>
     </label>
   `;
-  container.appendChild(div);
+  foodsContainer.appendChild(div);
+  loadProducts(); // preenche o select recém-criado
+});
 
-  const select = div.querySelector("select[name='id_product[]']");
-  await loadProducts(select);
-}
-
-// -------------------------
-// Carrega produção do dia e renderiza gráficos e tabelas
-// -------------------------
-window.loadProduction = async function () {
-  const date =
-    document.getElementById("productionDate").value ||
-    new Date().toISOString().split("T")[0];
-
+// ------------------- Carregar produção do backend -------------------
+async function loadProduction(date) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/production?date=${date}`
-    );
+    const query = date ? `?date=${date}` : "";
+    const response = await fetch(`http://localhost:3000/production${query}`);
     if (!response.ok) throw new Error("Erro ao carregar produção!");
     const data = await response.json();
 
-    // -------------------------
-    // Agrupar por turno
-    // -------------------------
-    const shiftsData = {
-      morning: [],
-      evening: [],
-      night: [],
-    };
-
-    data.forEach((item) => {
-      if (shiftsData[item.shift]) shiftsData[item.shift].push(item);
-    });
-
-    // Agregado por turno (totais)
-    // Agregado por turno (totais)
-    function aggregateShift(type) {
-      if (type === "total") {
-        return {
-          produced: data.reduce(
-            (sum, i) => sum + (i.quantity_produced || 0),
-            0
-          ),
-          remnant: data.reduce((sum, i) => sum + (i.remnant || 0), 0),
-        };
-      } else {
-        const shiftItems = shiftsData[type] || [];
-        return {
-          produced: shiftItems.reduce(
-            (sum, i) => sum + (i.quantity_produced || 0),
-            0
-          ),
-          remnant: shiftItems.reduce((sum, i) => sum + (i.remnant || 0), 0),
-        };
-      }
-    }
-
-    // Renderiza gráficos por turno
-    renderShiftChart(
-      "morningChart",
-      aggregateShift("morning"),
-      "Produção - Manhã"
-    );
-    renderShiftChart(
-      "eveningChart",
-      aggregateShift("evening"),
-      "Produção - Tarde"
-    );
-    renderShiftChart("nightChart", aggregateShift("night"), "Produção - Noite");
-    renderShiftChart("totalChart", aggregateShift("total"), "Produção Geral");
-
-    renderShiftTables(data); // tabela de comidas por turno
+    renderTables(data);
+    renderCharts(data);
   } catch (err) {
     console.error(err);
-    alert(err.message);
   }
-};
+}
 
-// -------------------------
-// Renderiza gráficos por turno
-// -------------------------
-function renderShiftChart(canvasId, values, title) {
-  const canvasEl = document.getElementById(canvasId);
-  if (!canvasEl) return; // se o canvas não existir, sai da função
+// ------------------- Renderizar tabelas -------------------
+function renderTables(data) {
+  const totalBody = document.querySelector("#totalTable tbody");
+  const morningBody = document.querySelector("#morningTable tbody");
+  const afternoonBody = document.querySelector("#afternoonTable tbody");
+  const nightBody = document.querySelector("#nightTable tbody");
 
-  const ctx = canvasEl.getContext("2d");
+  [totalBody, morningBody, afternoonBody, nightBody].forEach(
+    (body) => (body.innerHTML = "")
+  );
 
-  // destrói gráfico antigo se existir
-  if (window[canvasId] instanceof Chart) {
-    window[canvasId].destroy();
-  }
-
-  // cria novo gráfico
-  window[canvasId] = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Produzido (kg)", "Sobrou (kg)"],
-      datasets: [
-        {
-          label: title,
-          data: [values.produced, values.remnant],
-          backgroundColor: ["#4caf50", "#f44336"],
-        },
-      ],
-    },
-    options: { responsive: true, plugins: { legend: { position: "bottom" } } },
+  data.forEach((item) => {
+    const row = `
+      <tr>
+        <td>${item.product_name || item.food}</td>
+        <td>${item.produced}</td>
+        <td>${item.remnant}</td>
+      </tr>
+    `;
+    totalBody.innerHTML += row;
+    if (item.shift === "morning") morningBody.innerHTML += row;
+    if (item.shift === "evening") afternoonBody.innerHTML += row;
+    if (item.shift === "night") nightBody.innerHTML += row;
   });
 }
 
-// -------------------------
-// Renderiza tabelas de comidas por turno
-// -------------------------
-function renderShiftTables(items) {
-  const tables = {
-    morning: document.querySelector("#morningTable tbody"),
-    evening: document.querySelector("#eveningTable tbody"),
-    night: document.querySelector("#nightTable tbody"),
+// ------------------- Renderizar gráficos -------------------
+function renderCharts(data) {
+  const shiftsData = {
+    morning: data.filter((i) => i.shift === "morning"),
+    evening: data.filter((i) => i.shift === "evening"),
+    night: data.filter((i) => i.shift === "night"),
   };
 
-  Object.values(tables).forEach((tbody) => (tbody.innerHTML = ""));
-
-  items.forEach((item) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${item.product_name || item.food}</td>
-      <td>${item.quantity_produced}</td>
-      <td>${item.remnant}</td>
-    `;
-    if (tables[item.shift]) tables[item.shift].appendChild(tr);
-  });
-}
-
-// -------------------------
-// Inicialização
-// -------------------------
-window.addEventListener("DOMContentLoaded", async () => {
-  // popula selects já presentes
-  const initialSelects = document.querySelectorAll(
-    'select[name="id_product[]"]'
-  );
-  for (const select of initialSelects) await loadProducts(select);
-
-  addFoodBtn.addEventListener("click", createFoodItem);
-
-  const loadBtn = document.getElementById("loadDataBtn");
-  if (loadBtn) loadBtn.addEventListener("click", window.loadProduction);
-
-  const mealForm = document.getElementById("mealForm");
-  if (mealForm) {
-    mealForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(e.target);
-      const mealType = formData.get("mealType");
-      const shift = formData.get("shift");
-      const notes = formData.get("notes");
-      const productIds = formData.getAll("id_product[]");
-      const quantities = formData.getAll("quantityProduced[]");
-      const leftovers = formData.getAll("leftovers[]");
-
-      const items = productIds.map((id, i) => ({
-        id_product: parseInt(id),
-        quantityProduced: parseFloat(quantities[i]),
-        leftovers: parseFloat(leftovers[i]),
-      }));
-
-      const data = { mealType, shift, notes, items };
-
-      try {
-        const response = await fetch("http://localhost:3000/production", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-
-        if (!response.ok)
-          throw new Error(
-            (await response.text()) || "Erro ao salvar produção!"
-          );
-        alert("Produção registrada com sucesso!");
-        if (typeof window.loadProduction === "function")
-          await window.loadProduction();
-      } catch (err) {
-        console.error(err);
-        alert(err.message);
-      }
-    });
+  function aggregate(items) {
+    return {
+      produced: items.reduce((sum, i) => sum + parseFloat(i.produced || 0), 0),
+      remnant: items.reduce((sum, i) => sum + parseFloat(i.remnant || 0), 0),
+    };
   }
 
-  // carrega produção do dia ao abrir a página
-  if (typeof window.loadProduction === "function") window.loadProduction();
+  renderShiftChart(
+    "morningChart",
+    aggregate(shiftsData.morning),
+    "Produção - Manhã"
+  );
+  renderShiftChart(
+    "afternoonChart",
+    aggregate(shiftsData.evening),
+    "Produção - Tarde"
+  );
+  renderShiftChart(
+    "nightChart",
+    aggregate(shiftsData.night),
+    "Produção - Noite"
+  );
+  renderShiftChart("totalChart", aggregate(data), "Produção - Total do Dia");
+}
+
+// ------------------- Criar ou atualizar gráfico -------------------
+function renderShiftChart(canvasId, values, title) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+
+  if (charts[canvasId]) charts[canvasId].destroy();
+
+  charts[canvasId] = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: [""], // só um rótulo no eixo X
+    datasets: [
+      {
+        label: "Produzido",
+        data: [values.produced],
+        backgroundColor: "#4CAF50",
+      },
+      {
+        label: "Sobra",
+        data: [values.remnant],
+        backgroundColor: "#FF5722",
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: title },
+    },
+  },
 });
+
+}
+
+// ------------------- Envio do formulário -------------------
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  const foods = Array.from(document.getElementsByName("id_product[]"));
+  const produced = Array.from(document.getElementsByName("quantityProduced[]"));
+  const leftovers = Array.from(document.getElementsByName("leftovers[]"));
+
+  const items = foods.map((food, i) => ({
+    id_product: food.value,
+    quantityProduced: parseFloat(produced[i].value),
+    leftovers: parseFloat(leftovers[i].value),
+  }));
+
+  const body = {
+    mealType: formData.get("mealType"),
+    shift: formData.get("shift"),
+    notes: formData.get("notes"),
+    items,
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/production", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) throw new Error("Erro ao salvar produção!");
+    form.reset();
+    loadProducts(); // garante que selects ainda funcionem
+    loadProduction(productionDate.value || null);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// ------------------- Botão carregar produção por data -------------------
+loadDataBtn.addEventListener("click", () => {
+  loadProduction(productionDate.value || null);
+});
+
+// ------------------- Inicializar -------------------
+loadProducts();
+loadProduction();

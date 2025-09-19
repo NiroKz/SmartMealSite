@@ -1,13 +1,12 @@
 // models/productionModel.js
 const db = require("../config/db");
 
-// Inserir produção (agora recebendo também 'food' — nome da comida)
+// Inserir produção (recebe também 'food')
 const insertProduction = (productionData) => {
   return new Promise((resolve, reject) => {
     const {
-      id_meal, // id da refeição (criado/pego pelo controller)
-      id_product, // id do produto (FK para tabela product)
-      food, // NOME do produto (campo que causava o erro)
+      id_product,    // id do produto (FK)
+      food,          // nome do produto
       quantityProduced,
       mealType,
       shift,
@@ -15,13 +14,11 @@ const insertProduction = (productionData) => {
       notes,
     } = productionData;
 
-    // Inserimos explicitamente o campo 'food' no INSERT para evitar o erro
     db.execute(
       `INSERT INTO production
-       (id_meal, date_production, id_product, food, quantity_produced, meal_type, shift, remnant, note)
-       VALUES (?, CURDATE(), ?, ?, ?, ?, ?, ?, ?)`,
+       (date_production, id_product, food, quantity_produced, meal_type, shift, remnant, note)
+       VALUES (CURDATE(), ?, ?, ?, ?, ?, ?, ?)`,
       [
-        id_meal,
         id_product,
         food,
         quantityProduced,
@@ -38,7 +35,7 @@ const insertProduction = (productionData) => {
   });
 };
 
-// Buscar produção por data (sem alterações)
+// Buscar produção por data (já normalizando nomes para o front)
 const fetchProductionByDate = (date) => {
   return new Promise((resolve, reject) => {
     db.execute(
@@ -46,8 +43,8 @@ const fetchProductionByDate = (date) => {
          p.id_product,
          COALESCE(p.food, pr.product_name) AS product_name,
          p.food,
-         p.quantity_produced,
-         p.remnant,
+         p.quantity_produced AS produced,  
+         p.remnant AS remnant,             
          p.meal_type,
          p.shift,
          p.note

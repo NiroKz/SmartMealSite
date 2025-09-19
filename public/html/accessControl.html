@@ -164,6 +164,29 @@
                     </div>
                 </form>
 
+                <!-- 🔹 Seleção da data -->
+                <label>Escolher data:
+                    <input type="date" id="productionDate">
+                </label>
+                <button type="button" id="loadDataBtn">Carregar Produção</button>
+
+                <!-- 🔹 Produção Geral -->
+                <div class="meal-graph">
+                    <h3>Produção Geral</h3>
+                    <canvas id="totalChart"></canvas>
+                    <table id="totalTable" border="1">
+                        <thead>
+                            <tr>
+                                <th>Comida</th>
+                                <th>Produzido (kg)</th>
+                                <th>Sobrou (kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- 🔹 Produção Manhã -->
                 <div class="meal-graph">
                     <h3>Produção Manhã</h3>
                     <canvas id="morningChart"></canvas>
@@ -177,10 +200,13 @@
                         </thead>
                         <tbody></tbody>
                     </table>
+                </div>
 
+                <!-- 🔹 Produção Tarde -->
+                <div class="meal-graph">
                     <h3>Produção Tarde</h3>
-                    <canvas id="eveningChart"></canvas>
-                    <table id="eveningTable" border="1">
+                    <canvas id="afternoonChart"></canvas>
+                    <table id="afternoonTable" border="1">
                         <thead>
                             <tr>
                                 <th>Comida</th>
@@ -190,7 +216,10 @@
                         </thead>
                         <tbody></tbody>
                     </table>
+                </div>
 
+                <!-- 🔹 Produção Noite -->
+                <div class="meal-graph">
                     <h3>Produção Noite</h3>
                     <canvas id="nightChart"></canvas>
                     <table id="nightTable" border="1">
@@ -203,29 +232,7 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-
-                    <h3>Produção Geral</h3>
-                    <canvas id="totalChart"></canvas>
                 </div>
-                <label>Escolher data:
-                    <input type="date" id="productionDate">
-                </label>
-                <button type="button" id="loadDataBtn">Carregar Produção</button>
-
-                <!-- Tabela de produção -->
-                <table id="productionTable" border="1">
-                    <thead>
-                        <tr>
-                            <th>Comida</th>
-                            <th>Produzido (kg)</th>
-                            <th>Sobrou (kg)</th>
-                            <th>Tipo Refeição</th>
-                            <th>Turno</th>
-                            <th>Observações</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
             </section>
         </section>
 

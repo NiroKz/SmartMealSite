@@ -9,7 +9,7 @@ function getCurrentDateFormatted() {
 }
 
 // Função para criar ou obter id_meal do dia (mantida igual)
-async function getOrCreateMeal(mealType, shift) {
+/*async function getOrCreateMeal(mealType, shift) {
   const today = getCurrentDateFormatted();
 
   return new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ async function getOrCreateMeal(mealType, shift) {
       }
     );
   });
-}
+}*/
 
 // Helper: busca o nome do produto (product_name) dado o id_product
 function getProductName(id_product) {
@@ -62,7 +62,7 @@ const registerProduction = async (req, res) => {
     }
 
     // cria ou obtém id_meal para o dia
-    const id_meal = await getOrCreateMeal(mealType, shift);
+    // const id_meal = await getOrCreateMeal(mealType, shift);
 
     // itera cada item e grava na tabela production
     for (const item of items) {
@@ -70,7 +70,6 @@ const registerProduction = async (req, res) => {
       const productName = (await getProductName(item.id_product)) || "";
 
       const productionData = {
-        id_meal,
         id_product: item.id_product,
         food: productName, // <- aqui garantimos que 'food' será enviado
         quantityProduced: item.quantityProduced,
