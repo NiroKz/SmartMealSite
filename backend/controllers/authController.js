@@ -57,7 +57,7 @@ exports.prelogin = async (req, res) => {
         <div style="text-align: center; margin: 20px 0;">
           <span style="display: inline-block; background: #4CAF50; color: #fff; font-weight: bold; font-size: 18px; padding: 10px 20px; border-radius: 5px;">${tempPassword}</span>
         </div>
-        <p style="font-size: 14px; color: #777;">Essa senha é válida apenas por 30 minutos. Após o login, recomendamos que altere para uma senha de sua preferência.</p>
+        <p style="font-size: 14px; color: #777;">Essa senha é de uso único.</p>
         <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;" />
         <p style="font-size: 12px; color: #999;">Se você não solicitou esta senha, ignore este e-mail.</p>
       </div>
