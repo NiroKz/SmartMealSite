@@ -37,6 +37,8 @@ app.use("/filter", filterRoutes);
 const productRoutes = require("./routes/productRoutes");
 app.use("/product", productRoutes);
 
+const feedbackRoutes = require('./routes/feedbackRoutes');
+app.use('/feedback', feedbackRoutes);
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

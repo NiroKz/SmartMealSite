@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feedback</title>
   <link rel="stylesheet" href="../styles/feedback.css">
+  <link rel="stylesheet" href="../styles/popup.css">
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
 </head>
+
 <body>
   <header>
     <div class="logo-container">
@@ -22,22 +25,22 @@
   </header>
   <br>
   <br>
-  <br>  
+  <br>
   <br>
   <br>
   <main>
     <section class="feedback-container">
       <h2>Feedbacks</h2>
-      
+
       <form id="feedbackForm">
         <label for="rm">Digite seu RM:</label>
-        <input type="number" id="rm" name="rm" required maxlength="5">
+        <input type="number" id="rm" name="id_rm" required maxlength="5">
 
         <label for="data">Selecione a data do feedback:</label>
-        <input type="date" id="date" name="date" required>
+        <input type="date" id="date" name="date_feedback" required>
 
         <label for="comentary">Digite seu comentário:</label>
-        <textarea id="comentary" name="comentary" rows="5" required></textarea>
+        <textarea id="comentary" name="comment" rows="5" required></textarea>
 
         <h3>Faça uma avaliação:</h3>
         <div class="rating-container">
@@ -66,5 +69,15 @@
       </nav>
     </div>
   </footer>
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h2 id="popup-title">Título</h2>
+      <p id="popup-message">Mensagem do sistema...</p>
+    </div>
+  </div>
+  <script src="../js/popup.js"></script>
+  <script src="../js/feedback.js"></script>
 </body>
+
 </html>
