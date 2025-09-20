@@ -1,35 +1,37 @@
-const { createLiberation } = require("../models/liberationModel");
+const db = require("../config/db");
 
-const handleLiberation = async (req, res) => {
+function handleLiberation(req, res) {
   console.log("Received liberation request body:", req.body);
-  try {
-    const { rm, lunch, dinner, justification, option, repeat } = req.body;
 
-    if (!rm || !justification || (!lunch && !dinner)) {
-      return res.status(400).json({ error: "Missing required fields" });
+  const { rm, lunch, dinner, justification, option, repeat } = req.body;
+
+  // 🔹 meal_type: pega o primeiro que não for null
+  let meal_type = null;
+  if (lunch) meal_type = "lunch";
+  else if (dinner) meal_type = "dinner";
+
+  // 🔹 repeat: converter boolean para yes/no
+  const allow_repeat = repeat ? "yes" : "no";
+
+  // 🔹 garantir datetime completo
+  const date_time = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  const query = `
+    INSERT INTO release_exception
+    (id_rm, meal_type, type_release, date_time, reason, allow_repeat)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [rm, meal_type, option, date_time, justification, allow_repeat];
+
+  db.query(query, values, (err, results) => {
+    if (err) {
+      console.error("Error in handleLiberation:", err);
+      return res.status(500).json({ error: "Failed to register exception release" });
     }
 
-    const liberations = [];
-
-    if (option === "temporary") {
-      if (lunch) liberations.push({ date: lunch, type: "almoço" });
-      if (dinner) liberations.push({ date: dinner, type: "jantar" });
-    } else {
-      const today = new Date().toISOString().split("T")[0];
-      liberations.push({ date: today, type: "almoço" });
-      liberations.push({ date: today, type: "jantar" });
-    }
-
-    for (const item of liberations) {
-      const datetime = new Date(item.date);
-      await createLiberation(rm, datetime, justification, item.type, option, repeat);
-    }
-
-    res.status(200).json({ message: "Liberation successfully created" });
-  } catch (err) {
-    console.error("Error in handleLiberation:", err);
-    res.status(500).json({ error: "Server error", details: err.message || err });
-  }
-};
+    res.status(201).json({ message: "Exception release registered successfully!" });
+  });
+}
 
 module.exports = { handleLiberation };

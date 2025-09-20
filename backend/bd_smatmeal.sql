@@ -409,13 +409,13 @@ id_rm int(5) NOT NULL,
 date_time datetime NOT NULL, -- hh:mm dd/mm/yyyy --
 reason varchar(140),
 meal_type enum('breakfast','lunch', 'snack', 'dinner') NOT NULL,
-type_realease enum('temporary', 'permanent') NOT NULL,
+type_release enum('temporary', 'permanent') NOT NULL,
 allow_repeat enum('yes', 'no') NOT NULL,
 foreign key(id_rm) references student(id_rm)
 );
-    select id_rm, meal_type, type_realease, date_time, reason from release_exception;
+    select id_rm, meal_type, type_release, date_time, reason from release_exception;
     
-    INSERT INTO release_exception (id_rm, date_time, reason, meal_type, type_realease, allow_repeat) VALUES
+    INSERT INTO release_exception (id_rm, date_time, reason, meal_type, type_release, allow_repeat) VALUES
 (10000, '2025-08-23 07:30:00', 'Problema de saúde', 'breakfast', 'temporary', 'no'),
 (10001, '2025-08-23 12:00:00', 'Viajei para outro estado', 'lunch', 'temporary', 'yes'),
 (10002, '2025-08-24 15:00:00', 'Compromisso acadêmico', 'snack', 'permanent', 'no'),

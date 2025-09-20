@@ -17,7 +17,7 @@ const createLiberation = (
     const formattedDateTime = formatDateTimeForMySQL(datetime);
     const query = `
         INSERT INTO release_exception
-        (id-rm, meal_type, type_release, date_time, reason, allow_repeat)
+        (id_rm, meal_type, type_release, date_time, reason, allow_repeat)
         VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
     //INSERT INTO liberacao_excecao
@@ -26,7 +26,7 @@ const createLiberation = (
     const values = [
       studentId,
       mealType,
-      permissionType === "temporary" ? "temporária" : "permanente",
+      permissionType === "temporary" ? "temporary" : "permanent",
       formattedDateTime.split(" ")[0],
       formattedDateTime,
       reason,
