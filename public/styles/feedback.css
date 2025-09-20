@@ -1,3 +1,97 @@
 @import "./footer.css";
 @import "./header.css";
 @import "./hall.css";
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.feedback-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #f6e8ca;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.feedback-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.feedback-container label {
+  display: block;
+  text-align: left;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.feedback-container input[type="number"],
+.feedback-container input[type="date"],
+.feedback-container textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.feedback-container textarea {
+  resize: vertical;
+}
+
+.rating-container {
+  margin-top: 2rem;
+}
+
+.rating-container input[type="range"] {
+  width: 100%;
+  margin: 1rem 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: linear-gradient(to right, red, orange, yellow, lightgreen, green);
+  border-radius: 5px;
+  outline: none;
+}
+
+.rating-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #555;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.faces {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.feedback-container button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #7b6b4c;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.feedback-container button:hover {
+  background: #5a4e39;
+}
