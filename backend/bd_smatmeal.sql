@@ -163,7 +163,10 @@ INSERT INTO student (id_rm, id_class, student_name, biometrics_authorization, da
 (20015, 21, 'Camila Teste', TRUE, '2025-09-01', 'Paulo Teste', 'Glúten');
 
 
-select * from student;
+select * from student
+join meal
+on student.id_rm= meal.id_rm 
+where student.id_rm = 10014;
 
 create table meal (
 id_meal int auto_increment primary key NOT NULL,
@@ -414,6 +417,7 @@ allow_repeat enum('yes', 'no') NOT NULL,
 foreign key(id_rm) references student(id_rm)
 );
     select id_rm, meal_type, type_release, date_time, reason from release_exception;
+    select * from release_exception;
     
     INSERT INTO release_exception (id_rm, date_time, reason, meal_type, type_release, allow_repeat) VALUES
 (10000, '2025-08-23 07:30:00', 'Problema de saúde', 'breakfast', 'temporary', 'no'),
@@ -429,6 +433,12 @@ foreign key(id_rm) references student(id_rm)
 
 
 select * from release_exception;
+
+
+select * from student
+join release_exception
+on student.id_rm= release_exception.id_rm 
+where student.id_rm = 10014;
 
 create table school_user (
 id_user int auto_increment primary key NOT NULL,

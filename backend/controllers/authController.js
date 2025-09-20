@@ -46,8 +46,25 @@ exports.prelogin = async (req, res) => {
         {
           from: "SmartMeal <onboarding@resend.dev>",
           to: email,
-          subject: "Sua senha temporária",
-          html: `<p>Olá ${user.user_name},</p><p>Sua senha temporária é: <strong>${tempPassword}</strong></p>`,
+          subject: "Sua senha temporária - SmartMeal",
+          html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <img src="https://yourdomain.com/logo.png" alt="SmartMeal" style="width: 120px;" />
+        </div>
+        <h2 style="color: #333;">Olá ${user.user_name},</h2>
+        <p style="font-size: 16px; color: #555;">Você solicitou uma senha temporária para acessar o <strong>SmartMeal</strong>. Use-a para fazer login:</p>
+        <div style="text-align: center; margin: 20px 0;">
+          <span style="display: inline-block; background: #4CAF50; color: #fff; font-weight: bold; font-size: 18px; padding: 10px 20px; border-radius: 5px;">${tempPassword}</span>
+        </div>
+        <p style="font-size: 14px; color: #777;">Essa senha é válida apenas por 30 minutos. Após o login, recomendamos que altere para uma senha de sua preferência.</p>
+        <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;" />
+        <p style="font-size: 12px; color: #999;">Se você não solicitou esta senha, ignore este e-mail.</p>
+      </div>
+      <p style="font-size:12px; color:#999;">
+      SmartMeal - www.smartmeal.com.br | contato@smartmeal.com.br
+      </p>
+      `,
         },
         {
           headers: {
@@ -58,7 +75,10 @@ exports.prelogin = async (req, res) => {
       );
 
       //res.redirect("/html/login.html");
-      res.json({ sucesso: true, mensagem: "Email enviado com sucesso! Verifique sua caixa de entrada." });
+      res.json({
+        sucesso: true,
+        mensagem: "Email enviado com sucesso! Verifique sua caixa de entrada.",
+      });
       console.log("Prelogin realizado com sucesso");
     } catch (emailErr) {
       console.error(
