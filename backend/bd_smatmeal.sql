@@ -254,6 +254,10 @@ INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (20014, '2025-09-18 18:00:00', 'dinner', 'allowed'),
 (20015, '2025-09-18 18:10:00', 'dinner', 'blocked');
 
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(20015, '2025-09-18 12:40:00', 'lunch', 'allowed'),
+(20015, '2025-09-18 18:30:00', 'dinner', 'allowed');
+
 
 select * from meal;
 

@@ -21,20 +21,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Botão de aplicar filtro
 document.getElementById("filterBtn").addEventListener("click", async () => {
+
   const course = document.getElementById("course").value;
   const period = document.getElementById("period").value;
   const grade = document.getElementById("grade").value;
+  const date = document.getElementById("filterDate").value;
 
-  if (!course || !period || !grade) {
+  if (!course || !period || !grade || !date) {
     alert("Selecione todos os filtros!");
     return;
   }
 
+
   try {
     const response = await fetch(
-      `/filter/students?course=${course}&period=${period}&grade=${grade}`
+      `/filter/students?course=${course}&period=${period}&grade=${grade}&date=${date}`
     );
     const data = await response.json();
+
+    // Exibir data escolhida acima da tabela
+    const selectedDateDisplay = document.getElementById("selectedDateDisplay");
+    const [ano, mes, dia] = date.split("-");
+    selectedDateDisplay.textContent = `Data selecionada: ${dia}/${mes}/${ano}`;
 
     const tbody = document.getElementById("studentsTableBody");
     tbody.innerHTML = "";
