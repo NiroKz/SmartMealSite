@@ -41,7 +41,7 @@ exports.prelogin = async (req, res) => {
     tempPasswords[email] = tempPassword;
 
     try {
-      await axios.post(
+      await axios.post( //TODO: arrumar imagem do email e footer
         "https://api.resend.com/emails",
         {
           from: "SmartMeal <onboarding@resend.dev>",
@@ -50,7 +50,7 @@ exports.prelogin = async (req, res) => {
           html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
         <div style="text-align: center; margin-bottom: 30px;">
-          <img src="https://yourdomain.com/logo.png" alt="SmartMeal" style="width: 120px;" />
+          <img src="..\..\public\images\SmartMealLogo.png" alt="SmartMeal" style="width: 120px;" />
         </div>
         <h2 style="color: #333;">Olá ${user.user_name},</h2>
         <p style="font-size: 16px; color: #555;">Você solicitou uma senha temporária para acessar o <strong>SmartMeal</strong>. Use-a para fazer login:</p>
