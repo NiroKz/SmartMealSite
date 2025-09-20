@@ -1,37 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback</title>
-    <link rel="stylesheet" href="../styles/feedback.css">
-    <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <link rel="stylesheet" href="../styles/feedback.css">
+  <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
 </head>
 <body>
-    <header>
+  <header>
     <div class="logo-container">
-      <img src="../images/SmartMealLogo.png">
+      <img src="../images/SmartMealLogo.png" alt="Logo Smart Meal">
       <h1>Smart Meal</h1>
     </div>
     <nav>
       <ul>
-        <li><a href="../index.html"><b>Home</b> </a></li>
+        <li><a href="../index.html"><b>Home</b></a></li>
         <li><a href="../../public/html/register.html"><b>Começar agora</b></a></li>
       </ul>
     </nav>
   </header>
+  <br>
+  <br>
+  <br>  
+  <br>
+  <br>
+  <main>
+    <section class="feedback-container">
+      <h2>Feedbacks</h2>
+      
+      <form id="feedbackForm">
+        <label for="rm">Digite seu RM:</label>
+        <input type="number" id="rm" name="rm" required maxlength="5">
 
-   <footer>
-        <div class="footer-container">
-            <p><b>&copy; 2025 Smart Meal</b></p>
-            <nav>
-                <ul>
-                    <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                </ul>
-            </nav>
+        <label for="data">Selecione a data do feedback:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="comentary">Digite seu comentário:</label>
+        <textarea id="comentary" name="comentary" rows="5" required></textarea>
+
+        <h3>Faça uma avaliação:</h3>
+        <div class="rating-container">
+          <input type="range" id="rating" name="rating" min="1" max="5" value="3">
+          <div class="faces">
+            <span>😡</span>
+            <span>😟</span>
+            <span>😐</span>
+            <span>🙂</span>
+            <span>😍</span>
+          </div>
         </div>
-    </footer>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p><b>&copy; 2025 Smart Meal</b></p>
+      <nav>
+        <ul>
+          <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../scripts/feedback.js"></script>
 </body>
 </html>
