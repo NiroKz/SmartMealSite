@@ -43,6 +43,9 @@ app.use('/feedback', feedbackRoutes);
 const studentRoutes = require("./routes/studentRoutes");
 app.use("/student", studentRoutes);
 
+const stockRoutes = require("./routes/stockRoutes");
+app.use("/stock", stockRoutes);
+
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
   console.error(err.stack);

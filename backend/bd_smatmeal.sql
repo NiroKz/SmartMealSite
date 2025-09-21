@@ -162,7 +162,7 @@ INSERT INTO student (id_rm, id_class, student_name, biometrics_authorization, da
 (20014, 20, 'Gabriel Teste', TRUE, '2025-09-01', 'Sandra Teste', 'Nenhuma'),
 (20015, 21, 'Camila Teste', TRUE, '2025-09-01', 'Paulo Teste', 'Glúten');
 
-
+select * from student;
 select * from student
 join meal
 on student.id_rm= meal.id_rm 
@@ -272,6 +272,9 @@ INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (20012, '2025-09-21 12:10:00', 'lunch', 'allowed');
+
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(10245, '2025-09-21 12:10:00', 'lunch', 'allowed');
 
 select * from meal;
 
