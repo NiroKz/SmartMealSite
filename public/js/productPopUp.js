@@ -40,10 +40,12 @@ document.getElementById("productForm").addEventListener("submit", async (e) => {
     });
 
     if (res.ok) {
-      alert("Produto atualizado com sucesso!");
+      //alert("Produto atualizado com sucesso!");
+      showPopup("Sucesso!", "Produto atualizado com sucesso!");
       modal.style.display = "none";
     } else {
-      alert("Erro ao salvar produto");
+      //alert("Erro ao salvar produto");
+      showPopup("Erro", "Erro ao salvar produto.");
     }
   } catch (err) {
     console.error(err);

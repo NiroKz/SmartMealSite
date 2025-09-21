@@ -7,6 +7,7 @@
     <title>Controle de Acesso</title>
     <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
     <link rel="stylesheet" href="../styles/accessControl.css">
+    <link rel="stylesheet" href="../styles/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -420,6 +421,7 @@
     <script src="../js/production.js"></script>
     <script src="../js/stock.js"></script>
     <script src="../js/productPopUp.js"></script>
+    <script src="../js/popup.js"></script>
     <script src="../js/feedback.js"></script>
     <footer>
         <div class="footer-container">
@@ -433,6 +435,13 @@
             </nav>
         </div>
     </footer>
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title">Título</h2>
+            <p id="popup-message">Mensagem do sistema...</p>
+        </div>
+    </div>
 </body>
 
 </html>
