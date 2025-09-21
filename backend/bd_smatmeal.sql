@@ -555,3 +555,21 @@ LEFT JOIN meal m
 WHERE c.course = ?
   AND c.`period` = ?
   AND c.`grade` = ?; */
+  
+  -- logica do filtro com anabolizante
+SELECT
+        s.id_rm,
+        s.student_name,
+        COUNT(CASE WHEN m.type_meal = 'lunch' AND m.access_status = 'allowed' THEN 1 ELSE NULL END) AS lunch_allowed_count,
+        COUNT(CASE WHEN m.type_meal = 'dinner' AND m.access_status = 'allowed' THEN 1 ELSE NULL END) AS dinner_allowed_count,
+        COUNT(CASE WHEN m.type_meal = 'lunch' AND m.access_status = 'exception' THEN 1 ELSE NULL END) AS lunch_exception_count,
+        COUNT(CASE WHEN m.type_meal = 'dinner' AND m.access_status = 'exception' THEN 1 ELSE NULL END) AS dinner_exception_count,
+        MAX(CASE WHEN m.type_meal = 'lunch' THEN m.date_time END) AS lunch_time,
+        MAX(CASE WHEN m.type_meal = 'dinner' THEN m.date_time END) AS dinner_time
+    FROM student s
+    JOIN class c ON s.id_class = c.id_class
+    LEFT JOIN meal m ON m.id_rm = s.id_rm AND DATE(m.date_time) = '2025-09-18'
+    WHERE c.course = 'INFO' AND c.period = 'T' AND c.grade = '3'
+    GROUP BY s.id_rm, s.student_name
+    ORDER BY s.student_name;
+
