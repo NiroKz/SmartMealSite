@@ -7,6 +7,7 @@
   <title>Smart Meal</title>
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
   <link rel="stylesheet" href="../styles/studentRegister.css">
+  <link rel="stylesheet" href="../styles/popup.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -18,12 +19,13 @@
     </div>
     <nav>
       <ul>
-        <li><a href="./feedback.html"><b>Feedback</b> </a></li>
-        <li><a href="../index.html"><b>Home</b> </a></li>
+        <li><a href="./feedback.html"><b>Feedback</b></a></li>
+        <li><a href="../index.html"><b>Home</b></a></li>
         <li><a href="../html/prelogin.html"><b>Entrar</b></a></li>
       </ul>
     </nav>
   </header>
+
   <main>
     <div class="page-wrapper">
       <div class="container">
@@ -32,9 +34,11 @@
             <img src="../images/SmartMealLogo.png" alt="Smart Meal Logo" style="width:100%; height:100%;">
           </div>
         </div>
+
         <div class="right-panel">
           <h1>Faça seu cadastro:</h1>
           <form id="studentForm">
+
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required maxlength="60">
 
@@ -42,14 +46,22 @@
             <input type="text" id="RM" name="RM" required maxlength="5">
 
             <label for="Course">Curso:</label>
-                <select name="Course" id="Course">
-                <!-- as opções devem ser geradas com oq tiver no bd da escola
-                exemplo: se no bd tiver adm, meca e ptec. tem q aparecer os 3 aq -->
-                </select>
+            <select id="Course" required>
+              <option value="">Selecione o curso</option>
+            </select>
 
-            <label for="student_legal_guardian">Responsavel:</label>
+            <label for="Year">Ano:</label>
+            <select id="Year" required>
+              <option value="">Selecione o ano</option>
+            </select>
+
+            <label for="Period">Período:</label>
+            <select id="Period" required>
+              <option value="">Selecione o período</option>
+            </select>
+
+            <label for="student_legal_guardian">Responsável:</label>
             <input type="text" id="student_legal_guardian" name="student_legal_guardian" required maxlength="60">
-
 
             <label for="food_restriction">Restrição Alimentar:</label>
             <textarea id="food_restriction" name="food_restriction" maxlength="30" rows="3"></textarea>
@@ -60,6 +72,7 @@
       </div>
     </div>
   </main>
+
   <footer>
     <div class="footer-container">
       <p><b>&copy; 2025 Smart Meal</b></p>
@@ -72,7 +85,15 @@
       </nav>
     </div>
   </footer>
-<script src="../js/studentRegister.js"></script>
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h2 id="popup-title">Título</h2>
+      <p id="popup-message">Mensagem do sistema...</p>
+    </div>
+  </div>
+  <script src="../js/studentRegister.js"></script>
+  <script src="../js/popup.js"></script>
 </body>
 
 </html>
