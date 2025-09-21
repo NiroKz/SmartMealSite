@@ -6,6 +6,9 @@ function showPopup(title, message, duration = 3000) {
   titleEl.innerText = title;
   msgEl.innerText = message;
 
+  // Remove a classe hidden
+  popup.classList.remove("hidden");
+
   // Remove barrinha antiga (se existir)
   const oldBar = popup.querySelector(".progress-bar");
   if (oldBar) oldBar.remove();
@@ -29,4 +32,6 @@ function showPopup(title, message, duration = 3000) {
 function closePopup() {
   const popup = document.getElementById("popup");
   popup.style.display = "none";
+  // Re-adiciona a classe hidden
+  popup.classList.add("hidden");
 }
