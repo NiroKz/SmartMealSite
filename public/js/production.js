@@ -173,6 +173,7 @@ function renderShiftChart(canvasId, values, title) {
 }
 
 // ------------------- Envio do formulário -------------------
+// ------------------- Envio do formulário -------------------
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
@@ -202,8 +203,35 @@ form.addEventListener("submit", async (e) => {
     });
 
     if (!response.ok) throw new Error("Erro ao salvar produção!");
+
+    // 🔹 Reseta o formulário
     form.reset();
-    loadProducts(); // garante que selects ainda funcionem
+
+    // 🔹 Remove todos os itens de comida extras
+    foodsContainer.innerHTML = "";
+
+    // 🔹 Cria um novo item padrão
+    const div = document.createElement("div");
+    div.classList.add("food-item");
+    div.innerHTML = `
+      <label>Comida:
+        <select name="id_product[]" required>
+          <option value="" disabled selected>Carregando produtos...</option>
+        </select>
+      </label>
+      <label>Produzido (kg):
+        <input type="number" step="0.001" name="quantityProduced[]" required>
+      </label>
+      <label>Sobrou (kg):
+        <input type="number" step="0.001" name="leftovers[]" required>
+      </label>
+    `;
+    foodsContainer.appendChild(div);
+
+    // 🔹 Recarrega os produtos no novo select
+    loadProducts();
+
+    // 🔹 Recarrega a produção para atualizar tabelas/gráficos
     loadProduction(productionDate.value || null);
   } catch (err) {
     console.error(err);
