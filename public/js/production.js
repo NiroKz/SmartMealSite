@@ -10,6 +10,7 @@ const foodsContainer = document.getElementById("foodsContainer");
 const charts = {};
 
 // ------------------- Carregar produtos no select -------------------
+// ------------------- Carregar produtos no select -------------------
 async function loadProducts() {
   try {
     const response = await fetch("http://localhost:3000/product");
@@ -19,13 +20,22 @@ async function loadProducts() {
     // Preenche todos os selects de comida
     const selects = Array.from(document.getElementsByName("id_product[]"));
     selects.forEach((select) => {
-      select.innerHTML = "";
+      const prevValue = select.value; // guarda a seleção anterior
+
+      select.innerHTML = ""; // limpa as opções antigas
+
+      // recria as opções
       products.forEach((prod) => {
         const option = document.createElement("option");
         option.value = prod.id_product;
         option.textContent = prod.product_name;
         select.appendChild(option);
       });
+
+      // tenta restaurar a seleção
+      if (prevValue) {
+        select.value = prevValue;
+      }
     });
   } catch (err) {
     console.error(err);
@@ -137,30 +147,29 @@ function renderShiftChart(canvasId, values, title) {
   if (charts[canvasId]) charts[canvasId].destroy();
 
   charts[canvasId] = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: [""], // só um rótulo no eixo X
-    datasets: [
-      {
-        label: "Produzido",
-        data: [values.produced],
-        backgroundColor: "#4CAF50",
-      },
-      {
-        label: "Sobra",
-        data: [values.remnant],
-        backgroundColor: "#FF5722",
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      title: { display: true, text: title },
+    type: "bar",
+    data: {
+      labels: [""], // só um rótulo no eixo X
+      datasets: [
+        {
+          label: "Produzido",
+          data: [values.produced],
+          backgroundColor: "#4CAF50",
+        },
+        {
+          label: "Sobra",
+          data: [values.remnant],
+          backgroundColor: "#FF5722",
+        },
+      ],
     },
-  },
-});
-
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: title },
+      },
+    },
+  });
 }
 
 // ------------------- Envio do formulário -------------------
