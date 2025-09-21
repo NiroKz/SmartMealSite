@@ -40,6 +40,9 @@ app.use("/product", productRoutes);
 const feedbackRoutes = require('./routes/feedbackRoutes');
 app.use('/feedback', feedbackRoutes);
 
+const studentRoutes = require("./routes/studentRoutes");
+app.use("/student", studentRoutes);
+
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -267,6 +267,12 @@ INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (20014, '2025-09-21 12:20:00', 'lunch', 'blocked'),
 (20014, '2025-09-21 18:30:00', 'dinner', 'allowed');
 
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(20013, '2025-09-21 18:30:00', 'dinner', 'allowed');
+
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(20012, '2025-09-21 12:10:00', 'lunch', 'allowed');
+
 select * from meal;
 
 create table feedback (
