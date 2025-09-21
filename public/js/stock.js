@@ -1,4 +1,3 @@
-// public/js/stock.js
 document.addEventListener("DOMContentLoaded", async () => {
   const tbody = document.querySelector(".estoque-table tbody");
 
@@ -6,15 +5,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("http://localhost:3000/stock");
     const stockData = await response.json();
 
-    tbody.innerHTML = ""; // limpa dados mockados
+    tbody.innerHTML = ""; // limpa tabela mockada
 
     stockData.forEach(item => {
       const row = document.createElement("tr");
 
+      const quantity_movement_formated = Number(item.quantity_movement);
       row.innerHTML = `
         <td>${item.batch}</td>
         <td>${item.date_movement}</td>
-        <td>${item.quantity_movement}</td>
+        <td>${quantity_movement_formated.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} ${item.unit}</td>
         <td>${item.validity}</td>
         <td>${item.product_name}</td>
       `;

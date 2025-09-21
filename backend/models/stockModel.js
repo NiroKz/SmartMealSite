@@ -1,7 +1,6 @@
-// models/stockModel.js
 const db = require("../config/db");
 
-// Buscar todos os registros de estoque com nome do produto
+// Buscar todas as movimentações de estoque
 function getAllStock(callback) {
   db.query(
     `SELECT 
@@ -10,7 +9,9 @@ function getAllStock(callback) {
         DATE_FORMAT(s.date_movement, '%d/%m/%Y') AS date_movement,
         s.quantity_movement,
         DATE_FORMAT(s.validity, '%d/%m/%Y') AS validity,
-        p.product_name
+        s.destination,
+        p.product_name,
+        p.unit
      FROM stock s
      JOIN product p ON s.id_product = p.id_product
      ORDER BY s.date_movement DESC`,
@@ -21,7 +22,7 @@ function getAllStock(callback) {
   );
 }
 
-// Adicionar novo movimento de estoque
+// Inserir nova movimentação de estoque
 function addStock(data, callback) {
   const { id_product, quantity_movement, date_movement, validity, batch, destination } = data;
 
@@ -32,9 +33,11 @@ function addStock(data, callback) {
     (err, result) => {
       if (err) return callback(err, null);
 
-      // Atualiza a quantidade do produto
+      // Atualiza a quantidade atual do produto (pode ser positiva ou negativa)
       db.query(
-        `UPDATE product SET current_quantity = current_quantity + ? WHERE id_product = ?`,
+        `UPDATE product 
+         SET current_quantity = current_quantity + ? 
+         WHERE id_product = ?`,
         [quantity_movement, id_product],
         (err2) => {
           if (err2) return callback(err2, null);
