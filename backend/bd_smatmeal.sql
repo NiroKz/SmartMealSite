@@ -259,6 +259,14 @@ INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (20015, '2025-09-18 18:30:00', 'dinner', 'allowed');
 
 
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(20015, '2025-09-21 12:20:00', 'lunch', 'allowed'),
+(20015, '2025-09-21 18:30:00', 'dinner', 'allowed');
+
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(20014, '2025-09-21 12:20:00', 'lunch', 'blocked'),
+(20014, '2025-09-21 18:30:00', 'dinner', 'allowed');
+
 select * from meal;
 
 create table feedback (
@@ -572,4 +580,55 @@ SELECT
     WHERE c.course = 'INFO' AND c.period = 'T' AND c.grade = '3'
     GROUP BY s.id_rm, s.student_name
     ORDER BY s.student_name;
+    
+    SELECT
+    s.id_rm,
+    s.student_name,
+    MAX(CASE WHEN m.type_meal = 'lunch' THEN m.date_time END) AS lunch_time,
+    MAX(CASE WHEN m.type_meal = 'dinner' THEN m.date_time END) AS dinner_time,
+    GROUP_CONCAT(CASE WHEN m.type_meal = 'lunch' AND m.id_meal <> (
+        SELECT MIN(m2.id_meal)
+        FROM meal m2
+        WHERE m2.id_rm = s.id_rm AND DATE(m2.date_time) = ?
+          AND m2.type_meal = 'lunch'
+    ) THEN DATE_FORMAT(m.date_time, '%H:%i') END SEPARATOR ', ') AS lunch_repeat_times,
+    GROUP_CONCAT(CASE WHEN m.type_meal = 'dinner' AND m.id_meal <> (
+        SELECT MIN(m2.id_meal)
+        FROM meal m2
+        WHERE m2.id_rm = s.id_rm AND DATE(m2.date_time) = ?
+          AND m2.type_meal = 'dinner'
+    ) THEN DATE_FORMAT(m.date_time, '%H:%i') END SEPARATOR ', ') AS dinner_repeat_times
+FROM student s
+JOIN class c ON s.id_class = c.id_class
+LEFT JOIN meal m ON m.id_rm = s.id_rm AND DATE(m.date_time) = '2025-09-18'
+WHERE c.course = 'INFO' AND c.period = 'M' AND c.grade = '3'
+GROUP BY s.id_rm, s.student_name
+ORDER BY s.student_name;
 
+SELECT
+      s.id_rm,
+      s.student_name,
+      MAX(CASE WHEN m.type_meal = 'lunch' THEN m.date_time END) AS lunch_time,
+      MAX(CASE WHEN m.type_meal = 'dinner' THEN m.date_time END) AS dinner_time,
+      GROUP_CONCAT(
+        CASE WHEN m.type_meal = 'lunch' AND m.id_meal <> (
+          SELECT MIN(m2.id_meal)
+          FROM meal m2
+          WHERE m2.id_rm = s.id_rm AND DATE(m2.date_time) = ? AND m2.type_meal = 'lunch'
+        ) THEN DATE_FORMAT(m.date_time, '%H:%i') END
+        SEPARATOR ', '
+      ) AS lunch_repeat_times,
+      GROUP_CONCAT(
+        CASE WHEN m.type_meal = 'dinner' AND m.id_meal <> (
+          SELECT MIN(m2.id_meal)
+          FROM meal m2
+          WHERE m2.id_rm = s.id_rm AND DATE(m2.date_time) = ? AND m2.type_meal = 'dinner'
+        ) THEN DATE_FORMAT(m.date_time, '%H:%i') END
+        SEPARATOR ', '
+      ) AS dinner_repeat_times
+    FROM student s
+    JOIN class c ON s.id_class = c.id_class
+    LEFT JOIN meal m ON m.id_rm = s.id_rm AND DATE(m.date_time) = '2025-09-18'
+    WHERE c.course = 'INFO' AND c.period = 'T' AND c.grade = '3'
+    GROUP BY s.id_rm, s.student_name
+    ORDER BY s.student_name
