@@ -1,6 +1,5 @@
 // public/js/production.js
 console.log("✅ production.js carregado!");
-
 const form = document.getElementById("mealForm");
 const loadDataBtn = document.getElementById("loadDataBtn");
 const productionDate = document.getElementById("productionDate");
@@ -13,7 +12,7 @@ const charts = {};
 // ------------------- Carregar produtos no select -------------------
 async function loadProducts() {
   try {
-    const response = await fetch("http://localhost:3000/product");
+    const response = await fetch(`${API_BASE_URL}/product`);
     if (!response.ok) throw new Error("Erro ao carregar produtos!");
     const products = await response.json();
 
@@ -67,7 +66,7 @@ document.getElementById("addFoodBtn").addEventListener("click", () => {
 async function loadProduction(date) {
   try {
     const query = date ? `?date=${date}` : "";
-    const response = await fetch(`http://localhost:3000/production${query}`);
+    const response = await fetch(`${API_BASE_URL}/production${query}`);
     if (!response.ok) throw new Error("Erro ao carregar produção!");
     const data = await response.json();
 
@@ -196,7 +195,7 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/production", {
+    const response = await fetch(`${API_BASE_URL}/production`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

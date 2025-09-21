@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const API_BASE_URL = process.env.API_BASE_URL;
 
 // Middlewares
 app.use(cors());
@@ -54,5 +55,6 @@ app.use((err, req, res, next) => {
 
 // Inicia o servidor
 app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+  //console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+  console.log(`✅ Servidor rodando em ${API_BASE_URL}`);
 });
