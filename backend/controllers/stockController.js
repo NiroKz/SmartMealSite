@@ -29,17 +29,19 @@ exports.addStock = async (req, res) => {
       "SELECT id_product FROM product WHERE product_name = ?",
       [productName],
       (err, product) => {
-        if (err) return res.status(500).json({ error: "Erro no servidor" });
-
+        if (err) {
+          return res.status(500).json({ error: "Erro no servidor" });
+        }
+        res.json(results);
         if (product.length > 0) {
           // Produto já existe → atualiza quantidade
           db.query(
             "UPDATE product SET current_quantity = current_quantity + ? WHERE id_product = ?",
             [productQuantity, product[0].id_product],
             (err) => {
-              if (err)
+              if (err){
                 return res.status(500).json({ error: "Erro no servidor" });
-
+              }
               // Registra no histórico (stock)
               db.query(
                 "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination) VALUES (?, ?, NOW(), ?, ?, ?)",
@@ -51,8 +53,9 @@ exports.addStock = async (req, res) => {
                   destination,
                 ],
                 (err) => {
-                  if (err)
+                  if (err){
                     return res.status(500).json({ error: "Erro no servidor" });
+                  }
                   res
                     .status(200)
                     .json({ message: "Produto atualizado com sucesso" });
@@ -66,9 +69,9 @@ exports.addStock = async (req, res) => {
             "INSERT INTO product (product_name, current_quantity, unit, minimum_quantity) VALUES (?, ?, ?, 0)",
             [productName, productQuantity, productUnit],
             (err, insert) => {
-              if (err)
+              if (err){
                 return res.status(500).json({ error: "Erro no servidor" });
-
+              }
               // Registra no histórico
               db.query(
                 "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination) VALUES (?, ?, NOW(), ?, ?, ?)",
@@ -80,8 +83,9 @@ exports.addStock = async (req, res) => {
                   destination,
                 ],
                 (err) => {
-                  if (err)
+                  if (err){
                     return res.status(500).json({ error: "Erro no servidor" });
+                  }
                   res
                     .status(200)
                     .json({ message: "Produto adicionado com sucesso" });

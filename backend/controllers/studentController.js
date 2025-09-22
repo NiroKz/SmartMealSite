@@ -18,6 +18,7 @@ exports.registerStudent = (req, res) => {
       console.error("Erro ao cadastrar aluno:", err);
       return res.status(500).send("Erro ao cadastrar aluno.");
     }
+    res.json(results);
     //res.send("Aluno cadastrado com sucesso!");
     res.status(201).send("Aluno cadastrado com sucesso!");
   });

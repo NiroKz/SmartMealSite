@@ -39,7 +39,7 @@ exports.getFilteredStudents = (req, res) => {
       console.error("Erro no banco de dados:", err);
       return res.status(500).json({ error: "Erro no banco de dados", details: err.message });
     }
-
+    res.json(results);
     const data = results.map((row) => {
       // Função para definir status
       function getStatus(mealType, time) {

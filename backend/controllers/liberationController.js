@@ -29,6 +29,7 @@ function handleLiberation(req, res) {
       console.error("Error in handleLiberation:", err);
       return res.status(500).json({ error: "Failed to register exception release" });
     }
+    res.json(results);
 
     res.status(201).json({ message: "Exception release registered successfully!" });
   });

@@ -18,7 +18,7 @@ exports.register = (req, res) => {
       console.error("Erro ao cadastrar usuário:", err);
       return res.status(500).send("Erro no cadastro.");
     }
-
+    res.json(results);
     res.redirect("/html/prelogin.html");
     console.log("Cadastro realizado com sucesso");
   });
@@ -30,7 +30,10 @@ exports.prelogin = async (req, res) => {
   if (!email) return res.status(400).send("Email é obrigatório.");
 
   User.findUserByEmail(email, async (err, results) => {
-    if (err) return res.status(500).send("Erro no servidor.");
+    if (err) {
+      return res.status(500).send("Erro no servidor.");
+    }
+    res.json(results);
     if (results.length === 0)
       return res.status(404).send("Email não encontrado.");
 
@@ -41,7 +44,8 @@ exports.prelogin = async (req, res) => {
     tempPasswords[email] = tempPassword;
 
     try {
-      await axios.post( //TODO: arrumar imagem do email e footer
+      await axios.post(
+        //TODO: arrumar imagem do email e footer
         "https://api.resend.com/emails",
         {
           from: "SmartMeal <onboarding@resend.dev>",
@@ -97,7 +101,10 @@ exports.login = (req, res) => {
     return res.status(400).send("CPF e senha são obrigatórios.");
 
   User.findUserByCPF(cpf, (err, results) => {
-    if (err) return res.status(500).send("Erro no servidor.");
+    if (err) {
+      return res.status(500).send("Erro no servidor.");
+    }
+    res.json(results);
     if (results.length === 0)
       return res.status(401).send("CPF não encontrado.");
 

@@ -114,8 +114,9 @@ const getProductionSummaryByShift = async (req, res) => {
        GROUP BY shift`,
       [date],
       (err, results) => {
-        if (err) return res.status(500).json({ error: "Erro ao buscar produção por turno" });
-
+        if (err) {
+          return res.status(500).json({ error: "Erro ao buscar produção por turno" });
+        }
         res.json(results); // retorna algo como [{shift: "morning", total_produced: 10, total_remnant: 2}, ...]
       }
     );
