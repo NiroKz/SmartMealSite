@@ -56,5 +56,6 @@ app.use((err, req, res, next) => {
 // Inicia o servidor
 app.listen(PORT, () => {
   //console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
-  console.log(`✅ Servidor rodando em ${API_BASE_URL}`);
+  //console.log(`✅ Servidor rodando em ${API_BASE_URL}`);
+  console.log(`✅ Servidor rodando em Railway`);
 });
