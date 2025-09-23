@@ -10,11 +10,13 @@ const PORT = process.env.PORT || 3000;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://smartmealsite.onrender.com";
 
 // Middlewares
-app.use(cors({
-  origin: FRONTEND_URL,   // só permite requisições do front
+app.use(cors());
+
+/*{
+  origin: "https://localhost:300/public",   // só permite requisições do front
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
-}));
+}*/
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -62,5 +64,6 @@ app.use((err, req, res, next) => {
 
 // Inicia o servidor
 app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando no Railway em porta ${PORT}`);
+  //console.log(`✅ Servidor rodando no Railway em porta ${PORT}`);
+  console.log(`✅ Servidor rodando no http://localhost:${PORT}`);
 });
