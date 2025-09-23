@@ -4,7 +4,7 @@ document.getElementById("preloginForm").addEventListener("submit", async functio
       const email = document.getElementById("email").value;
 
       try {
-        const response = await fetch("/auth/prelogin", {
+        const response = await fetch("https://smartmealsite-backend.up.railway.app/auth/prelogin", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email })

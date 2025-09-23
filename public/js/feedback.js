@@ -5,7 +5,7 @@
 // Função para carregar e renderizar os feedbacks
 async function loadFeedbacks() {
   try {
-    const response = await fetch(`${API_BASE_URL}/feedback/getAllFeedbacks`);
+    const response = await fetch(`https://smartmealsite-backend.up.railway.app/feedback/getAllFeedbacks`);
     const feedbacks = await response.json();
     console.log("Feedbacks recebidos:", feedbacks);
 
@@ -61,7 +61,7 @@ async function submitFeedback(e) {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/feedback/submitFeedback`, {
+    const response = await fetch(`https://smartmealsite-backend.up.railway.app/feedback/submitFeedback`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id_rm, date_feedback, rating: ratingValue, comment })

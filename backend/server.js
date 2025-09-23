@@ -5,10 +5,17 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const API_BASE_URL = process.env.API_BASE_URL;
+//const API_BASE_URL = process.env.API_BASE_URL;
+// URL do frontend no Render
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://smartmealsite.onrender.com";
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: FRONTEND_URL,   // só permite requisições do front
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -55,7 +62,5 @@ app.use((err, req, res, next) => {
 
 // Inicia o servidor
 app.listen(PORT, () => {
-  //console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
-  //console.log(`✅ Servidor rodando em ${API_BASE_URL}`);
-  console.log(`✅ Servidor rodando em Railway`);
+  console.log(`✅ Servidor rodando no Railway em porta ${PORT}`);
 });

@@ -12,7 +12,7 @@ const charts = {};
 // ------------------- Carregar produtos no select -------------------
 async function loadProducts() {
   try {
-    const response = await fetch(`${API_BASE_URL}/product`);
+    const response = await fetch(`https://smartmealsite-backend.up.railway.app/product`);
     if (!response.ok) throw new Error("Erro ao carregar produtos!");
     const products = await response.json();
 
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadProduction(date) {
   try {
     const query = date ? `?date=${date}` : "";
-    const response = await fetch(`${API_BASE_URL}/production${query}`);
+    const response = await fetch(`https://smartmealsite-backend.up.railway.app/production${query}`);
     if (!response.ok) throw new Error("Erro ao carregar produção!");
     const data = await response.json();
 
@@ -208,7 +208,7 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    const response = await fetch(`${API_BASE_URL}/production`, {
+    const response = await fetch(`https://smartmealsite-backend.up.railway.app/production`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

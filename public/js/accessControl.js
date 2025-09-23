@@ -46,7 +46,7 @@ function irParaSecao(secao) {
   if (secaoEl) secaoEl.style.display = 'block';
 
   // Atualiza dados do backend
-  fetch("/studentAccess/today")
+  fetch("https://smartmealsite-backend.up.railway.app/studentAccess/today")
     .then((res) => res.json())
     .then((data) => {
       const { total_today, total_students, lunch_count, dinner_count } = data;
