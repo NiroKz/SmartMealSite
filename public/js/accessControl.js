@@ -46,7 +46,7 @@ function irParaSecao(secao) {
   if (secaoEl) secaoEl.style.display = 'block';
 
   // Atualiza dados do backend
-  fetch("https://smart-meal-backend.vercel.app/studentAccess/today")
+  fetch("/studentAccess/today")
     .then((res) => res.json())
     .then((data) => {
       const { total_today, total_students, lunch_count, dinner_count } = data;

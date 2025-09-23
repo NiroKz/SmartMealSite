@@ -1,7 +1,7 @@
 const db = require("../config/db");
 
 const school = {
-  criar: (dados, callback) => {
+  criar: async (dados) => {
     const { id_user, nome_escola, rua_endereco, fone } = dados;
 
     const sql = `
@@ -9,7 +9,14 @@ const school = {
       VALUES (?, ?, ?, ?)
     `;
 
-    db.query(sql, [id_user, nome_escola, rua_endereco, fone], callback);
+    const [result] = await db.execute(sql, [
+      id_user,
+      nome_escola,
+      rua_endereco,
+      fone,
+    ]);
+
+    return result;
   },
 };
 

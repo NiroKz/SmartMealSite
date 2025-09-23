@@ -1,12 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { registerProduction, getProductionByDate, getProductionSummaryByShift } = require('../controllers/productionController');
+const { registerProduction, getProductionByDate, getProductionSummaryByShift } = require("../controllers/productionController");
 
-router.post('/', registerProduction);
+// Criar produção
+router.post("/", registerProduction);
 
-router.get('/', getProductionByDate);
+// Buscar produção por data
+router.get("/", getProductionByDate);
 
-// Nova rota para resumo por shift
+// Resumo de produção por turno
 router.get("/summary", getProductionSummaryByShift);
 
 module.exports = router;

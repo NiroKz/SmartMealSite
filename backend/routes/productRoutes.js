@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { fetchAllProducts } = require("../controllers/productController"); // só importar
+const { fetchAllProducts } = require("../controllers/productController");
 
-router.get("/", fetchAllProducts); // usar a função importada
+// Buscar todos os produtos
+router.get("/", fetchAllProducts);
 
 module.exports = router;

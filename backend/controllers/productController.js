@@ -1,15 +1,14 @@
-// controllers/productController.js
 const db = require("../config/db");
 
-// Função para buscar todos os produtos
-const fetchAllProducts = (req, res) => {
-  db.execute("SELECT id_product, product_name FROM product", (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Erro ao buscar produtos." });
-    }
-    res.json(results);
-  });
+// Buscar todos os produtos
+const fetchAllProducts = async (req, res) => {
+  try {
+    const [results] = await db.query("SELECT id_product, product_name FROM product");
+    return res.json(results);
+  } catch (err) {
+    console.error("Erro ao buscar produtos:", err);
+    return res.status(500).json({ message: "Erro ao buscar produtos." });
+  }
 };
 
 module.exports = { fetchAllProducts };

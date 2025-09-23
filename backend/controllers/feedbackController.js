@@ -1,11 +1,10 @@
-const db = require("../config/db"); // Conexão MySQL
+const db = require("../config/db");
 
-// Função para salvar feedback
+// Salvar feedback
 const submitFeedback = async (req, res) => {
   try {
     const { id_rm, date_feedback, rating, comment } = req.body;
 
-    // Log no terminal para debugar
     console.log("=== Feedback recebido ===");
     console.log("RM:", id_rm);
     console.log("Data:", date_feedback);
@@ -13,7 +12,6 @@ const submitFeedback = async (req, res) => {
     console.log("Comentário:", comment);
     console.log("========================");
 
-    // Verifica se algum campo veio undefined ou vazio
     if (!id_rm || !date_feedback || !rating || !comment) {
       console.log("❌ Algum campo está vazio ou undefined");
       return res
@@ -22,38 +20,37 @@ const submitFeedback = async (req, res) => {
     }
 
     const sql = `
-            INSERT INTO feedback (id_rm, date_feedback, rating, comment)
-            VALUES (?, ?, ?, ?)
-        `;
+      INSERT INTO feedback (id_rm, date_feedback, rating, comment)
+      VALUES (?, ?, ?, ?)
+    `;
 
     await db.execute(sql, [id_rm, date_feedback, rating, comment]);
 
     console.log("✅ Feedback salvo com sucesso!");
-    res.status(200).json({ message: "Feedback enviado com sucesso!" });
+    return res.status(200).json({ message: "Feedback enviado com sucesso!" });
   } catch (error) {
     console.error("❌ Erro ao salvar feedback:", error);
-    res.status(500).json({ message: "Erro ao enviar feedback." });
+    return res.status(500).json({ message: "Erro ao enviar feedback." });
   }
 };
 
-// Função para listar todos os feedbacks (usada futuramente)
-// Função para listar todos os feedbacks
-const getAllFeedbacks = (req, res) => {
-  const sql = `
-        SELECT f.id_feedback, s.student_name, f.date_feedback, f.rating, f.comment
-        FROM feedback f
-        JOIN student s ON f.id_rm = s.id_rm
-        ORDER BY f.date_feedback DESC
+// Buscar feedbacks
+const getAllFeedbacks = async (req, res) => {
+  try {
+    const sql = `
+      SELECT f.id_feedback, s.student_name, f.date_feedback, f.rating, f.comment
+      FROM feedback f
+      JOIN student s ON f.id_rm = s.id_rm
+      ORDER BY f.date_feedback DESC
     `;
 
-  db.execute(sql, (err, rows) => {
-    if (err) {
-      console.error("Erro ao buscar feedbacks:", err);
-      return res.status(500).json({ message: "Erro ao buscar feedbacks." });
-    }
-    res.status(200).json(rows);
-  });
-};
+    const [rows] = await db.execute(sql);
 
+    return res.status(200).json(rows);
+  } catch (err) {
+    console.error("Erro ao buscar feedbacks:", err);
+    return res.status(500).json({ message: "Erro ao buscar feedbacks." });
+  }
+};
 
 module.exports = { submitFeedback, getAllFeedbacks };

@@ -1,11 +1,11 @@
-const connection = require("../config/db");
+const db = require("../config/db");
 
 const formatDateTimeForMySQL = (date) => {
   const d = new Date(date);
   return d.toISOString().slice(0, 19).replace("T", " ");
 };
 
-const createLiberation = (
+const createLiberation = async (
   studentId,
   datetime,
   reason,
@@ -13,31 +13,25 @@ const createLiberation = (
   permissionType,
   canRepeat
 ) => {
-  return new Promise((resolve, reject) => {
-    const formattedDateTime = formatDateTimeForMySQL(datetime);
-    const query = `
-        INSERT INTO release_exception
-        (id_rm, meal_type, type_release, date_time, reason, allow_repeat)
-        VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const formattedDateTime = formatDateTimeForMySQL(datetime);
 
-    //INSERT INTO liberacao_excecao
-    //(id_rm, tipo_refeicao, tipo_permissao, data_permitida, data_horario, motivo, permitir_repeticao)
+  const query = `
+    INSERT INTO release_exception
+    (id_rm, meal_type, type_release, date_time, reason, allow_repeat)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
 
-    const values = [
-      studentId,
-      mealType,
-      permissionType === "temporary" ? "temporary" : "permanent",
-      formattedDateTime.split(" ")[0],
-      formattedDateTime,
-      reason,
-      canRepeat ? 1 : 0,
-    ];
+  const values = [
+    studentId,
+    mealType,
+    permissionType === "temporary" ? "temporary" : "permanent",
+    formattedDateTime,
+    reason,
+    canRepeat ? 1 : 0,
+  ];
 
-    connection.query(query, values, (err, results) => {
-      if (err) return reject(err);
-      resolve(results);
-    });
-  });
+  const [result] = await db.execute(query, values);
+  return result;
 };
 
 module.exports = { createLiberation };

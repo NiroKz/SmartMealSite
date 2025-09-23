@@ -1,3 +1,4 @@
+// controllers/studentAccessController.js
 const { fetchStudentAccessDataToday } = require("../models/studentAccessModel");
 
 const getTodayStudentAccessData = async (req, res) => {
@@ -5,8 +6,8 @@ const getTodayStudentAccessData = async (req, res) => {
     const data = await fetchStudentAccessDataToday();
     res.json(data);
   } catch (error) {
-    console.error("Error in getTodayStudentAccessData:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Erro em getTodayStudentAccessData:", error);
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 

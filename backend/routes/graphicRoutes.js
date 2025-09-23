@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const graphicController = require('../controllers/graphicController');
+const graphicController = require("../controllers/graphicController");
 
-router.get('/studentsCurses', graphicController.studentsCurses);
+router.get("/studentsCurses", graphicController.studentsCurses);
 
 module.exports = router;
