@@ -12,13 +12,13 @@ async function createUser(nome, cpf, email, telefone) {
 async function findUserByEmail(email) {
   const query = "SELECT * FROM school_user WHERE email = ?";
   const [rows] = await db.execute(query, [email]);
-  return rows[0]; // retorna só 1 usuário
+  return rows; // retorna array
 }
 
 async function findUserByCPF(cpf) {
   const query = "SELECT * FROM school_user WHERE cpf = ?";
   const [rows] = await db.execute(query, [cpf]);
-  return rows[0];
+  return rows; // retorna array
 }
 
 module.exports = {
