@@ -153,3 +153,35 @@ main {
     color: #222;
     font-weight: bold;
 }
+
+select,
+input[type="date"],
+input[type="number"],
+input[type="text"] {
+    border-radius: 10px;
+    border: 1px solid #d6c3a4;
+    padding: 8px 14px;
+    font-size: 1rem;
+    background: #fff;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 150px;          
+    height: 42px;
+    box-sizing: border-box;
+}
+
+.filter-options {
+    display: flex;
+    justify-content: center;
+    gap: 35px; 
+    margin-bottom: 20px;
+    border-bottom: 3px solid #222;
+    padding-bottom: 15px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.filter-options > div {
+    text-align: left;
+    min-width: unset;   
+}

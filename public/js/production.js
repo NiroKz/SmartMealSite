@@ -42,25 +42,38 @@ async function loadProducts() {
 }
 
 // ------------------- Adicionar novo campo de comida -------------------
-document.getElementById("addFoodBtn").addEventListener("click", () => {
-  const div = document.createElement("div");
-  div.classList.add("food-item");
-  div.innerHTML = `
-    <label>Comida:
-      <select name="id_product[]" required>
-        <option value="" disabled selected>Carregando produtos...</option>
-      </select>
-    </label>
-    <label>Produzido (kg):
-      <input type="number" step="0.001" name="quantityProduced[]" required>
-    </label>
-    <label>Sobrou (kg):
-      <input type="number" step="0.001" name="leftovers[]" required>
-    </label>
-  `;
-  foodsContainer.appendChild(div);
-  loadProducts(); // preenche o select recém-criado
+// Função para adicionar novos blocos de comida
+document.addEventListener("DOMContentLoaded", () => {
+  const addFoodBtn = document.getElementById("addFoodBtn");
+  const foodContainer = document.getElementById("foodInputsContainer");
+
+  if (addFoodBtn && foodContainer) {
+    addFoodBtn.addEventListener("click", () => {
+      const foodBlock = document.createElement("div");
+      foodBlock.classList.add("food-block");
+
+      foodBlock.innerHTML = `
+        <label>
+          Comida:
+          <select>
+            <option value="">Carregando produtos...</option>
+          </select>
+        </label>
+        <label>
+          Produzido (kg):
+          <input type="number" placeholder="Ex: 50" />
+        </label>
+        <label>
+          Sobrou (kg):
+          <input type="number" placeholder="Ex: 10" />
+        </label>
+      `;
+
+      foodContainer.appendChild(foodBlock);
+    });
+  }
 });
+
 
 // ------------------- Carregar produção do backend -------------------
 async function loadProduction(date) {

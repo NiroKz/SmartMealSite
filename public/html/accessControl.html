@@ -159,7 +159,10 @@
                         </div>
                     </div>
 
-                    <button type="button" id="addFoodBtn">+ Adicionar Comida</button>
+                    <button id="addFoodBtn" class="modulo-btn">Adicionar Comida</button>
+
+                    <div id="foodInputsContainer" class="food-inputs-container"></div>
+
 
                     <label>Observações:
                         <input type="text" name="notes" placeholder="Observações">
@@ -174,71 +177,78 @@
                 <label>Escolher data:
                     <input type="date" id="productionDate">
                 </label>
+                <br>
+                <br>
+                <br>
                 <button type="button" id="loadDataBtn">Carregar Produção</button>
-
+                <br>
+                <br>
                 <!-- 🔹 Produção Geral -->
-                <div class="meal-graph">
-                    <h3>Produção Geral</h3>
-                    <canvas id="totalChart"></canvas>
-                    <table id="totalTable" border="1">
-                        <thead>
-                            <tr>
-                                <th>Comida</th>
-                                <th>Produzido (kg)</th>
-                                <th>Sobrou (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                <section id="refeicao" class="modulo-conteudo">
+                    <h2>Controle de Refeições</h2>
+                    <!-- Container 2x2 para os gráficos e tabelas -->
+                    <div class="meal-graphs-container">
+                        <!-- Gráfico 1 -->
+                        <div class="meal-graph">
+                            <h3>Consumo Diário</h3>
+                            <canvas id="graficoDiario"></canvas>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Comida</th>
+                                        <th>Produzido (kg)</th>
+                                        <th>Sobrou (kg)</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
 
-                <!-- 🔹 Produção Manhã -->
-                <div class="meal-graph">
-                    <h3>Produção Manhã</h3>
-                    <canvas id="morningChart"></canvas>
-                    <table id="morningTable" border="1">
-                        <thead>
-                            <tr>
-                                <th>Comida</th>
-                                <th>Produzido (kg)</th>
-                                <th>Sobrou (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                        <!-- Gráfico 2 -->
+                        <div class="meal-graph">
+                            <h3>Consumo Semanal</h3>
+                            <canvas id="graficoSemanal"></canvas>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Comida</th>
+                                        <th>Produzido (kg)</th>
+                                        <th>Sobrou (kg)</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
 
-                <!-- 🔹 Produção Tarde -->
-                <div class="meal-graph">
-                    <h3>Produção Tarde</h3>
-                    <canvas id="afternoonChart"></canvas>
-                    <table id="afternoonTable" border="1">
-                        <thead>
-                            <tr>
-                                <th>Comida</th>
-                                <th>Produzido (kg)</th>
-                                <th>Sobrou (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                        <!-- Gráfico 3 -->
+                        <div class="meal-graph">
+                            <h3>Consumo Mensal</h3>
+                            <canvas id="graficoMensal"></canvas>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Comida</th>
+                                        <th>Produzido (kg)</th>
+                                        <th>Sobrou (kg)</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
 
-                <!-- 🔹 Produção Noite -->
-                <div class="meal-graph">
-                    <h3>Produção Noite</h3>
-                    <canvas id="nightChart"></canvas>
-                    <table id="nightTable" border="1">
-                        <thead>
-                            <tr>
-                                <th>Comida</th>
-                                <th>Produzido (kg)</th>
-                                <th>Sobrou (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                        <!-- Gráfico 4 -->
+                        <div class="meal-graph">
+                            <h3>Consumo por Categoria</h3>
+                            <canvas id="graficoCategoria"></canvas>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Comida</th>
+                                        <th>Produzido (kg)</th>
+                                        <th>Sobrou (kg)</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </section>
         </section>
 
