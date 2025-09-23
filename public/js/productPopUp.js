@@ -26,7 +26,7 @@ document.getElementById("productForm").addEventListener("submit", async (e) => {
   const productDestination = document.getElementById("productDestination").value;
 
   try {
-    const res = await fetch("https://smart-meal-backend.vercel.app/stock/add", {
+    const res = await fetch("/stock/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -23,7 +23,7 @@ saveSchoolBtn.addEventListener("click", async (e) => {
   }
 
   try {
-    const response = await fetch("https://smart-meal-backend.vercel.app/school/addSchools", {
+    const response = await fetch("/school/addSchools", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const token = sessionStorage.getItem("token");
 
   try {
-    const response = await fetch("https://smart-meal-backend.vercel.app/school/listSchool", {
+    const response = await fetch("/school/listSchool", {
       headers: {
         Authorization: "Bearer " + token,
       },

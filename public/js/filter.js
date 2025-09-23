@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Carrega cursos
   async function loadCourses() {
     try {
-      const response = await fetch("https://smart-meal-backend.vercel.app/filter/courses");
+      const response = await fetch("/filter/courses");
       if (!response.ok) throw new Error("Erro ao buscar cursos");
       const courses = await response.json();
       courseSelect.innerHTML = '<option value="">Selecione</option>';
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const url = `https://smartmealsite-backend.up.railway.app/filter/students?${new URLSearchParams({
+    const url = `/filter/students?${new URLSearchParams({
       course,
       period,
       grade,

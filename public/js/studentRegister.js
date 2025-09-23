@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let classes = [];
 
   // 1️⃣ Busca todas as turmas do backend
-  fetch("https://smart-meal-backend.vercel.app/student/classes")
+  fetch("/student/classes")
     .then((res) => res.json())
     .then((data) => {
       classes = data;
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch("https://smart-meal-backend.vercel.app/student/register", {
+      const response = await fetch("/student/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
