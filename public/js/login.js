@@ -33,7 +33,7 @@ form.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    const response = await fetch("https://smartmealsite-backend.up.railway.app/auth/login", {
+    const response = await fetch("https://smart-meal-backend.vercel.app/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cpf, password }),

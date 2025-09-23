@@ -1,6 +1,6 @@
 async function createGraphic() {
   try {
-    const response = await fetch("https://smartmealsite-backend.up.railway.app/graphic/studentsCurses");
+    const response = await fetch("https://smart-meal-backend.vercel.app/graphic/studentsCurses");
     const dados = await response.json();
 
     // Extrair labels e dados do resultado

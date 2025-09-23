@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Carrega cursos
   async function loadCourses() {
     try {
-      const response = await fetch("https://smartmealsite-backend.up.railway.app/filter/courses");
+      const response = await fetch("https://smart-meal-backend.vercel.app/filter/courses");
       if (!response.ok) throw new Error("Erro ao buscar cursos");
       const courses = await response.json();
       courseSelect.innerHTML = '<option value="">Selecione</option>';

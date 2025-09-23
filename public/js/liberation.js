@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         repeat: data.repeat
       };
       console.log(requestBody);
-      const response = await fetch("https://smartmealsite-backend.up.railway.app/studentLiberation", {
+      const response = await fetch("https://smart-meal-backend.vercel.app/studentLiberation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),

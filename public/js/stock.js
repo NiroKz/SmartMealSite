@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tbody = document.querySelector(".estoque-table tbody");
 
   try {
-    const response = await fetch(`https://smartmealsite-backend.up.railway.app/stock`);
+    const response = await fetch(`https://smart-meal-backend.vercel.app/stock`);
     const stockData = await response.json();
 
     tbody.innerHTML = ""; // limpa tabela mockada
