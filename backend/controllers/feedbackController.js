@@ -51,10 +51,9 @@ const getAllFeedbacks = (req, res) => {
       console.error("Erro ao buscar feedbacks:", err);
       return res.status(500).json({ message: "Erro ao buscar feedbacks." });
     }
-    res.json(results);
-    // rows aqui é o resultado do SELECT
     res.status(200).json(rows);
   });
 };
+
 
 module.exports = { submitFeedback, getAllFeedbacks };
