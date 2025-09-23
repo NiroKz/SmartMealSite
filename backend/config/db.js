@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10, // máximo de conexões simultâneas
   queueLimit: 0,
-  connectTimeout: 10000
+  connectTimeout: 20000
 });
 
 // Exporta já como pool de promessas
