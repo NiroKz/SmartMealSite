@@ -369,12 +369,12 @@ INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_au
 
 -- Alunos novos para teste de filtro
 INSERT INTO student (id_rm, id_class, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
-(20010, 16, 'Lucas Teste', TRUE, '2025-09-01', 'Carlos Teste', 'Nenhuma'),
-(20011, 17, 'Ana Teste', TRUE, '2025-09-01', 'Maria Teste', 'Glúten'),
-(20012, 18, 'Pedro Teste', TRUE, '2025-09-01', 'João Teste', 'Lactose'),
-(20013, 19, 'Juliana Teste', TRUE, '2025-09-01', 'Marcos Teste', 'Ovos'),
-(20014, 20, 'Gabriel Teste', TRUE, '2025-09-01', 'Sandra Teste', 'Nenhuma'),
-(20015, 21, 'Camila Teste', TRUE, '2025-09-01', 'Paulo Teste', 'Glúten');
+(30060, 4, 'Lucas Teste', TRUE, '2025-09-01', 'Carlos Teste', 'Nenhuma'),
+(30061, 4, 'Ana Teste', TRUE, '2025-09-01', 'Maria Teste', 'Glúten'),
+(30062, 4, 'Pedro Teste', TRUE, '2025-09-01', 'João Teste', 'Lactose'),
+(30063, 13, 'Juliana Teste', TRUE, '2025-09-01', 'Marcos Teste', 'Ovos'),
+(30064, 13, 'Gabriel Teste', TRUE, '2025-09-01', 'Sandra Teste', 'Nenhuma'),
+(30065, 12, 'Camila Teste', TRUE, '2025-09-01', 'Paulo Teste', 'Glúten');
 
 select * from student;
 select * from student
@@ -444,20 +444,20 @@ SELECT * FROM meal WHERE DATE(date_time) = CURDATE();
 -- Refeições para teste de filtro
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 -- 06/09/2025
-(20010, '2025-09-23 11:30:00', 'lunch', 'allowed'),
-(20011, '2025-09-23 11:40:00', 'lunch', 'blocked'),
-(20012, '2025-09-23 12:00:00', 'lunch', 'exception'),
-(20013, '2025-09-23 12:10:00', 'lunch', 'allowed'),
-(20014, '2025-09-23 18:00:00', 'dinner', 'blocked'),
-(20015, '2025-09-23 18:10:00', 'dinner', 'allowed'),
+(30030, '2025-09-23 11:30:00', 'lunch', 'allowed'),
+(30031, '2025-09-23 11:40:00', 'lunch', 'blocked'),
+(30032, '2025-09-23 12:00:00', 'lunch', 'exception'),
+(30033, '2025-09-23 12:10:00', 'lunch', 'allowed'),
+(30034, '2025-09-23 18:00:00', 'dinner', 'blocked'),
+(30035, '2025-09-23 18:10:00', 'dinner', 'allowed'),
 
 -- 07/09/2025 (outro dia)
-(20010, '2025-09-23 11:30:00', 'lunch', 'allowed'),
-(20011, '2025-09-23 11:40:00', 'lunch', 'allowed'),
-(20012, '2025-09-23 12:00:00', 'lunch', 'blocked'),
-(20013, '2025-09-23 12:10:00', 'lunch', 'exception'),
-(20014, '2025-09-23 18:00:00', 'dinner', 'allowed'),
-(20015, '2025-09-23 18:10:00', 'dinner', 'blocked');
+(30040, '2025-09-23 11:30:00', 'lunch', 'allowed'),
+(30041, '2025-09-23 11:40:00', 'lunch', 'allowed'),
+(30042, '2025-09-23 12:00:00', 'lunch', 'blocked'),
+(30043, '2025-09-23 12:10:00', 'lunch', 'exception'),
+(30044, '2025-09-23 18:00:00', 'dinner', 'allowed'),
+(30045, '2025-09-23 18:10:00', 'dinner', 'blocked');
 
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (20015, '2025-09-18 12:40:00', 'lunch', 'allowed'),
