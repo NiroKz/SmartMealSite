@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const { createLiberation } = require("../models/liberationModel");
 
 async function handleLiberation(req, res) {
   try {
@@ -6,22 +6,24 @@ async function handleLiberation(req, res) {
 
     const { rm, lunch, dinner, justification, option, repeat } = req.body;
 
-    let meal_type = null;
-    if (lunch) meal_type = "lunch";
-    else if (dinner) meal_type = "dinner";
+    const meals = [];
+    if (lunch) meals.push({ type: "lunch", date: lunch });
+    if (dinner) meals.push({ type: "dinner", date: dinner });
 
-    const allow_repeat = repeat ? "yes" : "no";
-    const date_time = new Date().toISOString().slice(0, 19).replace("T", " ");
+    if (meals.length === 0) {
+      return res.status(400).json({ error: "Selecione pelo menos uma refeição" });
+    }
 
-    const query = `
-      INSERT INTO release_exception
-      (id_rm, meal_type, type_release, date_time, reason, allow_repeat)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `;
-
-    const values = [rm, meal_type, option, date_time, justification, allow_repeat];
-
-    await db.query(query, values);
+    for (const meal of meals) {
+      await createLiberation(
+        rm,
+        meal.date,       // usa a data que veio do form
+        justification,
+        meal.type,
+        option,
+        repeat
+      );
+    }
 
     return res.status(201).json({ message: "Exception release registered successfully!" });
   } catch (err) {

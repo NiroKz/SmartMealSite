@@ -51,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const result = await response.json();
       //alert(result.message || "Liberation request sent.");
+      showPopup("Sucesso!", "Liberação criada.");
+      form.reset();
     } catch (error) {
       console.error(error);
       alert("Error sending liberation request.");

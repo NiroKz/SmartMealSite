@@ -27,7 +27,7 @@ const createLiberation = async (
     permissionType === "temporary" ? "temporary" : "permanent",
     formattedDateTime,
     reason,
-    canRepeat ? 1 : 0,
+    canRepeat ? "yes" : "no",  // 🔹 agora bate com ENUM
   ];
 
   const [result] = await db.execute(query, values);

@@ -2,7 +2,6 @@ DROP DATABASE IF EXISTS final_course_work;
 CREATE DATABASE final_course_work;
 USE final_course_work;
 
-SET FOREIGN_KEY_CHECKS = 0;
 create table IF NOT EXISTS biometrics (
 id_biometrics int auto_increment primary key NOT NULL,
 hash_digital1 varchar(256) NOT NULL,
@@ -143,7 +142,6 @@ foreign key(id_user) references school_user(id_user)
 );
 
 
-SET FOREIGN_KEY_CHECKS = 1;
 -- logica do filtro
 SELECT
     s.id_rm,
@@ -446,20 +444,20 @@ SELECT * FROM meal WHERE DATE(date_time) = CURDATE();
 -- Refeições para teste de filtro
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 -- 06/09/2025
-(20010, '2025-09-18 11:30:00', 'lunch', 'allowed'),
-(20011, '2025-09-18 11:40:00', 'lunch', 'blocked'),
-(20012, '2025-09-18 12:00:00', 'lunch', 'exception'),
-(20013, '2025-09-18 12:10:00', 'lunch', 'allowed'),
-(20014, '2025-09-18 18:00:00', 'dinner', 'blocked'),
-(20015, '2025-09-18 18:10:00', 'dinner', 'allowed'),
+(20010, '2025-09-23 11:30:00', 'lunch', 'allowed'),
+(20011, '2025-09-23 11:40:00', 'lunch', 'blocked'),
+(20012, '2025-09-23 12:00:00', 'lunch', 'exception'),
+(20013, '2025-09-23 12:10:00', 'lunch', 'allowed'),
+(20014, '2025-09-23 18:00:00', 'dinner', 'blocked'),
+(20015, '2025-09-23 18:10:00', 'dinner', 'allowed'),
 
 -- 07/09/2025 (outro dia)
-(20010, '2025-09-18 11:30:00', 'lunch', 'allowed'),
-(20011, '2025-09-18 11:40:00', 'lunch', 'allowed'),
-(20012, '2025-09-18 12:00:00', 'lunch', 'blocked'),
-(20013, '2025-09-18 12:10:00', 'lunch', 'exception'),
-(20014, '2025-09-18 18:00:00', 'dinner', 'allowed'),
-(20015, '2025-09-18 18:10:00', 'dinner', 'blocked');
+(20010, '2025-09-23 11:30:00', 'lunch', 'allowed'),
+(20011, '2025-09-23 11:40:00', 'lunch', 'allowed'),
+(20012, '2025-09-23 12:00:00', 'lunch', 'blocked'),
+(20013, '2025-09-23 12:10:00', 'lunch', 'exception'),
+(20014, '2025-09-23 18:00:00', 'dinner', 'allowed'),
+(20015, '2025-09-23 18:10:00', 'dinner', 'blocked');
 
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (20015, '2025-09-18 12:40:00', 'lunch', 'allowed'),
@@ -576,6 +574,8 @@ INSERT INTO stock (id_product, quantity_movement, date_movement, validity, batch
 
 
 select * from stock;
+delete from stock where id_stock = 18;
+
 
 
 INSERT INTO production (id_product, date_production, food, quantity_produced, meal_type, shift, remnant, note) VALUES 
@@ -591,7 +591,7 @@ INSERT INTO production (id_product, date_production, food, quantity_produced, me
 (10,  '2025-08-02', 'Sopa de Legumes', 12.000, 'dinner', 'night', 18.000, 'Sopa leve para a noite');
 
 
-select * from production;
+select * from production where date_production = CURDATE();
 
     select id_rm, meal_type, type_release, date_time, reason from release_exception;
     select * from release_exception;
