@@ -1,3 +1,4 @@
+// models/stockModel.js
 const db = require("../config/db");
 
 // Buscar todas as movimentações de estoque
@@ -16,38 +17,47 @@ async function getAllStock() {
     JOIN product p ON s.id_product = p.id_product
     ORDER BY s.date_movement DESC
   `;
-
   const [results] = await db.execute(query);
   return results;
 }
 
 // Inserir nova movimentação de estoque
 async function addStock(data) {
-  const { id_product, quantity_movement, date_movement, validity, batch, destination } = data;
+  const { productName, productQuantity, productUnit, batch, validity, destination } = data;
 
-  const insertQuery = `
-    INSERT INTO stock (id_product, quantity_movement, date_movement, validity, batch, destination) 
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
+  // Verifica se o produto já existe
+  const [product] = await db.execute(
+    "SELECT id_product FROM product WHERE product_name = ?",
+    [productName]
+  );
 
-  const [result] = await db.execute(insertQuery, [
-    id_product,
-    quantity_movement,
-    date_movement,
-    validity,
-    batch,
-    destination,
-  ]);
+  if (product.length > 0) {
+    // Produto já existe → atualiza quantidade
+    await db.execute(
+      "UPDATE product SET current_quantity = current_quantity + ? WHERE id_product = ?",
+      [productQuantity, product[0].id_product]
+    );
 
-  // Atualiza quantidade do produto
-  const updateQuery = `
-    UPDATE product 
-    SET current_quantity = current_quantity + ? 
-    WHERE id_product = ?
-  `;
-  await db.execute(updateQuery, [quantity_movement, id_product]);
+    await db.execute(
+      "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination) VALUES (?, ?, NOW(), ?, ?, ?)",
+      [product[0].id_product, productQuantity, batch, validity, destination]
+    );
 
-  return result.insertId;
+    return { message: "Produto atualizado com sucesso" };
+  } else {
+    // Produto novo → cadastra
+    const [insert] = await db.execute(
+      "INSERT INTO product (product_name, current_quantity, unit, minimum_quantity) VALUES (?, ?, ?, 0)",
+      [productName, productQuantity, productUnit]
+    );
+
+    await db.execute(
+      "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination) VALUES (?, ?, NOW(), ?, ?, ?)",
+      [insert.insertId, productQuantity, batch, validity, destination]
+    );
+
+    return { message: "Produto adicionado com sucesso" };
+  }
 }
 
 module.exports = {

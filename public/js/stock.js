@@ -1,27 +1,92 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   const tbody = document.querySelector(".estoque-table tbody");
+  const modal = document.getElementById("productModal");
+  const openModal = document.getElementById("openModal");
+  const closeModal = document.getElementById("closeModal");
 
-  try {
-    const response = await fetch(`/stock`);
-    const stockData = await response.json();
+  // -----------------------------
+  // 🔹 Função para carregar e popular a tabela
+  // -----------------------------
+  async function loadStockTable() {
+    try {
+      const response = await fetch(`/stock`);
+      const stockData = await response.json();
 
-    tbody.innerHTML = ""; // limpa tabela mockada
+      tbody.innerHTML = ""; // limpa tabela antes de renderizar
 
-    stockData.forEach(item => {
-      const row = document.createElement("tr");
+      stockData.forEach((item) => {
+        const row = document.createElement("tr");
 
-      const quantity_movement_formated = Number(item.quantity_movement);
-      row.innerHTML = `
-        <td>${item.batch}</td>
-        <td>${item.date_movement}</td>
-        <td>${quantity_movement_formated.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} ${item.unit}</td>
-        <td>${item.validity}</td>
-        <td>${item.product_name}</td>
-      `;
+        const quantity_movement_formated = Number(item.quantity_movement);
+        row.innerHTML = `
+          <td>${item.batch}</td>
+          <td>${item.date_movement}</td>
+          <td>${quantity_movement_formated.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} ${item.unit}</td>
+          <td>${item.validity}</td>
+          <td>${item.product_name}</td>
+        `;
 
-      tbody.appendChild(row);
-    });
-  } catch (error) {
-    console.error("Erro ao carregar estoque:", error);
+        tbody.appendChild(row);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar estoque:", error);
+    }
   }
+
+  // -----------------------------
+  // 🔹 Modal (abrir/fechar)
+  // -----------------------------
+  openModal.addEventListener("click", () => {
+    modal.style.display = "block";
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // -----------------------------
+  // 🔹 Salvar novo produto
+  // -----------------------------
+  document.getElementById("productForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const productName = document.getElementById("productName").value;
+    const productQuantity = parseFloat(document.getElementById("productQuantity").value);
+    const productUnit = document.getElementById("productUnit").value;
+    const productBatch = document.getElementById("productBatch").value;
+    const productValidity = document.getElementById("productValidity").value;
+    const productDestination = document.getElementById("productDestination").value;
+
+    try {
+      const res = await fetch("/stock/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productName,
+          productQuantity,
+          productUnit,
+          batch: productBatch,
+          validity: productValidity,
+          destination: productDestination,
+        }),
+      });
+
+      if (res.ok) {
+        showPopup("Sucesso!", "Produto atualizado com sucesso!");
+        modal.style.display = "none";
+
+        // 🔄 Atualiza tabela automaticamente após salvar
+        loadStockTable();
+      } else {
+        showPopup("Erro", "Erro ao salvar produto.");
+      }
+    } catch (err) {
+      console.error("Erro ao salvar produto:", err);
+    }
+  });
+
+  // -----------------------------
+  // 🔹 Carregamento inicial da tabela
+  // -----------------------------
+  loadStockTable();
 });
