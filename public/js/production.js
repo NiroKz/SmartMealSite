@@ -1,5 +1,5 @@
-// public/js/production.js
 console.log("✅ production.js carregado!");
+
 const form = document.getElementById("mealForm");
 const loadDataBtn = document.getElementById("loadDataBtn");
 const productionDate = document.getElementById("productionDate");
@@ -8,7 +8,6 @@ const foodsContainer = document.getElementById("foodsContainer");
 // Guarda os gráficos ativos
 const charts = {};
 
-// ------------------- Carregar produtos no select -------------------
 // ------------------- Carregar produtos no select -------------------
 async function loadProducts() {
   try {
@@ -42,12 +41,10 @@ async function loadProducts() {
 }
 
 // ------------------- Adicionar novo campo de comida -------------------
-// Função para adicionar novos blocos de comida
 document.addEventListener("DOMContentLoaded", () => {
   const addFoodBtn = document.getElementById("addFoodBtn");
-  const foodContainer = document.getElementById("foodInputsContainer");
 
-  if (addFoodBtn && foodContainer) {
+  if (addFoodBtn && foodsContainer) {
     addFoodBtn.addEventListener("click", () => {
       const foodBlock = document.createElement("div");
       foodBlock.classList.add("food-block");
@@ -55,25 +52,25 @@ document.addEventListener("DOMContentLoaded", () => {
       foodBlock.innerHTML = `
         <label>
           Comida:
-          <select>
+          <select name="id_product[]" required>
             <option value="">Carregando produtos...</option>
           </select>
         </label>
         <label>
-          Produzido (kg):
-          <input type="number" placeholder="Ex: 50" />
+          Produzido (kg, L):
+          <input type="number" name="quantityProduced[]" placeholder="Ex: 50" />
         </label>
         <label>
-          Sobrou (kg):
-          <input type="number" placeholder="Ex: 10" />
+          Sobrou (kg, L):
+          <input type="number" name="leftovers[]" placeholder="Ex: 10" />
         </label>
       `;
 
-      foodContainer.appendChild(foodBlock);
+      foodsContainer.appendChild(foodBlock);
+      loadProducts(); // Recarrega os produtos no novo select
     });
   }
 });
-
 
 // ------------------- Carregar produção do backend -------------------
 async function loadProduction(date) {
@@ -185,7 +182,6 @@ function renderShiftChart(canvasId, values, title) {
 }
 
 // ------------------- Envio do formulário -------------------
-// ------------------- Envio do formulário -------------------
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
@@ -226,6 +222,7 @@ form.addEventListener("submit", async (e) => {
     const div = document.createElement("div");
     div.classList.add("food-item");
     div.innerHTML = `
+    <br>
       <label>Comida:
         <select name="id_product[]" required>
           <option value="" disabled selected>Carregando produtos...</option>
@@ -237,6 +234,7 @@ form.addEventListener("submit", async (e) => {
       <label>Sobrou (kg):
         <input type="number" step="0.001" name="leftovers[]" required>
       </label>
+      <br>
     `;
     foodsContainer.appendChild(div);
 
