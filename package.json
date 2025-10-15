@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/NiroKz/SmartMealSite#readme",
   "dependencies": {
+    "@pdfme/generator": "^5.4.6",
     "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
