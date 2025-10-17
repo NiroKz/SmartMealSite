@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>${quantity_movement_formated.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} ${item.unit}</td>
           <td>${item.validity}</td>
           <td>${item.product_name}</td>
+          <td>${Number(item.price).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</td>
+          <td>${item.origin}</td>
         `;
 
         tbody.appendChild(row);
@@ -56,6 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const productBatch = document.getElementById("productBatch").value;
     const productValidity = document.getElementById("productValidity").value;
     const productDestination = document.getElementById("productDestination").value;
+    const productOrigin = document.getElementById("productOrigin").value;
+    const productPrice = document.getElementById("productPrice").value;
 
     try {
       const res = await fetch("/stock/add", {
@@ -68,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
           batch: productBatch,
           validity: productValidity,
           destination: productDestination,
+          origin: productOrigin,
+          price: productPrice,
         }),
       });
 

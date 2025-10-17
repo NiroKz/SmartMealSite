@@ -11,6 +11,8 @@ async function getAllStock() {
       s.quantity_movement,
       DATE_FORMAT(s.validity, '%d/%m/%Y') AS validity,
       s.destination,
+      s.price,
+      s.origin,
       p.product_name,
       p.unit
     FROM stock s
@@ -23,7 +25,7 @@ async function getAllStock() {
 
 // Inserir nova movimentação de estoque
 async function addStock(data) {
-  const { productName, productQuantity, productUnit, batch, validity, destination } = data;
+  const { productName, productQuantity, productUnit, batch, validity, destination, price, origin } = data;
 
   // Verifica se o produto já existe
   const [product] = await db.execute(
@@ -39,8 +41,8 @@ async function addStock(data) {
     );
 
     await db.execute(
-      "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination) VALUES (?, ?, NOW(), ?, ?, ?)",
-      [product[0].id_product, productQuantity, batch, validity, destination]
+      "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination, origin, price) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?)",
+      [product[0].id_product, productQuantity, batch, validity, destination, origin, price]
     );
 
     return { message: "Produto atualizado com sucesso" };
@@ -52,8 +54,8 @@ async function addStock(data) {
     );
 
     await db.execute(
-      "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination) VALUES (?, ?, NOW(), ?, ?, ?)",
-      [insert.insertId, productQuantity, batch, validity, destination]
+      "INSERT INTO stock (id_product, quantity_movement, date_movement, batch, validity, destination, origin, price) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?)",
+      [insert.insertId, productQuantity, batch, validity, destination, price, origin]
     );
 
     return { message: "Produto adicionado com sucesso" };

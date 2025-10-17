@@ -73,10 +73,18 @@ date_movement date NOT NULL, -- dd/mm/yyyy --
 validity date NOT NULL, -- dd/mm/yyyy --
 batch varchar(20) NOT NULL,
 destination varchar(140) NOT NULL,
+origin varchar(140) NOT NULL,
+price decimal(7,2) NOT NULL,
 
 foreign key(id_product) references product(id_product)
 );
+select * from stock;
+-- DESC stock;
 
+-- ALTER TABLE stock ADD COLUMN price decimal(7,2) NOT NULL;
+-- alter table para adicionar 
+-- origin varchar(140) NOT NULL, -- novo
+-- price decimal(7,2) NOT NULL, -- novo
 
 create table IF NOT EXISTS production (
 id_production int auto_increment primary key NOT NULL,
