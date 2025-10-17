@@ -925,6 +925,22 @@ select {
   gap: 6px;
 }
 
+.feedback-graph {
+    background-color: #F2E4C8;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.feedback-graph canvas {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+
+
 
 
 @media (max-width: 600px) {
