@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 
 <body>
@@ -403,41 +404,12 @@
     <!--Gráfico-->
     <div class="feedback-graph">
         <h3>Estatísticas de Feedbacks</h3>
-        <canvas id="feedbackChart"></canvas> <!--Aqui!-->
+        <canvas id="feedbackChart" width="300px" height="150px"></canvas> <!--Aqui!-->
     </div>
 
     <section class="access-control">
         <h2>Feedbacks</h2>
-
         <div class="feedbacks-container">
-
-            <div class="feedback-card positive">
-                <div class="feedback-header">
-                    <h3>Luís Henrique</h3>
-                    <span class="icon">😍</span>
-                </div>
-                <p>Gostei muito da refeição de hoje, estava saborosa e bem servida!</p>
-                <span class="feedback-date">03/09/2025</span>
-            </div>
-
-            <div class="feedback-card negative">
-                <div class="feedback-header">
-                    <h3>David Lima Alves</h3>
-                    <span class="icon">😞</span>
-                </div>
-                <p>A comida estava fria e faltou tempero.</p>
-                <span class="feedback-date">04/09/2025</span>
-            </div>
-
-            <div class="feedback-card neutral">
-                <div class="feedback-header">
-                    <h3>Hornet</h3>
-                    <span class="icon">😐</span>
-                </div>
-                <p>Até que estava gostoso, mas achei uma pedrinha no feijão.</p>
-                <span class="feedback-date">05/09/2025</span>
-            </div>
-
         </div>
     </section>
 </section>
