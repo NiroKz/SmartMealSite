@@ -8,10 +8,27 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'Segoe UI', sans-serif;
     background-color: #fde8bd;
     color: #2d2d2d;
+}
+
+main {
+    flex: 1 0 auto;
+    padding: 30px;
+}
+
+footer {
+    flex-shrink: 0;
+    position: relative !important;
 }
 
 nav ul {
@@ -29,10 +46,6 @@ nav a {
 
 nav a:hover {
     color: #645949;
-}
-
-main {
-    padding: 30px;
 }
 
 h2 {
@@ -944,10 +957,6 @@ select {
     display: block;
     margin: 0;
 }
-
-
-
-
 
 @media (max-width: 600px) {
     .access-control2 {
