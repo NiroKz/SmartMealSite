@@ -1,3 +1,5 @@
+@import "./header.css";
+@import "./footer.css";
 
 html,
 body{
@@ -8,39 +10,7 @@ body{
     overflow-x: hidden; 
     scroll-behavior:smooth;
 }
-header {
-    background-color: #f6ebd5;
-    width: 100vw;
-    margin: 0;
-    min-height: 140px;
-    padding: 0 40px;
-    box-sizing: border-box;
-    box-shadow: 0 5px 30px rgb(37, 37, 37);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 13%;
-}
-.header-title {
-    display: flex;
-    align-items: center;
-}
-.header-title h2 {
-    color: #222222;
-    font-size: 40px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-.header-buttons {
-    display: flex;
-    gap: 10px;
-}
+
 button {
     background-color: #1a1e30;
     border: none;
@@ -98,13 +68,13 @@ button:hover {
 }
 .intro-text {
     color: #1a1e30;
-    font-size: 70px;
+    font-size: 3vw;
     flex: 1;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
 }
 .intro-image img {
-    width: 100%;
+    width:25vw;
     height: auto;
     animation: floatY 2.5s ease-in-out infinite;
 }
@@ -204,7 +174,6 @@ button:hover {
     z-index: 2;
     opacity: 0.8;
 }
-
 
 
 .info-section {
