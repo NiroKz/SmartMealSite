@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Meal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adicionar Cardápio - Smart Meal</title>
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
   <link rel="stylesheet" href="../styles/studentRegister.css">
   <link rel="stylesheet" href="../styles/popup.css">
@@ -14,7 +14,7 @@
 <body>
   <header>
     <div class="logo-container">
-      <img src="../images/SmartMealLogo.png">
+      <img src="../images/SmartMealLogo.png" alt="logo">
       <h1>Smart Meal</h1>
     </div>
     <nav>
@@ -36,38 +36,38 @@
         </div>
 
         <div class="right-panel">
-          <h1>Faça seu cadastro:</h1>
-          <form id="studentForm">
+          <h1>Registrar Cardápio</h1>
 
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required maxlength="60">
+          <form id="menuForm">
+            <label for="date_menu">Data do cardápio</label>
+            <input type="date" id="date_menu" name="date_menu" required>
 
-            <label for="RM">RM:</label>
-            <input type="text" id="RM" name="RM" required maxlength="5">
-
-            <label for="Course">Curso:</label>
-            <select id="Course" required>
-              <option value="">Selecione o curso</option>
+            <label for="type_meal">Refeição</label>
+            <select id="type_meal" name="type_meal" required>
+              <option value="">Selecione</option>
+              <option value="lunch">Almoço</option>
+              <option value="dinner">Jantar</option>
             </select>
 
-            <label for="Year">Ano:</label>
-            <select id="Year" required>
-              <option value="">Selecione o ano</option>
+            <label for="main_dish">Prato principal (produto)</label>
+            <select id="main_dish" name="main_dish_id" required>
+              <option value="">Carregando produtos...</option>
             </select>
 
-            <label for="Period">Período:</label>
-            <select id="Period" required>
-              <option value="">Selecione o período</option>
+            <label for="side_dish">Acompanhamento (produto - opcional)</label>
+            <select id="side_dish" name="side_dish_id">
+              <option value="">Nenhum</option>
             </select>
 
-            <label for="student_legal_guardian">Responsável:</label>
-            <input type="text" id="student_legal_guardian" name="student_legal_guardian" required maxlength="60">
+            <label for="ingredients">Ingredientes / Observações (alérgenos)</label>
+            <textarea id="ingredients" name="ingredients" rows="3" maxlength="1000"></textarea>
 
-            <label for="food_restriction">Restrição Alimentar:</label>
-            <textarea id="food_restriction" name="food_restriction" maxlength="30" rows="3"></textarea>
+            <label for="notes">Observações</label>
+            <input type="text" id="notes" name="notes" maxlength="255">
 
-            <button type="submit">Cadastrar</button>
+              <button type="submit">Salvar Cardápio</button>
           </form>
+
         </div>
       </div>
     </div>
@@ -80,10 +80,12 @@
         <ul>
           <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
           <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+
         </ul>
       </nav>
     </div>
   </footer>
+
   <div id="popup" class="popup hidden">
     <div class="popup-content">
       <span class="close-btn" onclick="closePopup()">&times;</span>
@@ -91,7 +93,8 @@
       <p id="popup-message">Mensagem do sistema...</p>
     </div>
   </div>
-  <script src="../js/studentRegister.js"></script>
+
+  <script src="../js/menuRegister.js"></script>
   <script src="../js/popup.js"></script>
   <script src="../js/config.js"></script>
 </body>
