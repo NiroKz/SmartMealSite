@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adicionar Cardápio - Smart Meal</title>
+  <title>Registrar Produção - Smart Meal</title>
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
   <link rel="stylesheet" href="../styles/studentRegister.css">
   <link rel="stylesheet" href="../styles/popup.css">
@@ -36,36 +36,56 @@
         </div>
 
         <div class="right-panel">
-          <h1>Registrar Cardápio</h1>
+          <h1>Registrar Produção</h1>
 
           <form id="menuForm">
-            <label for="date_menu">Data do cardápio</label>
-            <input type="date" id="date_menu" name="date_menu" required>
 
-            <label for="type_meal">Refeição</label>
-            <select id="type_meal" name="type_meal" required>
-              <option value="">Selecione</option>
-              <option value="lunch">Almoço</option>
-              <option value="dinner">Jantar</option>
-            </select>
-
-            <label for="main_dish">Prato principal (produto)</label>
-            <select id="main_dish" name="main_dish_id" required>
+            <label for="id_product">Produto</label>
+            <select id="id_product" name="id_product" required>
               <option value="">Carregando produtos...</option>
             </select>
 
-            <label for="side_dish">Acompanhamento (produto - opcional)</label>
-            <select id="side_dish" name="side_dish_id">
-              <option value="">Nenhum</option>
+            <label for="id_meal">Ref. Refeição (opcional)</label>
+            <select id="id_meal" name="id_meal">
+              <option value="">Nenhuma</option>
             </select>
 
-            <label for="ingredients">Ingredientes / Observações (alérgenos)</label>
-            <textarea id="ingredients" name="ingredients" rows="3" maxlength="1000"></textarea>
+            <label for="date_production">Data da produção</label>
+            <input type="date" id="date_production" name="date_production" required>
 
-            <label for="notes">Observações</label>
-            <input type="text" id="notes" name="notes" maxlength="255">
+            <label for="food">Descrição (food) — até 25 caracteres</label>
+            <input type="text" id="food" name="food" maxlength="25" required>
 
-              <button type="submit">Salvar Cardápio</button>
+            <label for="quantity_produced">Quantidade produzida</label>
+            <input type="number" step="0.001" min="0" id="quantity_produced" name="quantity_produced" required>
+
+            <label for="meal_type">Tipo de refeição</label>
+            <select id="meal_type" name="meal_type" required>
+              <option value="">Selecione</option>
+              <option value="breakfast">Café da manhã</option>
+              <option value="lunch">Almoço</option>
+              <option value="snack">Lanche</option>
+              <option value="dinner">Janta</option>
+            </select>
+
+            <label for="shift">Turno</label>
+            <select id="shift" name="shift" required>
+              <option value="">Selecione</option>
+              <option value="morning">Manhã</option>
+              <option value="evening">Tarde</option>
+              <option value="night">Noite</option>
+            </select>
+
+            <label for="remnant">Remanescente (opcional)</label>
+            <input type="number" step="0.001" min="0" id="remnant" name="remnant">
+
+            <label for="note">Observação (até 40 caracteres)</label>
+            <input type="text" id="note" name="note" maxlength="40">
+
+            <div style="margin-top:12px;">
+              <button type="submit">Salvar Produção</button>
+              <button type="reset">Limpar</button>
+            </div>
           </form>
 
         </div>
@@ -76,13 +96,6 @@
   <footer>
     <div class="footer-container">
       <p><b>&copy; 2025 Smart Meal</b></p>
-      <nav>
-        <ul>
-          <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-          <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-
-        </ul>
-      </nav>
     </div>
   </footer>
 
