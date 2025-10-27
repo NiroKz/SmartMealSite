@@ -1,3 +1,5 @@
+const db = require("../config/db");
+
 const tempPasswords = {}; // { [email]: senha_temporaria }
 
 const bcrypt = require("bcrypt");
@@ -67,7 +69,7 @@ exports.prelogin = async (req, res) => {
         <p style="font-size:12px; color:#999;">
         SmartMeal - www.smartmeal.com.br | contato@smartmeal.com.br
         </p>
-        `
+        `,
       },
       {
         headers: {
@@ -117,11 +119,18 @@ exports.login = async (req, res) => {
     if (password === tempPassword) {
       delete tempPasswords[email]; // apaga após uso
 
+      // 🔹 Busca as permissões desse usuário
+      const [rows] = await db.query("SELECT * FROM access WHERE id_user = ?", [
+        user.id_user,
+      ]);
+      const permissions = rows[0] || {};
+
       const token = jwt.sign(
         {
           id_user: user.id_user,
           email: user.email,
           name: user.user_name,
+          permissions: permissions || {}, // 🔹 inclui as permissões no token
         },
         secret,
         { expiresIn: "2h" }

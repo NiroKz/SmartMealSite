@@ -48,6 +48,9 @@ form.addEventListener("submit", async (e) => {
     const data = await response.json();
     sessionStorage.setItem("token", data.token);
 
+    // 🔹 Salva usuário + permissões no localStorage
+    localStorage.setItem("usuario", JSON.stringify({ ...data.usuario, permissions: data.permissions }));
+
     showPopup("Bem-vindo!", "Login realizado com sucesso.");
     console.log("Login bem-sucedido:", data);
     setTimeout(() => {

@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 //const API_BASE_URL = process.env.API_BASE_URL;
 // URL do frontend no Render
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://smartmealsite.onrender.com";
+//const FRONTEND_URL = process.env.FRONTEND_URL || "https://smartmealsite.onrender.com";
 
 // Middlewares
 app.use(cors());
@@ -55,6 +55,9 @@ app.use("/student", studentRoutes);
 
 const stockRoutes = require("./routes/stockRoutes");
 app.use("/stock", stockRoutes);
+
+const adminRoutes = require("./routes/accessRoutes");
+app.use("/admin", adminRoutes);
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

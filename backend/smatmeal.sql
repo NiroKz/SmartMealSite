@@ -123,7 +123,8 @@ email varchar(320) NOT NULL,
 is_user_admin boolean
 );
 
-
+select * from school_user;
+select * from access;
 create table IF NOT EXISTS access(
 id_access int auto_increment primary key,
 id_user int,
@@ -644,7 +645,7 @@ select * from school_user;
 
 
 INSERT INTO access (id_user, access_stock, access_production, access_accesses, access_student_register, access_reports, access_student_perm, access_class_register) VALUES
-(1, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+(11, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
 (2, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE),
 (3, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE),
 (4, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE),
@@ -654,7 +655,7 @@ INSERT INTO access (id_user, access_stock, access_production, access_accesses, a
 (8, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
 (9, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE),
 (10, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE);
-
+-- (11, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE);
 
 select * from access;
 
