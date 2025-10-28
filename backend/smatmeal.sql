@@ -122,6 +122,7 @@ phone char(11) NOT NULL,
 email varchar(320) NOT NULL,
 is_user_admin boolean
 );
+SELECT * FROM access WHERE id_user = 12;
 
 select * from school_user;
 select * from access;
@@ -656,6 +657,9 @@ INSERT INTO access (id_user, access_stock, access_production, access_accesses, a
 (9, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE),
 (10, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE);
 -- (11, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE);
+
+INSERT INTO access (id_user, access_stock, access_production, access_accesses, access_student_register, access_reports, access_student_perm, access_class_register) VALUES
+(12, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE);
 
 select * from access;
 

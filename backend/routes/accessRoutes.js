@@ -9,4 +9,7 @@ router.get("/access", accessController.getAllAccess);
 // 🔹 Rota para atualizar permissões de um usuário
 router.put("/access/:id_user", accessController.updateAccess);
 
+// 🔹 Rota para buscar permissões de um usuário específico
+router.get("/access/:id_user", accessController.getAccessByUser);
+
 module.exports = router;

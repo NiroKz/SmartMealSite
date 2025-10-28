@@ -57,3 +57,19 @@ exports.updateAccess = async (req, res) => {
     return res.status(500).send("Erro interno ao atualizar permissões.");
   }
 };
+
+// 🔹 Retorna as permissões de um usuário específico
+exports.getAccessByUser = async (req, res) => {
+  try {
+    const { id_user } = req.params;
+    const userAccess = await accessModel.getAccessByUser(id_user);
+
+    if (!userAccess) return res.status(404).send("Usuário não encontrado");
+
+    return res.status(200).json(userAccess);
+  } catch (err) {
+    console.error("Erro ao buscar permissões do usuário:", err);
+    return res.status(500).send("Erro interno");
+  }
+};
+

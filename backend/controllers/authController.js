@@ -130,7 +130,7 @@ exports.login = async (req, res) => {
           id_user: user.id_user,
           email: user.email,
           name: user.user_name,
-          permissions: permissions || {}, // 🔹 inclui as permissões no token
+          permissions: permissions || {} // 🔹 inclui as permissões no token
         },
         secret,
         { expiresIn: "2h" }

@@ -674,6 +674,8 @@ h2 {
     background: #4a4237;
 }
 
+.hidden { display: none; }
+
 .modulo-icone {
     background: #d6cbb2;
     color: #645949;

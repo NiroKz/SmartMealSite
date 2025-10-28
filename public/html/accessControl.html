@@ -33,27 +33,27 @@
                 <h3>Você é diretor(a) desta escola</h3>
             </div>
             <div class="modulos-botoes">
-                <button class="modulo-btn" onclick="irParaSecao('acesso')">Controle de Acesso <span
+                <button class="modulo-btn" id="btn-accesses" onclick="irParaSecao('acesso')">Controle de Acesso <span
                         class="modulo-icone">&#9654;</span></button>
-                <button class="modulo-btn" onclick="irParaSecao('refeicao')">Controle de Refeições <span
+                <button class="modulo-btn" id="btn-production" onclick="irParaSecao('refeicao')">Controle de Refeições <span
                         class="modulo-icone">&#9654;</span></button>
-                <button class="modulo-btn" onclick="irParaSecao('estoque')">Controle de Estoque <span
+                <button class="modulo-btn" id="btn-stock" onclick="irParaSecao('estoque')">Controle de Estoque <span
                         class="modulo-icone">&#9654;</span></button>
-                <button class="modulo-btn" onclick="irParaSecao('admin')">Administração <span
+                <button class="modulo-btn" id="btn-admin" onclick="irParaSecao('admin')">Administração <span
                         class="modulo-icone">&#9654;</span></button>
-                <button class="modulo-btn" onclick="irParaSecao('feedbacks')">Feedback <span
+                <button class="modulo-btn" id="btn-feedback" onclick="irParaSecao('feedbacks')">Feedback <span
                         class="modulo-icone">&#9654;</span></button>
             </div>
             <br><br><br>
         </section>
         <section class="access-control2 tab-section">
-            <a class="selected" href="#" onclick="showTab(event, 'acesso')">Controle de Acesso</a>
-            <a href="#" class="tab" onclick="showTab(event, 'refeicao')">Controle de Refeições</a>
-            <a href="#" class="tab" onclick="showTab(event, 'estoque')">Controle de Estoque</a>
-            <a href="#" class="tab" onclick="showTab(event, 'admin')">Administração</a>
-            <a href="#" class="tab" onclick="showTab(event, 'feedbacks')">Feedbacks</a>
-            <a href="../html/studentRegister.html" class="tab">Adicionar Aluno</a>
-            <a href="../html/menuRegister.html" class="tab">Adicionar Cardápio</a>
+            <a class="selected" id="btn-accesses" href="#" onclick="showTab(event, 'acesso')">Controle de Acesso</a>
+            <a href="#" id="btn-production" class="tab" onclick="showTab(event, 'refeicao')">Controle de Refeições</a>
+            <a href="#" id="btn-stock" class="tab" onclick="showTab(event, 'estoque')">Controle de Estoque</a>
+            <a href="#" id="btn-admin" class="tab" onclick="showTab(event, 'admin')">Administração</a>
+            <a href="#" id="btn-feedback" class="tab" onclick="showTab(event, 'feedbacks')">Feedbacks</a>
+            <a href="../html/studentRegister.html" id="btn-student-register" class="tab">Adicionar Aluno</a>
+            <a href="../html/menuRegister.html" id="btn-foodmenu" class="tab">Adicionar Cardápio</a>
         </section>
 
         <br>
@@ -403,7 +403,11 @@
                                 <th>Email</th>
                                 <th>Estoque</th>
                                 <th>Produção</th>
+                                <th>Acessos</th>
+                                <th>Registro Aluno</th>
                                 <th>Relatórios</th>
+                                <th>Permissão Aluno</th>
+                                <th>Registro Turma</th>
                                 <th>Salvar</th>
                             </tr>
                         </thead>
@@ -439,6 +443,7 @@
     </main>
     <div id="modulos-container" style="display:none;"></div>
     <script src="../js/accessControl.js"></script>
+
     <script src="../js/graphicStudent.js"></script>
     <script src="../js/liberation.js"></script>
     <script src="../js/production.js"></script>
