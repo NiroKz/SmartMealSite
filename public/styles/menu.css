@@ -2,6 +2,7 @@
 @import "./header.css";
 @import "./footer.css";
 
+
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     min-height: 100vh;
@@ -16,6 +17,23 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+ button {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #6A5F4E;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+      font-size: 36px;
+  background-color: #5c5346;
 }
 
 .filter-container {
@@ -67,31 +85,35 @@ main {
     background: linear-gradient(180deg, #f7ead2 0%, #f2e7cf 100%);
     border-radius: 12px 12px 0 0;
     overflow: hidden;
-    border: 1px solid rgba(16,24,32,0.08);
-    box-shadow: 0 6px 18px rgba(16,24,32,0.06);
+    border: 1px solid rgba(16, 24, 32, 0.08);
+    box-shadow: 0 6px 18px rgba(16, 24, 32, 0.06);
 }
-.menu-header > div {
+
+.menu-header>div {
     padding: 28px 18px;
     text-align: center;
     font-weight: 900;
     font-size: 1.15rem;
     color: #111;
-    border-right: 1px solid rgba(16,24,32,0.04);
+    border-right: 1px solid rgba(16, 24, 32, 0.04);
 }
-.menu-header > div:last-child { border-right: none; }
+
+.menu-header>div:last-child {
+    border-right: none;
+}
 
 .menu-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0;
-    border-left: 1px solid rgba(16,24,32,0.04);
-    border-right: 1px solid rgba(16,24,32,0.04);
+    border-left: 1px solid rgba(16, 24, 32, 0.04);
+    border-right: 1px solid rgba(16, 24, 32, 0.04);
 }
 
 .menu-cell {
     padding: 20px 16px;
     min-height: 88px;
-    border-bottom: 1px solid rgba(16,24,32,0.04);
+    border-bottom: 1px solid rgba(16, 24, 32, 0.04);
     background: linear-gradient(180deg, #ffffff 0%, #fcfcfc 100%);
     font-size: 0.96rem;
     display: flex;
@@ -105,20 +127,30 @@ main {
 
 .menu-cell:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 24px rgba(16,24,32,0.08);
+    box-shadow: 0 10px 24px rgba(16, 24, 32, 0.08);
     background: #fffefc;
 }
 
-.menu-row:nth-child(even) .menu-cell { background: linear-gradient(180deg,#ffffff 0%, #fbfbfb 100%); }
-.menu-row:nth-child(odd) .menu-cell { background: linear-gradient(180deg,#ffffff 0%, #ffffff 100%); }
+.menu-row:nth-child(even) .menu-cell {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
+}
 
-.menu-cell strong { display:block; margin-bottom:6px; font-weight:800; color:#0d2136; }
+.menu-row:nth-child(odd) .menu-cell {
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+}
+
+.menu-cell strong {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 800;
+    color: #0d2136;
+}
 
 .menu-card-wrapper {
-    background: linear-gradient(180deg, rgba(242,231,207,0.6), rgba(255,255,255,0.6));
+    background: linear-gradient(180deg, rgba(242, 231, 207, 0.6), rgba(255, 255, 255, 0.6));
     border-radius: 12px;
     padding: 0;
-    box-shadow: 0 12px 30px rgba(16,24,32,0.06);
+    box-shadow: 0 12px 30px rgba(16, 24, 32, 0.06);
 }
 
 .filter-title {
@@ -127,16 +159,42 @@ main {
 }
 
 @media (max-width: 900px) {
-    .menu-header, .menu-row { grid-template-columns: repeat(2, 1fr); }
-    .menu-header > div { font-size: 1rem; padding: 18px 10px; }
-    .menu-cell { padding: 14px 10px; font-size: 0.9rem; min-height: 60px; }
-    .menu-grid { max-width: 700px; }
+
+    .menu-header,
+    .menu-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .menu-header>div {
+        font-size: 1rem;
+        padding: 18px 10px;
+    }
+
+    .menu-cell {
+        padding: 14px 10px;
+        font-size: 0.9rem;
+        min-height: 60px;
+    }
+
+    .menu-grid {
+        max-width: 700px;
+    }
 }
 
 @media (max-width: 480px) {
-    .menu-header, .menu-row { grid-template-columns: 1fr; }
-    .filter-container { padding: 6% 6% 10% 6%; }
-    .filter-title { font-size: 2.4rem; }
+
+    .menu-header,
+    .menu-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-container {
+        padding: 6% 6% 10% 6%;
+    }
+
+    .filter-title {
+        font-size: 2.4rem;
+    }
 }
 
 .filter-options {
@@ -150,7 +208,7 @@ main {
     max-width: 700px;
 }
 
-.filter-options > div {
+.filter-options>div {
     text-align: left;
     min-width: 90px;
 }
@@ -169,8 +227,14 @@ main {
     margin-right: 6px;
     vertical-align: middle;
 }
-.dot.green { background: #4caf50; }
-.dot.red { background: #c62828; }
+
+.dot.green {
+    background: #4caf50;
+}
+
+.dot.red {
+    background: #c62828;
+}
 
 .filter-table-title {
     text-align: center;
@@ -250,7 +314,7 @@ input[type="text"] {
     background: #fff;
     color: #333;
     transition: border-color 0.3s, box-shadow 0.3s;
-    width: 150px;          
+    width: 150px;
     height: 42px;
     box-sizing: border-box;
 }
@@ -258,7 +322,7 @@ input[type="text"] {
 .filter-options {
     display: flex;
     justify-content: center;
-    gap: 35px; 
+    gap: 35px;
     margin-bottom: 20px;
     border-bottom: 3px solid #222;
     padding-bottom: 15px;
@@ -266,7 +330,74 @@ input[type="text"] {
     max-width: 700px;
 }
 
-.filter-options > div {
+.filter-options>div {
     text-align: left;
-    min-width: unset;   
+    min-width: unset;
+}
+
+@media print {
+
+  @page {
+    size: landscape;
+    margin: 1cm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+  .filter-title{
+    visibility: visible;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+  }
+
+  .menu-grid, .menu-grid * {
+    visibility: visible;
+  }
+
+  .menu-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: table;
+    width: 100vw;
+    border-collapse: collapse;
+    transform: scale(1.45);
+    transform-origin: top left;
+  }
+
+  .menu-header {
+    display: table-row;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  .menu-day {
+    all: unset;
+    display: table-cell;
+    border: 1px solid #000 !important;
+    padding: 6px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .menu-row {
+    all: unset;
+    display: table-row;
+  }
+
+  .menu-cell {
+    all: unset;
+    display: table-cell;
+    border: 1px solid #000;
+    padding: 6px;
+    vertical-align: top;
+    text-align: left;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+  }
+
 }

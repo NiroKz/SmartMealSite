@@ -16,21 +16,26 @@
             <img src="../images/SmartMealLogo.png">
             <h1>Smart Meal</h1>
         </div>
+            <nav>
+      <ul>
+        <li><a href="../html/accessControl.html"><b>Voltar</b></a></li>
+      </ul>
+    </nav>
     </header>
 
     <main>
-        <div class="filter-container">
+        <div class="filter-container" id="menu">
             <button class="filter-close" onclick="window.history.back()">&times;</button>
             <h1 class="filter-title">Cardápio</h1>
 
             <!-- Grid do Cardápio -->
             <div class="menu-grid">
                 <div class="menu-header">
-                    <div>Segunda</div>
-                    <div>Terça</div>
-                    <div>Quarta</div>
-                    <div>Quinta</div>
-                    <div>Sexta</div>
+                    <div class="menu-day">Segunda</div>
+                    <div class="menu-day">Terça</div>
+                    <div class="menu-day">Quarta</div>
+                    <div class="menu-day">Quinta</div>
+                    <div class="menu-day">Sexta</div>
                 </div>
 
                 <!-- Exemplo de linhas - substituir por conteúdo dinâmico se necessário -->
@@ -66,7 +71,9 @@
                     <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
                 </div>
             </div>
-
+            <div style="margin-top:12px;">
+                <button onclick="window.print()" id="download_button">Imprimir Cardápio</button>
+            </div>
         </div>
     </main>
     <br><br>

@@ -1,7 +1,20 @@
+function irParaSecao(secaoId) {
+  const tabSections = document.querySelectorAll(".tab-section");
+  tabSections.forEach(s => s.style.display = "none");
+
+  const secaoEl = document.getElementById(secaoId);
+  if (secaoEl) secaoEl.style.display = "block";
+}
+
+
+/* 
+// ATÉ DAR UM JEITO NO LOGIN ISSO FICA COMENTADO
+
+
 //TODO: CONSERTAR O ACCESS CONTROL NA PARTE PÓS SELEÇÃO DE MODULO (VOLTAR PARA OQ ERA ANTES), COM O MENU VERTICAL SE TORNANDO HORIZONTAL
 // MAS MANTENDO A LÓGICA DE PERMISSÕES
 
-// ACCESS CONTROL - FRONTEND
+ // ACCESS CONTROL - FRONTEND
 document.addEventListener("DOMContentLoaded", async () => {
   const user = JSON.parse(localStorage.getItem("usuario"));
   if (!user) return window.location.href = "/html/login.html";
@@ -49,7 +62,7 @@ async function applyUserAccess(id_user) {
   } catch (err) {
     console.error("Erro ao aplicar permissões:", err);
   }
-}
+} 
 
 // MOSTRAR TODOS OS BOTÕES (ADMIN)
 function showAllButtons() {
@@ -72,7 +85,6 @@ function showAllButtons() {
   const adminTab = document.getElementById("admin-section");
   if (adminTab) adminTab.style.display = "";
 }
-
 
 // TABELA DE PERMISSÕES (ADMIN)
 async function loadPermissions() {
@@ -167,3 +179,5 @@ function initTabs() {
     if (secaoEl) secaoEl.style.display = "block";
   };
 }
+
+*/
