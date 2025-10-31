@@ -47,11 +47,11 @@
             <br><br><br>
         </section>
         <section class="access-control2 tab-section">
-            <a class="selected" id="btn-accesses" href="#" onclick="showTab(event, 'acesso')">Controle de Acesso</a>
-            <a href="#" id="btn-production" class="tab" onclick="showTab(event, 'refeicao')">Controle de Refeições</a>
-            <a href="#" id="btn-stock" class="tab" onclick="showTab(event, 'estoque')">Controle de Estoque</a>
-            <a href="#" id="btn-admin" class="tab" onclick="showTab(event, 'admin')">Administração</a>
-            <a href="#" id="btn-feedback" class="tab" onclick="showTab(event, 'feedbacks')">Feedbacks</a>
+            <a class="selected" id="btn-accesses" href="#" data-btn="btn-accesses" data-target="access-section" onclick="irParaSecao('acesso')">Controle de Acesso</a>
+            <a href="#" id="btn-production" class="tab" data-btn="btn-production" data-target="production-section" onclick="irParaSecao('refeicao')">Controle de Refeições</a>
+            <a href="#" id="btn-stock" class="tab" data-btn="btn-stock" data-target="stock-section" onclick="irParaSecao('estoque')">Controle de Estoque</a>
+            <a href="#" id="btn-admin" class="tab" data-btn="btn-admin" data-target="admin-section" onclick="irParaSecao('admin')">Administração</a>
+            <a href="#" id="btn-feedback" class="tab" onclick="irParaSecao('feedbacks')">Feedbacks</a>
             <a href="../html/studentRegister.html" id="btn-student-register" class="tab">Adicionar Aluno</a>
             <a href="../html/menuRegister.html" id="btn-foodmenu" class="tab">Adicionar Cardápio</a>
         </section>

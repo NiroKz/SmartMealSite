@@ -1,27 +1,44 @@
+// FUNÇÃO DE TROCA DE SEÇÃO
 function irParaSecao(secaoId) {
+  // Esconde todas as seções .tab-section
   const tabSections = document.querySelectorAll(".tab-section");
   tabSections.forEach(s => s.style.display = "none");
 
+  // Mostra a seção escolhida
   const secaoEl = document.getElementById(secaoId);
   if (secaoEl) secaoEl.style.display = "block";
+
+  // Muda o layout: esconde menu vertical e mostra o horizontal
+  const modulosSection = document.getElementById("modulos-section");
+  const menuHorizontal = document.querySelector(".access-control2");
+  if (modulosSection) modulosSection.style.display = "none";
+  if (menuHorizontal) menuHorizontal.style.display = "flex";
+
+  // Remove destaque anterior
+  document.querySelectorAll(".access-control2 a").forEach(a => a.classList.remove("selected"));
+
+  // Adiciona destaque à seção ativa (baseado no ID)
+  const activeLink = document.querySelector(`.access-control2 a[data-target='${secaoId}']`);
+  if (activeLink) activeLink.classList.add("selected");
+
+  // Reaplica permissões no menu horizontal
+  const user = JSON.parse(localStorage.getItem("usuario"));
+  if (user) {
+    if (user.is_usuario_admin) showAllButtons();
+    else applyUserAccess(user.id_user, true); // <- "true" = modo horizontal
+  }
 }
 
 
-/* 
-// ATÉ DAR UM JEITO NO LOGIN ISSO FICA COMENTADO
 
-
-//TODO: CONSERTAR O ACCESS CONTROL NA PARTE PÓS SELEÇÃO DE MODULO (VOLTAR PARA OQ ERA ANTES), COM O MENU VERTICAL SE TORNANDO HORIZONTAL
-// MAS MANTENDO A LÓGICA DE PERMISSÕES
-
- // ACCESS CONTROL - FRONTEND
+// CONTROLE DE LOGIN E ACESSO
 document.addEventListener("DOMContentLoaded", async () => {
   const user = JSON.parse(localStorage.getItem("usuario"));
   if (!user) return window.location.href = "/html/login.html";
 
   if (user.is_usuario_admin) {
     console.log("Usuário admin — acesso total concedido.");
-    await loadPermissions(); // tabela de permissões
+    await loadPermissions();
     showAllButtons();
   } else {
     await applyUserAccess(user.id_user);
@@ -31,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // APLICA PERMISSÕES DO USUÁRIO
-async function applyUserAccess(id_user) {
+async function applyUserAccess(id_user, isHorizontal = false) {
   try {
     const response = await fetch(`http://localhost:3000/admin/access/${id_user}`);
     if (!response.ok) throw new Error("Erro ao buscar permissões");
@@ -39,6 +56,7 @@ async function applyUserAccess(id_user) {
     const access = await response.json();
     console.log("Permissões do usuário:", access);
 
+    // Mapeia os IDs de botões e links
     const buttonMap = {
       "btn-stock": access.access_stock,
       "btn-production": access.access_production,
@@ -49,20 +67,23 @@ async function applyUserAccess(id_user) {
       "btn-admin": access.access_class_register
     };
 
-    // 🔹 Mostrar ou esconder botões sem mexer no CSS existente
+    // 🔹 Aplica restrição tanto nos botões verticais quanto nos links horizontais
     Object.entries(buttonMap).forEach(([id, hasAccess]) => {
-      const btn = document.getElementById(id);
-      if (btn) btn.style.display = hasAccess ? "" : "none"; // "" mantém o estilo padrão
+      const verticalEl = document.getElementById(id);
+      const horizontalEl = document.querySelector(`.access-control2 a[data-btn='${id}']`);
+      if (verticalEl) verticalEl.style.display = hasAccess ? "" : "none";
+      if (horizontalEl) horizontalEl.style.display = hasAccess ? "" : "none";
     });
 
-    // 🔹 Se não for admin, esconder seção de admin
+    // 🔹 Esconde aba de admin se não for admin
     const adminTab = document.getElementById("admin-section");
     if (adminTab) adminTab.style.display = "none";
 
   } catch (err) {
     console.error("Erro ao aplicar permissões:", err);
   }
-} 
+}
+
 
 // MOSTRAR TODOS OS BOTÕES (ADMIN)
 function showAllButtons() {
@@ -76,15 +97,17 @@ function showAllButtons() {
     "btn-admin"
   ];
 
-  // 🔹 Mostra todos os botões sem alterar o estilo original
   allButtonIds.forEach(id => {
-    const btn = document.getElementById(id);
-    if (btn) btn.style.display = "";
+    const el = document.getElementById(id);
+    if (el) el.style.display = "";
+    const horizontalEl = document.querySelector(`.access-control2 a[data-btn='${id}']`);
+    if (horizontalEl) horizontalEl.style.display = "";
   });
 
   const adminTab = document.getElementById("admin-section");
   if (adminTab) adminTab.style.display = "";
 }
+
 
 // TABELA DE PERMISSÕES (ADMIN)
 async function loadPermissions() {
@@ -148,6 +171,7 @@ async function loadPermissions() {
   }
 }
 
+// SALVAR PERMISSÕES
 async function savePermissions(id_user, updatedPermissions) {
   try {
     const response = await fetch(`http://localhost:3000/admin/access/${id_user}`, {
@@ -163,21 +187,30 @@ async function savePermissions(id_user, updatedPermissions) {
   }
 }
 
-// NAVEGAÇÃO ENTRE SEÇÕES
+// INICIALIZAÇÃO DE ABAS E LAYOUT
 function initTabs() {
   const tabSections = document.querySelectorAll(".tab-section");
-  
-  // Inicializa: mostra apenas a seção de módulos
-  tabSections.forEach(s => s.style.display = "none");
   const modulosSection = document.getElementById("modulos-section");
-  if (modulosSection) modulosSection.style.display = "block";
+  const menuHorizontal = document.querySelector(".access-control2");
 
-  // Define função global para os botões
-  window.irParaSecao = function(secaoId) {
-    tabSections.forEach(s => s.style.display = "none");
-    const secaoEl = document.getElementById(secaoId);
-    if (secaoEl) secaoEl.style.display = "block";
-  };
+  // Mostra só os botões verticais no início
+  tabSections.forEach(s => s.style.display = "none");
+  if (modulosSection) modulosSection.style.display = "block";
+  if (menuHorizontal) menuHorizontal.style.display = "none";
 }
 
-*/
+// VOLTAR AO MENU INICIAL
+function voltarParaInicio() {
+  const modulosSection = document.getElementById("modulos-section");
+  const menuHorizontal = document.querySelector(".access-control2");
+  const tabSections = document.querySelectorAll(".tab-section");
+
+  if (modulosSection) modulosSection.style.display = "block";
+  if (menuHorizontal) menuHorizontal.style.display = "none";
+  tabSections.forEach(s => {
+    if (!s.classList.contains("access-control2")) s.style.display = "none";
+  });
+
+  // Remove destaque ativo no menu horizontal
+  document.querySelectorAll(".access-control2 a").forEach(a => a.classList.remove("selected"));
+}
