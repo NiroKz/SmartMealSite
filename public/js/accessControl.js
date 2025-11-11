@@ -13,13 +13,21 @@ window.irParaSecao = function (secaoId) {
   if (modulosSection) modulosSection.style.display = "none";
   if (menuHorizontal) menuHorizontal.style.display = "flex";
 
-  document.querySelectorAll(".access-control2 a")
+  document
+    .querySelectorAll(".access-control2 a")
     .forEach((a) => a.classList.remove("selected"));
 
   const activeLink = document.querySelector(
-    `.access-control2 a[data-target='${secaoId}']`
+    `.access-control2 a[data-target='${secaoId}'], 
+   .access-control2 a[data-btn='btn-${secaoId}']`
   );
-  if (activeLink) activeLink.classList.add("selected");
+  
+  if (activeLink) {
+    activeLink.classList.add("selected");
+    console.log(`🔹 Link ativo: ${activeLink.textContent}`);
+  } else {
+    console.warn(`⚠️ Nenhum link correspondente encontrado para ${secaoId}`);
+  }
 
   const user = JSON.parse(localStorage.getItem("usuario"));
   if (user) {
@@ -71,7 +79,7 @@ async function applyUserAccess(id_user, isHorizontal = false) {
     });
 
     // 🔹 Esconde aba de admin se não for admin
-    const adminTab = document.getElementById("admin-section");
+    const adminTab = document.getElementById("admin");
     if (adminTab) adminTab.style.display = "none";
   } catch (err) {
     console.error("Erro ao aplicar permissões:", err);
@@ -227,3 +235,29 @@ function voltarParaInicio() {
     .querySelectorAll(".access-control2 a")
     .forEach((a) => a.classList.remove("selected"));
 }
+// ===============================
+// INICIALIZAÇÃO AO CARREGAR PÁGINA
+// ===============================
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("✅ accessControl.js inicializado!");
+
+  const user = JSON.parse(localStorage.getItem("usuario"));
+  if (!user) {
+    console.warn("⚠️ Nenhum usuário logado encontrado!");
+    return;
+  }
+
+  // 🔹 Inicializa layout padrão
+  initTabs();
+
+  // 🔹 Se for admin, mostra tudo
+  if (user.is_usuario_admin) {
+    console.log("👑 Usuário admin — mostrando todos os botões");
+    showAllButtons();
+  }
+  // 🔹 Caso contrário, aplica permissões do banco
+  else {
+    console.log("🔒 Aplicando permissões para o usuário comum...");
+    await applyUserAccess(user.id_user);
+  }
+});
