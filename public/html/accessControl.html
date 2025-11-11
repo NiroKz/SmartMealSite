@@ -35,8 +35,8 @@
             <div class="modulos-botoes">
                 <button class="modulo-btn" id="btn-accesses" onclick="irParaSecao('acesso')">Controle de Acesso <span
                         class="modulo-icone">&#9654;</span></button>
-                <button class="modulo-btn" id="btn-production" onclick="irParaSecao('refeicao')">Controle de Refeições <span
-                        class="modulo-icone">&#9654;</span></button>
+                <button class="modulo-btn" id="btn-production" onclick="irParaSecao('refeicao')">Controle de Refeições
+                    <span class="modulo-icone">&#9654;</span></button>
                 <button class="modulo-btn" id="btn-stock" onclick="irParaSecao('estoque')">Controle de Estoque <span
                         class="modulo-icone">&#9654;</span></button>
                 <button class="modulo-btn" id="btn-admin" onclick="irParaSecao('admin')">Administração <span
@@ -47,11 +47,16 @@
             <br><br><br>
         </section>
         <section class="access-control2 tab-section">
-            <a class="selected" id="btn-accesses" href="#" data-btn="btn-accesses" data-target="access-section" onclick="irParaSecao('acesso')">Controle de Acesso</a>
-            <a href="#" id="btn-production" class="tab" data-btn="btn-production" data-target="production-section" onclick="irParaSecao('refeicao')">Controle de Refeições</a>
-            <a href="#" id="btn-stock" class="tab" data-btn="btn-stock" data-target="stock-section" onclick="irParaSecao('estoque')">Controle de Estoque</a>
-            <a href="#" id="btn-admin" class="tab" data-btn="btn-admin" data-target="admin-section" onclick="irParaSecao('admin')">Administração</a>
-            <a href="#" id="btn-feedback" class="tab" onclick="irParaSecao('feedbacks')">Feedbacks</a>
+            <a class="tab" id="btn-accesses" href="#" data-btn="btn-accesses" data-target="acesso"
+                onclick="irParaSecao('acesso')">Controle de Acesso</a>
+            <a href="#" id="btn-production" class="tab" data-btn="btn-production" data-target="refeicao"
+                onclick="irParaSecao('refeicao')">Controle de Refeições</a>
+            <a href="#" id="btn-stock" class="tab" data-btn="btn-stock" data-target="estoque"
+                onclick="irParaSecao('estoque')">Controle de Estoque</a>
+            <a href="#" id="btn-admin" class="tab" data-btn="btn-admin" data-target="admin"
+                onclick="irParaSecao('admin')">Administração</a>
+            <a href="#" id="btn-feedback" class="tab" data-btn="btn-feedbacks" data-target="feedbacks"
+            onclick="irParaSecao('feedbacks')">Feedbacks</a>
             <a href="../html/studentRegister.html" id="btn-student-register" class="tab">Adicionar Aluno</a>
             <a href="../html/menuRegister.html" id="btn-foodmenu" class="tab">Adicionar Cardápio</a>
         </section>
@@ -322,7 +327,7 @@
 
         <section id="admin" class="tab-section">
             <section class="access-control">
-                <h2>Escolas</h2>
+                <!-- <h2>Escolas</h2>
                 <div class="admin-escolas-flex">
                     <div class="admin-escolas-list">
                         <div class="admin-escola-card" onclick="mostrarModulos('ETEC Jorge Street')">
@@ -351,7 +356,7 @@
                         <label>Endereço:<input type="text"></label>
                         <label>Telefone:<input type="text"></label>
                     </div>
-                </div>
+                </div> -->
 
                 <h2 class="admin-func-title">Funcionários</h2>
                 <div class="admin-func-flex">
@@ -403,10 +408,10 @@
                                 <th>Estoque</th>
                                 <th>Produção</th>
                                 <th>Acessos</th>
-                                <th>Registro Aluno</th>
+                                <th>Cadastro Aluno</th>
                                 <th>Relatórios</th>
-                                <th>Permissão Aluno</th>
-                                <th>Registro Turma</th>
+                                <th>Cardápio</th>
+                                <th>Administração</th>
                                 <th>Salvar</th>
                             </tr>
                         </thead>
@@ -438,8 +443,8 @@
 
     </main>
     <div id="modulos-container" style="display:none;"></div>
-    <script src="../js/accessControl.js"></script>
-
+    <script src="../js/permissionsAdmin.js"></script>
+    <script src="../js/accessControl.js"></script>    
     <script src="../js/graphicStudent.js"></script>
     <script src="../js/liberation.js"></script>
     <script src="../js/production.js"></script>
