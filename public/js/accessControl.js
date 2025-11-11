@@ -18,9 +18,9 @@ window.irParaSecao = function (secaoId) {
     .forEach((a) => a.classList.remove("selected"));
 
   const activeLink = document.querySelector(
-    `.access-control2 a[data-target='${secaoId}'], 
-   .access-control2 a[data-btn='btn-${secaoId}']`
-  );
+  `.access-control2 a[data-target='${secaoId}-section']`
+);
+
 
   if (activeLink) {
     activeLink.classList.add("selected");
