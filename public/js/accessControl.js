@@ -1,5 +1,19 @@
 console.log("✅ accessControl.js carregado!");
 
+// INICIALIZAÇÃO DE ABAS E LAYOUT
+function initTabs() {
+  const tabSections = document.querySelectorAll(".tab-section");
+  const modulosSection = document.getElementById("modulos-section");
+  const menuHorizontal = document.querySelector(".access-control2.tab-section");
+
+  // Esconde todas as seções de conteúdo
+  tabSections.forEach((s) => (s.style.display = "none"));
+  // Mostra apenas os botões de módulos
+  if (modulosSection) modulosSection.style.display = "block";
+  // Esconde a barra horizontal no início
+  if (menuHorizontal) menuHorizontal.style.display = "none";
+}
+
 // FUNÇÃO DE TROCA DE SEÇÃO
 window.irParaSecao = function (secaoId) {
   const tabSections = document.querySelectorAll(".tab-section");
@@ -9,8 +23,10 @@ window.irParaSecao = function (secaoId) {
   if (secaoEl) secaoEl.style.display = "block";
 
   const modulosSection = document.getElementById("modulos-section");
-  const menuHorizontal = document.querySelector(".access-control2");
+  const menuHorizontal = document.querySelector(".access-control2.tab-section");
+  // Esconde os botões de módulos
   if (modulosSection) modulosSection.style.display = "none";
+  // Mostra a barra horizontal ao escolher um módulo
   if (menuHorizontal) menuHorizontal.style.display = "flex";
 
   document
@@ -18,9 +34,8 @@ window.irParaSecao = function (secaoId) {
     .forEach((a) => a.classList.remove("selected"));
 
   const activeLink = document.querySelector(
-  `.access-control2 a[data-target='${secaoId}-section']`
-);
-
+    `.access-control2 a[data-target='${secaoId}-section']`
+  );
 
   if (activeLink) {
     activeLink.classList.add("selected");
@@ -109,18 +124,6 @@ function showAllButtons() {
 
   const adminTab = document.getElementById("admin");
   if (adminTab) adminTab.style.display = "";
-}
-
-// INICIALIZAÇÃO DE ABAS E LAYOUT
-function initTabs() {
-  const tabSections = document.querySelectorAll(".tab-section");
-  const modulosSection = document.getElementById("modulos-section");
-  const menuHorizontal = document.querySelector(".access-control2");
-
-  // Mostra só os botões verticais no início
-  tabSections.forEach((s) => (s.style.display = "none"));
-  if (modulosSection) modulosSection.style.display = "block";
-  if (menuHorizontal) menuHorizontal.style.display = "none";
 }
 
 // VOLTAR AO MENU INICIAL
