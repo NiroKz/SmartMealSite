@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Refeição - Smart Meal</title>
+  <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
+  <link rel="stylesheet" href="../styles/studentRegister.css">
+  <link rel="stylesheet" href="../styles/popup.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/SmartMealLogo.png" alt="logo">
+      <h1>Smart Meal</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="./feedback.html"><b>Feedback</b></a></li>
+        <li><a href="../index.html"><b>Home</b></a></li>
+        <li><a href="../html/accessControl.html"><b>Voltar</b></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-wrapper">
+      <div class="container">
+        <div class="left-panel">
+          <div class="logo">
+            <img src="../images/SmartMealLogo.png" alt="Smart Meal Logo" style="width:100%; height:100%;">
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <h1>Registrar Refeição</h1>
+
+          <form id="menuForm">
+
+            <label for="id_rm">Insira o RM:</label>
+            <input type="text" id="id_rm" name="id_rm" required maxlength="5">
+
+            <label for="date_time">Data da refeição</label>
+            <input type="date" id="date_time" name="date_time" required>
+
+            <label for="type_meal">Tipo de refeição</label>
+            <select id="type_meal" name="type_meal" required>
+              <option value="">Selecione</option>
+              <option value="breakfast">Café da manhã</option>
+              <option value="lunch">Almoço</option>
+              <option value="snack">Lanche</option>
+              <option value="dinner">Janta</option>
+            </select>
+
+            <label for="access_status">Status de acesso</label>
+            <select id="access_status" name="access_status" required>
+              <option value="">Selecione</option>
+              <option value="morning">Permitido</option>
+              <option value="evening">Bloqueado</option>
+              <option value="night">Excessão</option>
+            </select>
+
+            <div style="margin-top:12px;">
+              <button type="submit">Salvar Refeição</button>
+              <button type="reset">Limpar</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p><b>&copy; 2025 Smart Meal</b></p>
+    </div>
+  </footer>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h2 id="popup-title">Título</h2>
+      <p id="popup-message">Mensagem do sistema...</p>
+    </div>
+  </div>
+
+  <script src="../js/menuRegister.js"></script>
+  <script src="../js/popup.js"></script>
+  <script src="../js/config.js"></script>
+</body>
+
+</html>

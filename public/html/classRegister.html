@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registrar Aluno - Smart Meal</title>
+  <title>Registrar Sala - Smart Meal</title>
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
   <link rel="stylesheet" href="../styles/studentRegister.css">
   <link rel="stylesheet" href="../styles/popup.css">
@@ -36,35 +36,26 @@
         </div>
 
         <div class="right-panel">
-          <h1>Faça seu cadastro:</h1>
+          <h1>Faça o Registro da turma:</h1>
           <form id="studentForm">
 
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required maxlength="60">
+            <label for="course">Nome do curso:</label>
+            <input type="text" id="nome" name="course" required maxlength="60">
 
-            <label for="RM">RM:</label>
-            <input type="text" id="RM" name="RM" required maxlength="5">
-
-            <label for="Course">Curso:</label>
-            <select id="Course" required>
-              <option value="">Selecione o curso</option>
-            </select>
-
-            <label for="Year">Ano:</label>
-            <select id="Year" required>
-              <option value="">Selecione o ano</option>
-            </select>
-
-            <label for="Period">Período:</label>
-            <select id="Period" required>
+            <label for="period">Período:</label>
+            <select id="period" required>
               <option value="">Selecione o período</option>
             </select>
 
-            <label for="student_legal_guardian">Responsável:</label>
-            <input type="text" id="student_legal_guardian" name="student_legal_guardian" required maxlength="60">
+            <label for="grade">Ano:</label>
+            <select id="grade" required>
+              <option value="">Selecione o ano</option>
+            </select>
 
-            <label for="food_restriction">Restrição Alimentar:</label>
-            <textarea id="food_restriction" name="food_restriction" maxlength="30" rows="3"></textarea>
+            <label for="date_registration">Data de registro:</label>
+            <select id="date_registration" required>
+              <option value="">Selecione a data</option>
+            </select>
 
             <button type="submit">Cadastrar</button>
           </form>
