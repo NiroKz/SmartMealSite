@@ -47,6 +47,8 @@ form.addEventListener("submit", async (e) => {
 
     const data = await response.json();
     sessionStorage.setItem("token", data.token);
+    sessionStorage.setItem("is_user_admin", data.usuario.is_user_admin);
+
 
     // 🔹 Salva usuário + permissões no localStorage
     localStorage.setItem("usuario", JSON.stringify({ ...data.usuario, permissions: data.permissions }));

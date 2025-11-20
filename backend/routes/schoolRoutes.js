@@ -37,7 +37,7 @@ router.get("/listSchool", autenticarToken, async (req, res) => {
     const { id_user } = req.usuario;
 
     const sql =
-      "SELECT school_name, address_road, phone FROM school WHERE id_user = ?";
+      "SELECT school_name, address_road, phone FROM school";
 
     const [results] = await db.query(sql, [id_user]);
 

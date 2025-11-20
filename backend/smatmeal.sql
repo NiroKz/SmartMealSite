@@ -18,7 +18,7 @@ period enum('M', 'T', 'N') NOT NULL, -- manhã, tarde e noite (respectivamente)-
 grade char(1) NOT NULL,
 date_registration date NOT NULL -- dd/mm/yyyy --         
 );
-
+select * from class;
 
 create table IF NOT EXISTS student(
 id_rm int(5) primary key NOT NULL,

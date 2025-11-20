@@ -1,11 +1,11 @@
 const db = require("../config/db");
 
-async function createUser(nome, cpf, email, telefone) {
+async function createUser(nome, cpf, email, telefone, is_user_admin) {
   const query = `
     INSERT INTO school_user (user_name, cpf, email, phone, is_user_admin) 
-    VALUES (?, ?, ?, ?, false)
+    VALUES (?, ?, ?, ?, ?)
   `;
-  const [result] = await db.execute(query, [nome, cpf, email, telefone]);
+  const [result] = await db.execute(query, [nome, cpf, email, telefone, is_user_admin]);
   return result;
 }
 

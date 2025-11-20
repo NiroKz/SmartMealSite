@@ -12,9 +12,9 @@ addSchoolBtn.addEventListener("click", () => {
 saveSchoolBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
-  const nome_escola = document.getElementById("schoolName").value;
-  const rua_endereco = document.getElementById("schoolAddress").value;
-  const fone = document.getElementById("schoolPhone").value;
+  const nome_escola = document.getElementById("schoolName").value.trim();
+  const rua_endereco = document.getElementById("schoolAddress").value.trim();
+  const fone = document.getElementById("schoolPhone").value.trim();
   const token = sessionStorage.getItem("token");
 
   if (!nome_escola || !rua_endereco || !fone) {
@@ -35,12 +35,19 @@ saveSchoolBtn.addEventListener("click", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      createSchoolCard({ nome_escola, rua_endereco, fone });
+      // Adiciona o card na tela
+      createSchoolCard({
+        school_name: nome_escola,
+        address_road: rua_endereco,
+        phone: fone,
+      });
 
+      // Limpa inputs
       document.getElementById("schoolName").value = "";
       document.getElementById("schoolAddress").value = "";
       document.getElementById("schoolPhone").value = "";
 
+      // Fecha o formulário
       formBox.style.display = "none";
     } else {
       alert(data.erro || "Erro ao cadastrar escola.");
@@ -63,9 +70,10 @@ function createSchoolCard(school) {
       <span>${school.phone}</span>
     </div>
     <a class="play" href="accessControl.html">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
-    <polygon points="30,20 80,50 30,80" fill="#333" />
-    </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
+        <polygon points="30,20 80,50 30,80" fill="#333" />
+      </svg>
+    </a>
   `;
 
   schoolList.appendChild(card);
@@ -73,25 +81,44 @@ function createSchoolCard(school) {
 
 // Ao carregar, mostrar escolas já salvas
 window.addEventListener("DOMContentLoaded", async () => {
+  const is_user_admin = sessionStorage.getItem("is_user_admin");
+
+  if (is_user_admin === "1") {
+    // Admin → pode cadastrar escola
+    addSchoolBtn.style.display = "flex";
+    formBox.style.display = "none";
+  } else {
+    // Funcionário → não pode cadastrar escola
+    addSchoolBtn.style.display = "none";
+    formBox.style.display = "none";
+  }
+
+  carregarEscolas();
+});
+
+// Carregar escolas já cadastradas
+async function carregarEscolas() {
   const token = sessionStorage.getItem("token");
 
   try {
     const response = await fetch("/school/listSchool", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+      headers: { Authorization: "Bearer " + token },
     });
 
-    const escolas = await response.json();
-
     if (!response.ok) {
-      alert(escolas.erro || "Erro ao carregar escolas.");
+      console.error("Erro ao buscar escolas.");
       return;
     }
 
-    escolas.forEach(createSchoolCard);
+    const escolas = await response.json();
+
+    if (!Array.isArray(escolas)) {
+      console.error("Formato inválido recebido do servidor:", escolas);
+      return;
+    }
+
+    escolas.forEach((e) => createSchoolCard(e));
   } catch (err) {
     console.error("Erro ao carregar escolas:", err);
-    alert("Erro ao conectar com o servidor.");
   }
-});
+}

@@ -11,13 +11,13 @@ const User = require("../models/UserModel");
 // Registro de usuário
 exports.register = async (req, res) => {
   try {
-    const { nome, cpf, email, telefone } = req.body;
+    const { nome, cpf, email, telefone, is_user_admin } = req.body;
 
     if (!nome || !cpf || !email || !telefone) {
       return res.status(400).send("Todos os campos são obrigatórios.");
     }
 
-    const result = await User.createUser(nome, cpf, email, telefone);
+    const result = await User.createUser(nome, cpf, email, telefone, is_user_admin);
 
     console.log("Cadastro realizado com sucesso");
     return res.json(result);
@@ -124,12 +124,15 @@ exports.login = async (req, res) => {
         user.id_user,
       ]);
       const permissions = rows[0] || {};
+      const is_user_admin = user.is_user_admin;
+
 
       const token = jwt.sign(
         {
           id_user: user.id_user,
           email: user.email,
           name: user.user_name,
+          is_user_admin: is_user_admin,
           permissions: permissions || {} // 🔹 inclui as permissões no token
         },
         secret,
@@ -145,6 +148,7 @@ exports.login = async (req, res) => {
           id_user: user.id_user,
           name: user.user_name,
           email: user.email,
+          is_user_admin: is_user_admin
         },
       });
     } else {
