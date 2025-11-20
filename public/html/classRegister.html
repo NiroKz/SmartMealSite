@@ -45,17 +45,21 @@
             <label for="period">Período:</label>
             <select id="period" required>
               <option value="">Selecione o período</option>
+              <option value="M">Manhã</option>
+              <option value="T">Tarde</option>
+              <option value="N">Noite</option>
             </select>
 
             <label for="grade">Ano:</label>
             <select id="grade" required>
               <option value="">Selecione o ano</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
             </select>
 
             <label for="date_registration">Data de registro:</label>
-            <select id="date_registration" required>
-              <option value="">Selecione a data</option>
-            </select>
+            <input type="date" required>
 
             <button type="submit">Cadastrar</button>
           </form>
@@ -82,7 +86,7 @@
       <p id="popup-message">Mensagem do sistema...</p>
     </div>
   </div>
-  <script src="../js/studentRegister.js"></script>
+  <script src="../js/classRegister.js"></script>
   <script src="../js/popup.js"></script>
   <script src="../js/config.js"></script>
 </body>

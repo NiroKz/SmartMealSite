@@ -59,6 +59,10 @@ app.use("/stock", stockRoutes);
 const adminRoutes = require("./routes/accessRoutes");
 app.use("/admin", adminRoutes);
 
+const classRoutes = require("./routes/classRoutes");
+app.use("/class", classRoutes);
+
+
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
   console.error(err.stack);
