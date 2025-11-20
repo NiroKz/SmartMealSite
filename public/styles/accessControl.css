@@ -55,6 +55,8 @@ h2 {
 
 .access-control {
     background-color: #F2E4C8;
+    margin-left: 10vw;
+    margin-right: 10vw;
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 30px;
@@ -115,6 +117,8 @@ h2 {
 }
 
 .access-content {
+    margin-left: 10vw;
+    margin-right: 10vw;
     display: flex;
     gap: 20px;
     justify-content: center;
