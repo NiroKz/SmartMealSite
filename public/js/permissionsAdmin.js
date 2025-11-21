@@ -87,3 +87,84 @@ async function savePermissions(id_user, updatedPermissions) {
     alert("❌ Erro ao salvar permissões.");
   }
 }
+
+
+
+
+// Função para gerar relatório de permissões em formato imprimível
+// Abre uma nova janela com apenas a tabela de permissões e chama window.print()
+window.printPermissionsTable = function () {
+  try {
+    const container = document.getElementById('permissionsTableContainer');
+    const table = document.getElementById('permissionsTable');
+    if (!container || !table) {
+      alert('Tabela de permissões não encontrada. Abra a aba Administração antes de gerar o relatório.');
+      return;
+    }
+
+    // Clona o HTML da tabela
+    const tableHtml = container.outerHTML;
+
+    // Minimal CSS to keep table readable in print (copied/derived from main styles)
+    const styles = `
+      <style>
+        body{font-family:Segoe UI, Arial, sans-serif; margin:20px; color:#222}
+        h3{color:#222}
+        table{width:100%; border-collapse:collapse;}
+        thead th{background:#645949;color:#fff;padding:10px;text-align:left}
+        td, th{border:1px solid #eee;padding:8px}
+        tbody tr:nth-child(odd){background:#fbf6ea}
+        tbody tr:hover{background:#f6efe1}
+        td:first-child, th:first-child{text-align:left}
+      </style>`;
+
+    const win = window.open('', '_blank');
+    if (!win) {
+      alert('Não foi possível abrir a janela de impressão. Verifique se o bloqueador de pop-ups está ativo.');
+      return;
+    }
+
+    win.document.open();
+    win.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Relatório de Permissões</title>' + styles + '</head><body>');
+
+    // opcional: adicionar cabeçalho
+    const schoolName = (localStorage.getItem('nomeEscola') || 'SmartMeal');
+    win.document.write('<header style="margin-bottom:12px;">' +
+      '<strong>' + schoolName + '</strong></header>');
+
+    // Escreve apenas a tabela, mas remove a coluna de salvar (última coluna) no HTML string
+    const temp = document.createElement('div');
+    temp.innerHTML = tableHtml;
+    const tbl = temp.querySelector('#permissionsTable');
+    if (tbl) {
+     
+      const theadRow = tbl.querySelector('thead tr');
+      if (theadRow) {
+        const lastTh = theadRow.lastElementChild;
+        if (lastTh) lastTh.remove();
+      }
+    
+      tbl.querySelectorAll('tbody tr').forEach(r => {
+        const lastTd = r.lastElementChild;
+        if (lastTd) lastTd.remove();
+      });
+    }
+
+    win.document.write(temp.innerHTML);
+    win.document.write('</body></html>');
+    win.document.close();
+
+    // Espera o conteúdo carregar antes de imprimir
+    win.focus();
+    setTimeout(() => {
+      try { win.print(); } catch (e) { console.error(e); }
+      // opcionalmente fechar a janela após impressão (nem todos navegadores permitem)
+      // setTimeout(() => win.close(), 500);
+    }, 250);
+  } catch (err) {
+    console.error('Erro ao gerar janela de impressão:', err);
+    alert('Erro ao gerar relatório. Veja o console para mais detalhes.');
+  }
+};
+
+

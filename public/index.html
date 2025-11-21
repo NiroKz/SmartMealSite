@@ -1,115 +1,168 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Meal</title>
-    <link rel="icon" href="img/SmartMealLogo.png" type="image/png">
-    <link rel="shortcut icon" href="images/SmartMealLogoIcon.png">
-    <link rel="stylesheet" href="styles/index.css">
-</head>
-<body>
+<html lang="pt-BR">
 
-    
-<header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartMeal</title>
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+  <header>
     <div class="logo-container">
-      <img src="images/SmartMealLogo.png" alt="Logo Smart Meal">
+      <img src="images/SmartMealLogo.png" alt="SmartMeal logo">
       <h1>Smart Meal</h1>
     </div>
-    <nav>
-      <ul>
-       <li><a href="#home"><b>Home</b></a></li>
-       <li> <a href="html/feedback.html"><b>Feedback</b></a></li>
-       <li>  <a href="html/register.html"><b>Começar agora</b></a></li>
-       <li> <a href="html/prelogin.html"> <b>ENTRAR</b></a></li>
-      </ul>
+    <nav class="index-header">
+      <a href="#Apresentação">Início</a>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#contato">Contate-nos</a>
+      <a href="html/prelogin.html">Entrar</a>
+      <a href="html/register.html">Comece Agora</a>
     </nav>
   </header>
 
-<section class="intro-section" id="home">
-    <div class="intro-text">
-        <h1>Apresentando <br>Smart Meal</h1>
-        <a href="#info"><button><b>SAIBA MAIS</b></button></a>
+  <section class="intro-section" id="Apresentação" aria-label="Apresentação">
+    <div>
+      <h1>Apresentando:</h1><br>
+      <p>Smart Meal</p>
+      <div class="btn-row">
+        <a href="html/register.html" class="btn-primary">Começar</a>
+      </div>
     </div>
     <div class="intro-image">
-        <img src="images/Image1.png" alt="Smart Meal" />
+      <img src="images/Image1.png" alt="Ilustração de refeição" loading="lazy">
     </div>
-</section>
+  </section>
 
-<section class="cards-section carousel">
-    <div class="carousel-track">
-        <div class="card">
-            <img src="images/moderno.png" alt="Receita 1"><br><br>
-            <h3><b>MODERNO</b></h3>
-            <p>Tecnologias <br>Atuais</p>
+  <section class="why" aria-label="Por que escolher">
+    <h2>Por que escolher o <br>Smart Meal?</h2><br>
+    <div class="grid" role="list">
+      <article class="feature-card" role="listitem">
+        <div><img class="icon" src="images/tray.png"></div>
+        <div>
+          <h3>Controle</h3>
+          <p>Algoritmo que te permite fazer um controle sobre tudo que é produzido para você.</p>
         </div>
-        <div class="card">
-            <img src="images/pratico.png" alt="Receita 2"><br><br>
-            <h3><b>PRÁTICO</b></h3>
-            <p>Sistema <br>Unificado</p>
+      </article>
+      <article class="feature-card" role="listitem">
+        <div><img class="icon" src="images/quality-assurance.png"></div>
+        <div>
+          <h3>Relatório</h3>
+          <p>Obtenha seus relatórios prontos para serem impressos com apenas alguns cliques.</p>
         </div>
-        <div class="card">
-            <img src="images/compromisso.png" alt="Receita 3"><br><br>
-            <h3><b>COMPROMISSO</b></h3>
-            <p>Responsabilidade <br>Social</p>
+      </article>
+      <article class="feature-card" role="listitem">
+        <div><img class="icon" src="images/clock.png"></div>
+        <div>
+          <h3>Economia de Tempo</h3>
+          <p>Economize horas de planejamento. Configure uma vez e tenha sugestões para toda semana.</p>
         </div>
+      </article>
+      <article class="feature-card" role="listitem">
+        <div><img class="icon" src="images/graduation-cap.png"></div>
+        <div>
+          <h3>Para Toda Instituição</h3>
+          <p>Qualquer instituto de ensino pode fazer uso deste sistema.</p>
+        </div>
+      </article>
+      <article class="feature-card" role="listitem">
+        <div><img class="icon" src="images/do-not-touch.png"></div>
+        <div>
+          <h3>Segurança</h3>
+          <p>Apenas você e pessoas de sua escolha podem vizualizar e alterar os dados.</p>
+        </div>
+      </article>
+      <article class="feature-card" role="listitem">
+        <div><img class="icon" src="images/computer.png"></div>
+        <div>
+          <h3>Acesso Multiplataforma</h3>
+          <p>Use no seu smartphone, tablet ou computador. Sincronização automática em tempo real.</p>
+        </div>
+      </article>
     </div>
-</section>
+  </section>
 
-<section class="info-section" id="info">
-    <div class="info-text">
-        <h2><b>NOSSA MISSÃO</b></h2>
-        <p>Em ambientes como refeitórios escolares, esse controle permite planejar a quantidade certa de comida
-         a ser preparada, evitando desperdícios e garantindo que todos os alunos sejam atendidos.</p>
+  <section class="how" id="como-funciona" aria-label="Como Funciona">
+    <h2>Como Funciona</h2><br>
+    <div class="steps">
+      <div class="step">
+        <div class="dot"><img src="images/user.png"></div>
+        <h4>Configure o Perfil</h4>
+        <p>Informe suas preferências alimentares, restrições e objetivos de saúde.</p>
+      </div>
+      <div class="step">
+         <div class="dot"><img src="images/add-file.png"></div>
+        <h4>Adicione as informações</h4>
+        <p>Informe suas preferências de refeição, cardápio, alunos e turmas.</p>
+      </div>
+      <div class="step">
+         <div class="dot"><img src="images/statistics.png"></div>
+        <h4>Veja as estatísticas</h4>
+        <p>Nas páginas de controle é possível ver o produzido, quem comeu e quando</p>
+      </div>
+      <div class="step">
+         <div class="dot"><img src="images/transfer-data.png"></div>
+        <h4>Altere quem pode comer</h4>
+        <p>Altere as permissões de alunos conforme suas necessidades para poderem almoçar ou jantar fora do horário atribuido.</p>
+      </div>
     </div>
-    <div class="info-image">
-        <img src="images/Missão.jpg" />
-    </div>
+  </section>
 
-</section>
-
-<section class="contact-section" id="contact">
-  <div class="contact-text">
-    <h2><b>Entre em contato</b></h2>
-    <p>Escolha o canal que preferir:</p>
-
-    <div class="contact">
-          <div class="contact-icon">
-     <a href="https://wa.me/5511943337834" target="_blank">
-        <img src="images/Whatsapp-icon.png" alt="WhatsApp">
-         <span class="contact-label">Whatsapp</span>
-      </a>
-  </div>
-  <div class="contact-icon">
-      <a href="https://instagram.com/smartmeal_ejs" target="_blank">
-        <img src="images/Instagram-icon.png" alt="Instagram">
-        <span class="contact-label">Instagram</span>
-      </a>
-    
-  </div>
-  <div class="contact-icon">
-      <a href="mailto:flavoroverview@gmail.com" target="_blank">
-        <img src="images/Gmail-icon.png" alt="Gmail">
-        <span class="contact-label">Gmail</span>
-      </a>
-  </div>
-</div>
-  </div>
-</section>
-
-<script src="js/script.js"></script>
+  <section class="access" id="contato" aria-label="Chamada para Ação">
+    <h3>Já está cadastrado?</h3>
+    <p>Acesse seus relatórios por aqui!</p>
+    <div>
+      <a href="html/accessControl.html"><button>Controle de Acesso</button></a>
+  </section>
 
   <footer>
-    <div class="footer-container">
-      <p><b>&copy; 2025 Smart Meal</b></p>
-      <nav>
-        <ul>
-          <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-          <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-          <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-        </ul>
-      </nav>
+    <div class="footer-grid">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <img src="images/SmartMealLogo.png" alt="logo" style="width:36px;height:36px;object-fit:contain;">
+          <strong>Smart Meal</strong>
+        </div>
+        <p class="footer-desc">“Oferecer alimentos de qualidade e seguros não são apenas metas a serem alcançadas, 
+          mas sim um compromisso com a saúde e o bem-estar dos consumidores.”<br><b>- Daiane Carrett </b></p>
+      </div>
+
+      <div class="footer-center">
+        <h4 class="footer-section-title">Produto</h4>
+        <nav>
+          <a href="#controle-acesso">Controle de Acesso</a><br>
+          <a href="#estoque">Estoque</a><br>
+          <a href="#refeicoes">Refeições</a>
+        </nav>
+      </div>
+
+      <div class="footer-right">
+        <h4 class="footer-section-title">Contatos</h4>
+        <nav class="footer-contacts">
+          <a href="https://www.instagram.com/smartmeal_ejs/" target="_blank">
+            <img src="images/Instagram-icon.png" alt="Instagram" width="20" height="20">
+            <span>Instagram</span>
+          </a><br>
+          <a href="https://wa.me/5511943337834" target="_blank">
+            <img src="images/Whatsapp-icon.png" alt="WhatsApp" width="20" height="20">
+            <span>WhatsApp</span>
+          </a><br>
+          <a href="https://github.com/NiroKz/SmartMealSite" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.6 7.6 0 018 4.58c.68.003 1.36.092 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </nav>
+      </div>
     </div>
+    <p class="footer-small">© 2025 SmartMeal. Todos os direitos reservados.</p>
   </footer>
+
 </body>
+<script src="js/script.js"></script>
+
 </html>

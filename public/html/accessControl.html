@@ -359,45 +359,6 @@
                 </div> -->
 
                 <h2 class="admin-func-title">Funcionários</h2>
-                <div class="admin-func-flex">
-                    <div class="admin-func-perms">
-                        <button class="perms-toggle" onclick="togglePerms(this)">
-                            <b>Permissões <span class="arrow">&#9650;</span></b>
-                        </button>
-                        <div class="perms-content">
-                            <div><u>Controle de Acesso</u><br>Maria Silva<br>Pedro Quito</div>
-                            <div><u>Controle de Refeições</u><br>Olindo Freitas<br>Maria Bonita<br>Dário Pinto</div>
-                            <div><u>Controle de Estoque</u><br>Maria Silva<br>Pedro Quito</div>
-                            <div><u>Administrador</u><br>Olindo Freitas<br>Maria Bonita<br>Dário Pinto</div>
-                        </div>
-                    </div>
-                    <div class="admin-func-add">
-                        <b>Adicionar Funcionários</b>
-                        <form>
-                            <label>CPF:
-                                <input type="text" placeholder="Digite o CPF">
-                            </label>
-                            <label>Permissão de telas:
-                                <select>
-                                    <option>Controle de Acesso</option>
-                                    <option>Controle de Refeições</option>
-                                    <option>Controle de Estoque</option>
-                                    <option>Administração</option>
-                                </select>
-                            </label>
-                            <div class="admin-func-telas">
-                                <div>Controle de Acesso</div>
-                                <div>Controle de Refeições</div>
-                                <div>Controle de Estoque</div>
-                                <div>Administração</div>
-                            </div>
-                            <div class="buttons" style="margin-top: 14px;">
-                                <button type="submit">Adicionar</button>
-                                <button type="reset">Limpar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
                 <div id="permissionsTableContainer">
                     <h3>Gerenciar Permissões</h3>
                     <table id="permissionsTable">
@@ -420,7 +381,7 @@
                 </div>
 
                 <div class="admin-relatorio-btn-wrap">
-                    <button class="admin-relatorio-btn" onclick="window.print()">Gerar Relatório (PDF)</button>
+                    <button class="admin-relatorio-btn" onclick="printPermissionsTable()">Gerar Relatório (PDF)</button>
                 </div>
             </section>
         </section>
@@ -455,11 +416,6 @@
     <footer>
         <div class="footer-container">
             <p><b>&copy; 2025 Smart Meal</b></p>
-            <nav>
-                <ul>
-                    <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </nav>
         </div>
     </footer>
     <div id="popup" class="popup hidden">
