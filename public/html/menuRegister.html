@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registrar Produção - Smart Meal</title>
+  <title>Registrar Cardápio - Smart Meal</title>
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
   <link rel="stylesheet" href="../styles/studentRegister.css">
   <link rel="stylesheet" href="../styles/popup.css">
@@ -36,28 +36,12 @@
         </div>
 
         <div class="right-panel">
-          <h1>Registrar Produção</h1>
+          <h1>Registrar Cardápio</h1>
 
           <form id="menuForm">
 
-            <label for="id_product">Produto</label>
-            <select id="id_product" name="id_product" required>
-              <option value="">Carregando produtos...</option>
-            </select>
-
-            <label for="id_meal">Ref. Refeição (opcional)</label>
-            <select id="id_meal" name="id_meal">
-              <option value="">Nenhuma</option>
-            </select>
-
-            <label for="date_production">Data da produção</label>
-            <input type="date" id="date_production" name="date_production" required>
-
-            <label for="food">Descrição (food) — até 25 caracteres</label>
-            <input type="text" id="food" name="food" maxlength="25" required>
-
-            <label for="quantity_produced">Quantidade produzida</label>
-            <input type="number" step="0.001" min="0" id="quantity_produced" name="quantity_produced" required>
+            <label for="date_time">Data da produção</label>
+            <input type="date" id="date_time" name="date_time" required>
 
             <label for="meal_type">Tipo de refeição</label>
             <select id="meal_type" name="meal_type" required>
@@ -68,22 +52,20 @@
               <option value="dinner">Janta</option>
             </select>
 
-            <label for="shift">Turno</label>
-            <select id="shift" name="shift" required>
-              <option value="">Selecione</option>
-              <option value="morning">Manhã</option>
-              <option value="evening">Tarde</option>
-              <option value="night">Noite</option>
-            </select>
+            <label for="product_name_1">Nome do alimento 1:</label>
+            <input type="text" id="product_name_1" name="product_name_1" maxlength="40" required>
 
-            <label for="remnant">Remanescente (opcional)</label>
-            <input type="number" step="0.001" min="0" id="remnant" name="remnant">
+            <label for="product_name_2">Nome do alimento 2:</label>
+            <input type="text" id="product_name_2" name="product_name_2" maxlength="40" required>
 
-            <label for="note">Observação (até 40 caracteres)</label>
-            <input type="text" id="note" name="note" maxlength="40">
+            <label for="product_name_3">Nome do alimento 3:</label>
+            <input type="text" id="product_name_3" name="product_name_3" maxlength="40" required>
+
+            <label for="product_name_4">Nome do alimento 4:</label>
+            <input type="text" id="product_name_4" name="product_name_4" maxlength="40" required>
 
             <div style="margin-top:12px;">
-              <button type="submit">Salvar Produção</button>
+              <button type="submit">Salvar Cardápio</button>
               <button type="reset">Limpar</button>
             </div>
           </form>

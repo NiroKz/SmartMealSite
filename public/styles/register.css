@@ -30,7 +30,7 @@ main {
   margin-top: 12%;
   display: flex;
   width: 800px;
-  height: 500px;
+  height: auto;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -56,6 +56,7 @@ main {
 .right-panel {
   background-color: #F2E4C8;
   width: 60%;
+  height: auto;
   padding: 40px;
   display: flex;
   flex-direction: column;

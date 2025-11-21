@@ -270,7 +270,7 @@ body {
     color: rgb(0, 0, 0);
     text-align: center;
     border-radius: 14px;
-    margin: 0 auto 5%;
+    margin: -7% auto 5%;
     max-width: 100%;
 }
 
@@ -294,7 +294,7 @@ body {
     line-height: 1.6;
 }
 
-button {
+.btn-access {
     background-color: #645949;
     border: none;
     color: white;
@@ -309,10 +309,30 @@ button {
 
 }
 
-button:hover {
+.btn-access:hover {
    transform: scale(1.15);
    transition: all 0.3s ease-in-out;
 
+}
+
+.left{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3%;
+}
+
+.center{
+    display: flex;
+     justify-content: center;
+    flex-wrap: wrap;
+    cursor: default;
+}
+
+.right{
+    display: flex;
+     justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Parte do "Footer" */
