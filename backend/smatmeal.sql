@@ -18,7 +18,7 @@ period enum('M', 'T', 'N') NOT NULL, -- manhã, tarde e noite (respectivamente)-
 grade char(1) NOT NULL,
 date_registration date NOT NULL -- dd/mm/yyyy --         
 );
-
+select * from class;
 
 create table IF NOT EXISTS student(
 id_rm int(5) primary key NOT NULL,
@@ -150,6 +150,27 @@ address_road varchar(35) NOT NULL,
 phone char(11) NOT NULL, -- 99 99999-9999 --
 foreign key(id_user) references school_user(id_user)
 );
+
+create table menu(
+date_time datetime NOT NULL,
+meal_type enum('breakfast','lunch', 'snack', 'dinner') NOT NULL,
+product_name_1 varchar(40) NOT NULL,
+product_name_2 varchar(40) NOT NULL,
+product_name_3 varchar(40) NOT NULL,
+product_name_4 varchar(40) NOT NULL
+);
+
+INSERT INTO menu (meal_type, product_name_1, product_name_2, product_name_3, product_name_4) VALUES
+('lunch', 'Arroz', 'Feijão', 'Carne', 'Salada'),
+('lunch', 'Frango', 'Arroz', 'Feijão', 'Salada'),
+('lunch', 'Atum', 'Carne', 'Arroz', 'Salada'),
+('dinner', 'Frango', 'Salada', 'Arroz', 'Feijão'),
+('dinner', 'Carne', 'Arroz', 'Feijão', 'Atum'),
+('snack', 'Arroz', 'Salada', 'Atum', 'Frango'),
+('snack', 'Feijão', 'Frango', 'Salada', 'Carne'),
+('breakfast', 'Arroz', 'Feijão', 'Salada', 'Atum'),
+('breakfast', 'Frango', 'Arroz', 'Feijão', 'Salada'),
+('dinner', 'Carne', 'Atum', 'Arroz','Frango');
 
 
 -- logica do filtro
