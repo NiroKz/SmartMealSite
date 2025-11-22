@@ -401,3 +401,40 @@ input[type="text"] {
   }
 
 }
+/* Coluna extra para tipo de refeição */
+.menu-row {
+    display: grid;
+    grid-template-columns: 180px repeat(5, 1fr); /* 1 coluna fixa + 5 iguais */
+}
+
+.menu-type-header {
+    background: #decba9;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 10px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.menu-type-col {
+    background: #f3e8d1;
+    padding: 20px 10px;
+    text-align: center;
+    font-weight: bold;
+    border-right: 1px solid rgba(0,0,0,0.08);
+}
+
+.menu-row.header {
+    background: linear-gradient(180deg, #f7ead2 0%, #f2e7cf 100%);
+}
+
+.menu-row.header .menu-day {
+    font-weight: bold;
+    padding: 20px 10px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 700px) {
+    .menu-row {
+        grid-template-columns: 120px repeat(5, 1fr);
+    }
+}

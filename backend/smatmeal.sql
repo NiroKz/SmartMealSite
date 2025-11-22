@@ -680,7 +680,7 @@ INSERT INTO access (id_user, access_stock, access_production, access_accesses, a
 -- (11, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE);
 
 INSERT INTO access (id_user, access_stock, access_production, access_accesses, access_student_register, access_reports, access_student_perm, access_class_register) VALUES
-(12, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE);
+(21, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE);
 
 select * from access;
 
