@@ -16,11 +16,11 @@
             <img src="../images/SmartMealLogo.png">
             <h1>Smart Meal</h1>
         </div>
-            <nav>
-      <ul>
-        <li><a href="../index.html"><b>Home</b></a></li>
-      </ul>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="../index.html"><b>Home</b></a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
@@ -30,47 +30,9 @@
 
             <!-- Grid do Cardápio -->
             <div class="menu-grid">
-                <div class="menu-header">
-                    <div class="menu-day">Segunda</div>
-                    <div class="menu-day">Terça</div>
-                    <div class="menu-day">Quarta</div>
-                    <div class="menu-day">Quinta</div>
-                    <div class="menu-day">Sexta</div>
-                </div>
-
-                <!-- Exemplo de linhas - substituir por conteúdo dinâmico se necessário -->
-                <div class="menu-row">
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                </div>
-
-                <div class="menu-row">
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Feijoada. (evento raro)</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                </div>
-
-                <div class="menu-row">
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Strogonoff.</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                </div>
-
-                <div class="menu-row">
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                    <div class="menu-cell">Arroz, Feijão, Carne Moída e Salada de Alface</div>
-                </div>
+                <div id="menu-table"></div>
             </div>
+
             <div style="margin-top:12px;">
                 <button onclick="window.print()" id="download_button">Imprimir Cardápio</button>
             </div>
@@ -90,6 +52,7 @@
 
     <!-- Script JS -->
     <script src="../js/filter.js"></script>
+    <script src="../js/menuWeek.js"></script>
     <script src="../js/config.js"></script>
 </body>
 
