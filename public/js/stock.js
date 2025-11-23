@@ -50,9 +50,35 @@ document.addEventListener("DOMContentLoaded", () => {
       style: "currency",
       currency: "BRL",
     })}</td>
+    <td>
+    <button class="delete-btn" data-id="${item.id_stock}">
+       Excluir
+    </button>
+    </td>
   `;
 
         tbody.appendChild(row);
+        // Ativar botões de excluir
+        const deleteButton = row.querySelector(".delete-btn");
+
+        deleteButton.addEventListener("click", async () => {
+          const id = deleteButton.dataset.id; // sempre o id do próprio botão
+          console.log("ID recebido do banco:", item.id_stock);
+            try {
+            const res = await fetch(`/stock/${id}`, { method: "DELETE" });
+            const result = await res.json();
+
+            if (res.ok) {
+              showPopup("Sucesso", "Registro excluído com sucesso!");
+              loadStockTable();
+            } else {
+              showPopup("Erro", result.error || "Erro ao excluir.");
+            }
+          } catch (err) {
+            console.error(err);
+            showPopup("Erro", "Erro de comunicação com o servidor.");
+          }
+        });
       });
     } catch (error) {
       console.error("Erro ao carregar estoque:", error);

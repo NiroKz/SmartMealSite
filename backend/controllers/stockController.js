@@ -48,7 +48,26 @@ async function registerStock(req, res) {
   }
 }
 
+async function deleteStock(req, res) {
+  try {
+    const { id } = req.params;
+
+    const result = await stockModel.deleteStockById(id);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Registro não encontrado." });
+    }
+
+    return res.status(200).json({ message: "Registro excluído com sucesso." });
+  } catch (err) {
+    console.error("Erro ao excluir:", err);
+    return res.status(500).json({ error: "Erro ao excluir registro." });
+  }
+}
+
+
 module.exports = {
   getStock,
   registerStock,
+  deleteStock
 };

@@ -36,7 +36,7 @@ async function getAllStock() {
 
     FROM stock s
     JOIN product p ON s.id_product = p.id_product
-    ORDER BY s.date_movement DESC
+    ORDER BY p.product_name ASC, s.date_movement DESC
   `;
 
   const [results] = await db.execute(query);
@@ -117,7 +117,16 @@ async function addStock(data) {
   return { message: "Produto adicionado com sucesso" };
 }
 
+async function deleteStockById(id) {
+  const [result] = await db.execute(
+    "DELETE FROM stock WHERE id_stock = ?",
+    [id]
+  );
+  return result;
+}
+
 module.exports = {
   getAllStock,
   addStock,
+  deleteStockById
 };
