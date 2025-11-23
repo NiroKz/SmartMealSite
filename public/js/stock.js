@@ -5,28 +5,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModal = document.getElementById("closeModal");
 
   // -----------------------------
-  // 🔹 Função para carregar e popular a tabela
+  // 🔹 Carregar tabela de estoque
   // -----------------------------
   async function loadStockTable() {
     try {
       const response = await fetch(`/stock`);
       const stockData = await response.json();
 
-      tbody.innerHTML = ""; // limpa tabela antes de renderizar
+      tbody.innerHTML = ""; // limpa tabela
 
       stockData.forEach((item) => {
         const row = document.createElement("tr");
 
-        const quantity_movement_formated = Number(item.quantity_movement);
+        // BADGES
+        let badges = "";
+
+        if (item.low_stock == 1) {
+          badges += ` <span class="badge-stock badge-low-stock">⚠ Baixa quantidade</span>`;
+        }
+
+        if (item.near_expiration == 1) {
+          badges += ` <span class="badge-stock badge-expiration">⏳ Vencendo</span>`;
+        }
+
+        // CORES NA LINHA
+        if (item.low_stock == 1) {
+          row.classList.add("low-stock-row");
+        }
+
+        if (item.near_expiration == 1) {
+          row.classList.add("near-expiration-row");
+        }
+
+        const qty = Number(item.quantity_movement);
+
         row.innerHTML = `
-          <td>${item.batch}</td>
-          <td>${item.date_movement}</td>
-          <td>${quantity_movement_formated.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} ${item.unit}</td>
-          <td>${item.validity}</td>
-          <td>${item.product_name}</td>
-          <td>${Number(item.price).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</td>
-          <td>${item.origin}</td>
-        `;
+        <td>${item.product_name} ${badges}</td>
+    <td>${item.batch || "-"}</td>
+    <td>${qty.toLocaleString("pt-BR")} ${item.unit}</td>
+    <td>${item.date_movement}</td>
+    <td>${item.validity || "-"}</td>
+    <td>${item.origin}</td>
+    <td>${Number(item.price).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    })}</td>
+  `;
 
         tbody.appendChild(row);
       });
@@ -36,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -----------------------------
-  // 🔹 Modal (abrir/fechar)
+  // 🔹 Abrir / fechar modal
   // -----------------------------
   openModal.addEventListener("click", () => {
     modal.style.display = "block";
@@ -47,52 +71,64 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -----------------------------
-  // 🔹 Salvar novo produto
+  // 🔹 Salvar movimentação de estoque
   // -----------------------------
-  document.getElementById("productForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+  document
+    .getElementById("productForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const productName = document.getElementById("productName").value;
-    const productQuantity = parseFloat(document.getElementById("productQuantity").value);
-    const productUnit = document.getElementById("productUnit").value;
-    const productBatch = document.getElementById("productBatch").value;
-    const productValidity = document.getElementById("productValidity").value;
-    const productDestination = document.getElementById("productDestination").value;
-    const productOrigin = document.getElementById("productOrigin").value;
-    const productPrice = document.getElementById("productPrice").value;
+      const name = document.getElementById("productName").value;
+      const quantity = parseFloat(
+        document.getElementById("productQuantity").value
+      );
+      const unit = document.getElementById("productUnit").value;
 
-    try {
-      const res = await fetch("/stock/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          productName,
-          productQuantity,
-          productUnit,
-          batch: productBatch,
-          validity: productValidity,
-          destination: productDestination,
-          origin: productOrigin,
-          price: productPrice,
-        }),
-      });
+      const batch = document.getElementById("productBatch").value;
+      const validity = document.getElementById("productValidity").value;
+      const destination = document.getElementById("productDestination").value;
+      const origin = document.getElementById("productOrigin").value;
+      const price = parseFloat(document.getElementById("productPrice").value);
 
-      if (res.ok) {
-        showPopup("Sucesso!", "Produto atualizado com sucesso!");
-        modal.style.display = "none";
-
-        // 🔄 Atualiza tabela automaticamente após salvar
-        loadStockTable();
-      } else {
-        showPopup("Erro", "Erro ao salvar produto.");
+      // Validação simples
+      if (isNaN(quantity)) {
+        showPopup("Erro", "Quantidade inválida!");
+        return;
       }
-    } catch (err) {
-      console.error("Erro ao salvar produto:", err);
-    }
-  });
+
+      try {
+        const res = await fetch("/stock", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            quantity,
+            unit,
+            batch,
+            validity,
+            destination,
+            origin,
+            price,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          showPopup("Sucesso!", result.message || "Movimentação registrada!");
+          modal.style.display = "none";
+          loadStockTable();
+        } else {
+          showPopup("Erro", result.error || "Erro ao registrar movimentação.");
+        }
+      } catch (err) {
+        console.error("Erro ao salvar produto:", err);
+        showPopup("Erro", "Erro ao se comunicar com o servidor.");
+      }
+    });
 
   // -----------------------------
-  // 🔹 Carregamento inicial da tabela
+  // 🔹 Inicializa tabela ao carregar página
   // -----------------------------
   loadStockTable();
 });

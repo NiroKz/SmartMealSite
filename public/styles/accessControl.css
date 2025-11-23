@@ -366,6 +366,32 @@ h2 {
     font-size: 1.1rem;
     color: #222;
 }
+/* Cores de linhas críticas */
+.low-stock-row {
+  background-color: #ffdddd !important; /* vermelho claro */
+}
+
+.near-expiration-row {
+  background-color: #fff3cd !important; /* amarelo claro */
+}
+
+/* Badges dentro da coluna de nome */
+.badge-stock {
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.badge-low-stock {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.badge-expiration {
+  background-color: #f39c12;
+  color: white;
+}
 
 .estoque-table-container {
     display: flex;
