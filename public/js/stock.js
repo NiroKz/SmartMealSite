@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteButton.addEventListener("click", async () => {
           const id = deleteButton.dataset.id; // sempre o id do próprio botão
           console.log("ID recebido do banco:", item.id_stock);
-            try {
+          try {
             const res = await fetch(`/stock/${id}`, { method: "DELETE" });
             const result = await res.json();
 
@@ -152,6 +152,13 @@ document.addEventListener("DOMContentLoaded", () => {
         showPopup("Erro", "Erro ao se comunicar com o servidor.");
       }
     });
+
+  document.querySelectorAll(".reload-stock").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      console.log("Botão reload-stock clicado!");
+      loadStockTable();
+    });
+  });
 
   // -----------------------------
   // 🔹 Inicializa tabela ao carregar página
