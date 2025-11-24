@@ -698,3 +698,47 @@ INSERT INTO school (id_user, school_name, address_road, phone) VALUES
 
 
 select * from school; 
+
+
+UPDATE stock
+  SET quantity_movement = quantity_movement - 5
+  WHERE id_product = 1;
+  
+  select * from product;
+  
+  select * from stock;
+  
+  
+  SELECT 
+      s.id_stock,
+      s.batch,
+      DATE_FORMAT(s.date_movement, '%d/%m/%Y') AS date_movement,
+      s.quantity_movement,
+      DATE_FORMAT(s.validity, '%d/%m/%Y') AS validity,
+      s.destination,
+      s.price,
+      s.origin,
+      
+
+      p.product_name,
+      p.unit,
+      p.current_quantity,
+      p.minimum_quantity,
+      p.id_product,
+
+      
+      CASE 
+        WHEN p.current_quantity < 15 THEN 1
+        ELSE 0
+      END AS low_stock,
+
+      
+      CASE 
+        WHEN s.validity <= CURDATE() THEN 1
+        WHEN s.validity <= DATE_ADD(CURDATE(), INTERVAL 3 DAY) THEN 1
+        ELSE 0
+      END AS near_expiration
+
+    FROM stock s
+    JOIN product p ON s.id_product = p.id_product
+    ORDER BY p.product_name ASC, s.date_movement DESC;
