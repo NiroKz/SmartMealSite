@@ -1,5 +1,8 @@
 // controllers/productionController.js
-const { insertProduction, fetchProductionByDate } = require("../models/productionModel");
+const {
+  insertProduction,
+  fetchProductionByDate,
+} = require("../models/productionModel");
 const db = require("../config/db");
 
 // Função para obter data atual do servidor (YYYY-MM-DD)
@@ -8,7 +11,7 @@ function getCurrentDateFormatted() {
   return now.toISOString().split("T")[0];
 }
 
-// Helper: busca o nome do produto (product_name) dado o id_product
+// Helper: busca o nome do produto
 async function getProductName(id_product) {
   const [results] = await db.execute(
     "SELECT product_name FROM product WHERE id_product = ?",
@@ -17,14 +20,21 @@ async function getProductName(id_product) {
   return results.length > 0 ? results[0].product_name : null;
 }
 
-// Registrar produção
+// 🔥 REGISTRAR PRODUÇÃO + BAIXAR ESTOQUE AUTOMATICAMENTE
 const registerProduction = async (req, res) => {
+  let connection;
+
   try {
     const { items, mealType, shift, notes } = req.body;
 
     if (!items || items.length === 0 || !mealType || !shift) {
       return res.status(400).json({ message: "Campos obrigatórios ausentes." });
     }
+
+    // Criar conexão exclusiva para transação
+    connection = await db.getConnection();
+
+    await connection.beginTransaction();
 
     for (const item of items) {
       const productName = (await getProductName(item.id_product)) || "";
@@ -39,17 +49,60 @@ const registerProduction = async (req, res) => {
         notes: notes || "",
       };
 
-      await insertProduction(productionData);
+      // 1) Inserir produção
+      await connection.execute(
+        `
+        INSERT INTO production
+        (date_production, id_product, food, quantity_produced, meal_type, shift, remnant, note)
+        VALUES (CURDATE(), ?, ?, ?, ?, ?, ?, ?)
+        `,
+        [
+          productionData.id_product,
+          productionData.food,
+          productionData.quantityProduced,
+          productionData.mealType,
+          productionData.shift,
+          productionData.leftovers,
+          productionData.notes,
+        ]
+      );
+
+      console.log("🔎 DEBUG:", {
+        id_product: item.id_product,
+        quantityProduced: item.quantityProduced,
+      });
+
+      // 2) Baixa do estoque na tabela product
+      await connection.execute(
+        `
+  UPDATE stock
+  SET quantity_movement = quantity_movement - ?
+  WHERE id_product = ?;
+  `,
+        [item.quantityProduced, item.id_product]
+      );
     }
 
-    res.status(201).json({ message: "Produção registrada com sucesso." });
+    await connection.commit();
+
+    // Liberar conexão
+    connection.release();
+
+    res.status(201).json({
+      message: "Produção registrada e estoque atualizado com sucesso.",
+    });
   } catch (err) {
-    console.error("Erro em registerProduction:", err);
+    console.error("❌ Erro em registerProduction:", err);
+
+    if (connection) {
+      await connection.rollback();
+      connection.release();
+    }
+
     res.status(500).json({ message: "Erro interno do servidor." });
   }
 };
 
-// Consultar produção por data
 const getProductionByDate = async (req, res) => {
   try {
     const date = req.query.date || getCurrentDateFormatted();
@@ -61,7 +114,6 @@ const getProductionByDate = async (req, res) => {
   }
 };
 
-// Consultar produção por turno do dia
 const getProductionSummaryByShift = async (req, res) => {
   try {
     const date = req.query.date || getCurrentDateFormatted();
