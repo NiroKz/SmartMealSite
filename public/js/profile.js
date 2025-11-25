@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+  function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("is_user_admin");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("usuario");
+  window.location.href = "/html/index.html";
+}
+
   const nameInput = document.getElementById("user_name");
   const cpfInput = document.getElementById("cpf");
   const emailInput = document.getElementById("email");
   const phoneInput = document.getElementById("phone");
-  const adminInput = document.getElementById("admin");
 
   const editBtn = document.getElementById("editBtn");
   const saveBtn = document.getElementById("saveBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
 
   // Pegar ID do usuário salvo no login
   const userId = localStorage.getItem("userId");
@@ -40,6 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     saveBtn.style.display = "inline-block";
   });
 
+  logoutBtn.addEventListener("click", () => {
+    logout();
+  });
+
   // 🔹 3. Salvar mudanças
   document
     .getElementById("profileForm")
@@ -71,3 +83,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 });
+
