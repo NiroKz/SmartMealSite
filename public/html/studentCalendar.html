@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../images/SmartMealLogo.png">
+            <h1>Smart Meal</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html"><b>Home</b></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="filter-container" id="menu">
+            <button class="filter-close" onclick="window.history.back()">&times;</button>
+
+            <h2 class="calendar-title">Cardápio do Mês</h2>
+
+            <div class="calendar-header">
+                <button id="prevMonth">&#10094;</button>
+                <h3 id="currentMonth"></h3>
+                <button id="nextMonth">&#10095;</button>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+    </main>
+
+    <br><br>
+    <footer>
+        <div class="footer-container">
+            <p><b>&copy; 2025 Smart Meal</b></p>
+            <nav>
+                <ul>
+                    <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Script JS -->
+    <script src="../js/config.js"></script>
+    <script src="../js/studentAccessMonth.js"></script>
+</body>
+
+</html>
