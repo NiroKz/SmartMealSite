@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Alunos</title>
+  <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
+  <link rel="stylesheet" href="../styles/studentRegister.css">
+  <link rel="stylesheet" href="../styles/studentManager.css">
+  <link rel="stylesheet" href="../styles/popup.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- <header>
+    <div class="logo-container">
+      <img src="../images/SmartMealLogo.png">
+      <h1>Smart Meal</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="./feedback.html"><b>Feedback</b></a></li>
+        <li><a href="../index.html"><b>Home</b></a></li>
+        <li><a href="../html/accessControl.html"><b>Voltar</b></a></li>
+      </ul>
+    </nav>
+  </header> -->
+  <h1>Gerenciar Alunos</h1>
+
+  <!-- 🔍 Barra de pesquisa -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar por nome ou RM">
+    <button id="searchBtn">Buscar</button>
+    <button id="addBtn">Adicionar Aluno</button>
+  </div>
+
+  <!-- 🟦 Onde aparecerão os cards dos alunos -->
+  <div id="resultsContainer" class="results"></div>
+
+  <!-- 🟩 Modal de adicionar/editar -->
+  <div id="studentModal" class="modal hidden">
+    <div class="modal-content">
+
+      <h2 id="modalTitle">Adicionar Aluno</h2>
+      <span id="closeModal" class="close">&times;</span>
+
+      <form id="studentForm">
+
+        <input type="hidden" id="edit_id_student">
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required maxlength="60">
+
+        <label for="RM">RM:</label>
+        <input type="text" id="RM" name="RM" required maxlength="5">
+
+        <label for="Course">Curso:</label>
+        <select id="Course" required>
+          <option value="">Selecione o curso</option>
+        </select>
+
+        <label for="Year">Ano:</label>
+        <select id="Year" required>
+          <option value="">Selecione o ano</option>
+        </select>
+
+        <label for="Period">Período:</label>
+        <select id="Period" required>
+          <option value="">Selecione o período</option>
+        </select>
+
+        <label for="student_legal_guardian">Responsável:</label>
+        <input type="text" id="student_legal_guardian" required maxlength="60">
+
+        <label for="food_restriction">Restrição Alimentar:</label>
+        <textarea id="food_restriction" maxlength="30" rows="3"></textarea>
+
+        <button type="submit" id="submitBtn">Salvar</button>
+      </form>
+
+    </div>
+  </div>
+  <!--<footer>
+    <div class="footer-container">
+      <p><b>&copy; 2025 Smart Meal</b></p>
+      <nav>
+        <ul>
+          <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer> -->
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h2 id="popup-title">Título</h2>
+      <p id="popup-message">Mensagem do sistema...</p>
+    </div>
+  </div>
+  <script src="../js/student.js"></script>
+  <script src="../js/popup.js"></script>
+  <script src="../js/config.js"></script>
+</body>
+
+</html>
