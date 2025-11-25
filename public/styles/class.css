@@ -1,0 +1,118 @@
+.page-wrapper {
+  width: 90%;
+  margin: auto;
+}
+
+.btn-add {
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.class-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.class-card {
+  width: 260px;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.class-card h3 {
+  margin-top: 0;
+}
+
+.card-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-edit {
+  background: #ffc107;
+  padding: 6px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background: #dc3545;
+  padding: 6px 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+/* Modal básico */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  background: #00a86b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.class-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.class-card {
+  width: 260px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.class-card button {
+  margin-right: 10px;
+}

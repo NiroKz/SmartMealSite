@@ -1,24 +1,38 @@
-// models/classModel.js
-
 const db = require("../config/db");
 
-// Função para inserir uma nova turma no banco.
-async function createClass(course, period, grade, date_registration) {
-  const sql = `
-    INSERT INTO class (course, period, grade, date_registration) 
-    VALUES (?, ?, ?, ?)
-  `;
+async function createClass(course, period, grade) {
+  await db.execute(
+    `INSERT INTO class (course, period, grade, date_registration)
+     VALUES (?, ?, ?, CURDATE())`,
+    [course, period, grade]
+  );
+}
 
-  const values = [course, period, grade, date_registration];
+async function getAllClasses() {
+  const [rows] = await db.execute(`SELECT * FROM class`);
+  return rows;
+}
 
-  try {
-    const [result] = await db.execute(sql, values);
-    return result; // retorna o resultado para o controller
-  } catch (error) {
-    throw error;
-  }
+async function getClassById(id) {
+  const [rows] = await db.execute(`SELECT * FROM class WHERE id_class = ?`, [id]);
+  return rows[0];
+}
+
+async function updateClass(id, course, period, grade) {
+  await db.execute(
+    `UPDATE class SET course=?, period=?, grade=? WHERE id_class=?`,
+    [course, period, grade, id]
+  );
+}
+
+async function deleteClass(id) {
+  await db.execute(`DELETE FROM class WHERE id_class = ?`, [id]);
 }
 
 module.exports = {
-  createClass
+  createClass,
+  getAllClasses,
+  getClassById,
+  updateClass,
+  deleteClass
 };

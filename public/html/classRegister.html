@@ -7,6 +7,7 @@
   <title>Registrar Sala - Smart Meal</title>
   <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
   <link rel="stylesheet" href="../styles/studentRegister.css">
+  <link rel="stylesheet" href="../styles/class.css">
   <link rel="stylesheet" href="../styles/popup.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
@@ -28,45 +29,47 @@
 
   <main>
     <div class="page-wrapper">
-      <div class="container">
-        <div class="left-panel">
-          <div class="logo">
-            <img src="../images/SmartMealLogo.png" alt="Smart Meal Logo" style="width:100%; height:100%;">
-          </div>
-        </div>
+      <h1>Gerenciar Turmas</h1>
 
-        <div class="right-panel">
-          <h1>Faça o Registro da turma:</h1>
-          <form id="studentForm">
+      <button id="openModal" class="btn-add">Nova Turma</button>
 
-            <label for="course">Nome do curso:</label>
-            <input type="text" id="nome" name="course" required maxlength="60">
-
-            <label for="period">Período:</label>
-            <select id="period" required>
-              <option value="">Selecione o período</option>
-              <option value="M">Manhã</option>
-              <option value="T">Tarde</option>
-              <option value="N">Noite</option>
-            </select>
-
-            <label for="grade">Ano:</label>
-            <select id="grade" required>
-              <option value="">Selecione o ano</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-
-            <label for="date_registration">Data de registro:</label>
-            <input type="date" required>
-
-            <button type="submit">Cadastrar</button>
-          </form>
-        </div>
-      </div>
+      <div id="classContainer" class="class-container"></div>
     </div>
   </main>
+
+  <!-- Modal -->
+  <div id="classModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2 id="modalTitle">Cadastrar Turma</h2>
+
+      <form id="classForm">
+
+        <input type="hidden" id="classId">
+
+        <label>Nome do curso (máx. 4 letras):</label>
+        <input type="text" id="nome" required maxlength="4">
+
+        <label>Período:</label>
+        <select id="period" required>
+          <option value="">Selecione</option>
+          <option value="M">Manhã</option>
+          <option value="T">Tarde</option>
+          <option value="N">Noite</option>
+        </select>
+
+        <label>Ano:</label>
+        <select id="grade" required>
+          <option value="">Selecione</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+
+        <button type="submit" id="submitBtn">Salvar</button>
+      </form>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-container">
@@ -86,7 +89,7 @@
       <p id="popup-message">Mensagem do sistema...</p>
     </div>
   </div>
-  <script src="../js/classRegister.js"></script>
+  <script src="../js/class.js"></script>
   <script src="../js/popup.js"></script>
   <script src="../js/config.js"></script>
 </body>
