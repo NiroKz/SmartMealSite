@@ -1,3 +1,16 @@
+const form = document.getElementById("formBox");
+const telefoneInput = document.getElementById("schoolPhone");
+
+// Funções de formatação de telefone e CPF (mantidas do seu código)
+telefoneInput.addEventListener("input", function (e) {
+  let input = e.target.value.replace(/\D/g, "").slice(0, 11);
+  let formatted = "";
+  if (input.length > 0) formatted += "(" + input.substring(0, 2);
+  if (input.length >= 3) formatted += ") " + input.substring(2, 7);
+  if (input.length >= 8) formatted += "-" + input.substring(7, 11);
+  e.target.value = formatted;
+});
+
 const addSchoolBtn = document.getElementById("addSchoolBtn");
 const formBox = document.getElementById("formBox");
 const saveSchoolBtn = document.getElementById("saveSchoolBtn");
