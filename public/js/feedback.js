@@ -2,63 +2,97 @@
 console.log("Script feedback.js carregado!");
 
 let feedbackChart = null;
+let allFeedbacks = [];   // Todos feedbacks vindos do backend
+let visibleCount = 10;   // Quantos feedbacks mostrar por vez
 
-// Função para carregar e renderizar os feedbacks + atualizar o gráfico
+// Função principal: busca feedbacks no servidor
 async function loadFeedbacks() {
   try {
     const response = await fetch(`/feedback/getAllFeedbacks`);
-    const feedbacks = await response.json();
-    console.log("Feedbacks recebidos:", feedbacks);
+    allFeedbacks = await response.json();
+    console.log("Feedbacks recebidos:", allFeedbacks);
 
-    const container = document.querySelector(".feedbacks-container");
-    if (!container) {
-      console.error("Container de feedbacks não encontrado!");
-      return;
-    }
+    visibleCount = 10; // Reinicia contagem sempre que abrir a aba
+    renderFeedbacks(); // Renderiza só os primeiros
 
-    container.innerHTML = ""; // limpa cards antigos
-
-    // Montar cards visuais
-    feedbacks.forEach((fb) => {
-      const cardClass =
-        fb.rating === "good"
-          ? "positive"
-          : fb.rating === "bad"
-          ? "negative"
-          : "neutral";
-      const emoji =
-        fb.rating === "good" ? "😍" : fb.rating === "bad" ? "😞" : "😐";
-
-      const card = document.createElement("div");
-      card.classList.add("feedback-card", cardClass);
-      card.innerHTML = `
-        <div class="feedback-header">
-          <h3>${fb.student_name}</h3>
-          <span class="icon">${emoji}</span>
-        </div>
-        <p>${fb.comment}</p>
-        <span class="feedback-date">${new Date(
-          fb.date_feedback
-        ).toLocaleDateString("pt-BR")}</span>
-      `;
-      container.appendChild(card);
-    });
-
-    // Contagem dos tipos de feedback
-    const totalGood = feedbacks.filter((f) => f.rating === "good").length;
-    const totalMid = feedbacks.filter((f) => f.rating === "mid").length;
-    const totalBad = feedbacks.filter((f) => f.rating === "bad").length;
-
-    // Atualizar gráfico de pizza
-    setTimeout(() => {
-      updateFeedbackChart(totalGood, totalMid, totalBad);
-    }, 300);
+    updateChartData(); // Atualiza gráfico
   } catch (error) {
     console.error("Erro ao carregar feedbacks:", error);
   }
 }
 
-// Função para atualizar o gráfico
+
+// Função que desenha os cards visíveis
+function renderFeedbacks() {
+  const container = document.querySelector(".feedbacks-container");
+  const loadMoreBtn = document.querySelector("#loadMoreFeedbacks");
+
+  if (!container) {
+    console.error("Container de feedbacks não encontrado!");
+    return;
+  }
+
+  container.innerHTML = ""; // limpar área  
+
+  const feedbacksToShow = allFeedbacks.slice(0, visibleCount);
+
+  feedbacksToShow.forEach((fb) => {
+    const cardClass =
+      fb.rating === "good"
+        ? "positive"
+        : fb.rating === "bad"
+        ? "negative"
+        : "neutral";
+
+    const emoji =
+      fb.rating === "good" ? "😍" : fb.rating === "bad" ? "😞" : "😐";
+
+    const card = document.createElement("div");
+    card.classList.add("feedback-card", cardClass);
+
+    card.innerHTML = `
+      <div class="feedback-header">
+        <h3>${fb.student_name}</h3>
+        <span class="icon">${emoji}</span>
+      </div>
+      <p>${fb.comment}</p>
+      <span class="feedback-date">
+        ${new Date(fb.date_feedback).toLocaleDateString("pt-BR")}
+      </span>
+    `;
+
+    container.appendChild(card);
+  });
+
+  // Exibir / ocultar botão "Carregar mais"
+  if (visibleCount >= allFeedbacks.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "block";
+  }
+}
+
+
+// Botão "Carregar mais"
+function loadMore() {
+  visibleCount += 10;
+  renderFeedbacks();
+}
+
+
+// Atualiza o gráfico
+function updateChartData() {
+  const totalGood = allFeedbacks.filter((f) => f.rating === "good").length;
+  const totalMid = allFeedbacks.filter((f) => f.rating === "mid").length;
+  const totalBad = allFeedbacks.filter((f) => f.rating === "bad").length;
+
+  setTimeout(() => {
+    updateFeedbackChart(totalGood, totalMid, totalBad);
+  }, 300);
+}
+
+
+// Função original do gráfico (mantida)
 function updateFeedbackChart(good, mid, bad) {
   console.log("Atualizando gráfico...", good, mid, bad);
   const ctx = document.getElementById("feedbackChart");
@@ -68,7 +102,6 @@ function updateFeedbackChart(good, mid, bad) {
     return;
   }
 
-  // Se já existir um gráfico, destrói antes de criar outro
   if (feedbackChart) {
     feedbackChart.destroy();
   }
@@ -80,7 +113,7 @@ function updateFeedbackChart(good, mid, bad) {
       datasets: [
         {
           data: [good, mid, bad],
-          backgroundColor: ["#4CAF50", "#FFC107", "#F44336"], // cores verde, amarelo, vermelho
+          backgroundColor: ["#4CAF50", "#FFC107", "#F44336"],
           borderColor: "#F2E4C8",
           borderWidth: 1,
         },
@@ -93,22 +126,23 @@ function updateFeedbackChart(good, mid, bad) {
           position: "right",
           labels: { color: "#333", font: { size: 14 } },
         },
-       datalabels: {
-                    color: "#f6f6f6ff",
-                    font: { size: 14 },
-                    formatter: (value, ctx) => {
-                        const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                        const percentage = ((value / sum) * 100).toFixed(0) + "%";
-                        return percentage;
-                    }
-                }
-            }
-        },
-        plugins: [ChartDataLabels] // ativando plugin
-    });
+        datalabels: {
+          color: "#f6f6f6ff",
+          font: { size: 14 },
+          formatter: (value, ctx) => {
+            const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+            const percentage = ((value / sum) * 100).toFixed(0) + "%";
+            return percentage;
+          }
+        }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
 }
 
-// Envio de feedback
+
+// Envio de feedback (mantido)
 async function submitFeedback(e) {
   e.preventDefault();
 
@@ -118,18 +152,12 @@ async function submitFeedback(e) {
 
   const ratingSlider = document.getElementById("rating");
   let ratingValue;
+
   switch (ratingSlider.value) {
-    case "1":
-      ratingValue = "bad";
-      break;
-    case "2":
-      ratingValue = "mid";
-      break;
-    case "3":
-      ratingValue = "good";
-      break;
-    default:
-      ratingValue = "mid";
+    case "1": ratingValue = "bad"; break;
+    case "2": ratingValue = "mid"; break;
+    case "3": ratingValue = "good"; break;
+    default: ratingValue = "mid";
   }
 
   try {
@@ -150,22 +178,18 @@ async function submitFeedback(e) {
     showPopup("Sucesso!", "Feedback enviado com sucesso!");
     document.getElementById("feedbackForm").reset();
 
-    // Atualiza feedbacks e gráfico
-    loadFeedbacks();
+    loadFeedbacks(); // recarrega com paginação
   } catch (error) {
     console.error("Erro ao enviar feedback:", error);
     showPopup("Erro", "Erro ao enviar feedback.");
   }
 }
 
+
 // Eventos
-// Envio de feedback
-document
-  .getElementById("feedbackForm")
-  ?.addEventListener("submit", submitFeedback);
-// Carrega feedbacks quando a aba de feedbacks for aberta
-document
-  .querySelector("#feedbacks-tab-button")
-  ?.addEventListener("click", loadFeedbacks);
-// Carrega feedbacks assim que a página é carregada (fallback)
+document.getElementById("feedbackForm")?.addEventListener("submit", submitFeedback);
+document.querySelector("#feedbacks-tab-button")?.addEventListener("click", loadFeedbacks);
 window.addEventListener("DOMContentLoaded", loadFeedbacks);
+
+// Evento do botão carregar mais
+document.querySelector("#loadMoreFeedbacks")?.addEventListener("click", loadMore);

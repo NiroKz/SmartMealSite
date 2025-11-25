@@ -53,4 +53,27 @@ const getAllFeedbacks = async (req, res) => {
   }
 };
 
-module.exports = { submitFeedback, getAllFeedbacks };
+// Buscar feedbacks paginados
+const getFeedbacksPaginated = async (req, res) => {
+  try {
+    let limit = parseInt(req.query.limit) || 10;
+    let offset = parseInt(req.query.offset) || 0;
+
+    const sql = `
+      SELECT f.id_feedback, s.student_name, f.date_feedback, f.rating, f.comment
+      FROM feedback f
+      JOIN student s ON f.id_rm = s.id_rm
+      ORDER BY f.date_feedback DESC
+      LIMIT ? OFFSET ?
+    `;
+
+    const [rows] = await db.execute(sql, [limit, offset]);
+    return res.status(200).json(rows);
+
+  } catch (err) {
+    console.error("Erro ao buscar feedbacks paginados:", err);
+    return res.status(500).json({ message: "Erro ao buscar feedbacks." });
+  }
+};
+
+module.exports = { submitFeedback, getAllFeedbacks, getFeedbacksPaginated };
