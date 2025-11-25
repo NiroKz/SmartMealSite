@@ -81,10 +81,12 @@ async function savePermissions(id_user, updatedPermissions) {
       }
     );
     if (!response.ok) throw new Error("Erro ao atualizar permissões");
-    alert("✅ Permissões atualizadas com sucesso!");
+    //alert("✅ Permissões atualizadas com sucesso!");
+    showPopup("Sucesso", " Permissões atualizadas com sucesso!");
   } catch (error) {
     console.error("Erro ao salvar permissões:", error);
-    alert("❌ Erro ao salvar permissões.");
+    //alert("❌ Erro ao salvar permissões.");
+    showPopup("Erro","Erro ao salvar permissões.");
   }
 }
 

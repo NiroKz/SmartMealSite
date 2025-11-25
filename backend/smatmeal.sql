@@ -33,7 +33,7 @@ food_restriction varchar (30),
 foreign key(id_class) references class(id_class),
 foreign key(id_biometrics) references biometrics(id_biometrics)
 );
-
+select * from student;
 
 create table IF NOT EXISTS meal (
 id_meal int auto_increment primary key NOT NULL,
