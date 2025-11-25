@@ -31,7 +31,8 @@ saveSchoolBtn.addEventListener("click", async (e) => {
   const token = localStorage.getItem("token");
 
   if (!nome_escola || !rua_endereco || !fone) {
-    alert("Por favor, preencha todos os campos!");
+    //alert("Por favor, preencha todos os campos!");
+    showPopup("Por favor, preencha todos os campos!");
     return;
   }
 
@@ -63,11 +64,13 @@ saveSchoolBtn.addEventListener("click", async (e) => {
       // Fecha o formulário
       formBox.style.display = "none";
     } else {
-      alert(data.erro || "Erro ao cadastrar escola.");
+      //alert(data.erro || "Erro ao cadastrar escola.");
+      showPopup("Erro",data.erro || "Erro ao cadastrar escola.");
     }
   } catch (err) {
     console.error(err);
-    alert("Erro na conexão com o servidor.");
+    //alert("Erro na conexão com o servidor.");
+    showPopup("Erro","Erro na conexão com o servidor.");
   }
 });
 

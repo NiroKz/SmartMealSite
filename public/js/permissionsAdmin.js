@@ -100,7 +100,8 @@ window.printPermissionsTable = function () {
     const container = document.getElementById('permissionsTableContainer');
     const table = document.getElementById('permissionsTable');
     if (!container || !table) {
-      alert('Tabela de permissões não encontrada. Abra a aba Administração antes de gerar o relatório.');
+      //alert('Tabela de permissões não encontrada. Abra a aba Administração antes de gerar o relatório.');
+      showPopup("Erro", "Tabela de permissões não encontrada.");
       return;
     }
 
@@ -122,7 +123,8 @@ window.printPermissionsTable = function () {
 
     const win = window.open('', '_blank');
     if (!win) {
-      alert('Não foi possível abrir a janela de impressão. Verifique se o bloqueador de pop-ups está ativo.');
+      //alert('Não foi possível abrir a janela de impressão. Verifique se o bloqueador de pop-ups está ativo.');
+      showPopup("Erro","Não foi possível abrir a janela de impressão.");
       return;
     }
 
@@ -165,7 +167,8 @@ window.printPermissionsTable = function () {
     }, 250);
   } catch (err) {
     console.error('Erro ao gerar janela de impressão:', err);
-    alert('Erro ao gerar relatório. Veja o console para mais detalhes.');
+    //alert('Erro ao gerar relatório. Veja o console para mais detalhes.');
+    showPopup("Erro", "Erro ao gerar relatório.");
   }
 };
 

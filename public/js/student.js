@@ -197,7 +197,8 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (!selectedClass) {
-      alert("Selecione curso/ano/período.");
+      //alert("Selecione curso/ano/período.");
+      showPopup("Erro", "Selecione curso/ano/período.");
       return;
     }
 
@@ -227,11 +228,13 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (res.ok) {
-        alert(editMode ? "Aluno atualizado!" : "Aluno cadastrado!");
+        //alert(editMode ? "Aluno atualizado!" : "Aluno cadastrado!");
+        showPopup("Sucesso", editMode ? "Aluno atualizado!" : "Aluno cadastrado!");
         modal.classList.add("hidden");
         searchStudents();
       } else {
-        alert("Erro ao salvar aluno.");
+        //alert("Erro ao salvar aluno.");
+        showPopup("Erro","Erro ao salvar aluno.");
       }
     } catch (err) {
       console.error(err);
@@ -250,10 +253,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(`/student/delete/${id}`, { method: "DELETE" });
 
       if (res.ok) {
-        alert("Aluno excluído!");
+        //alert("Aluno excluído!");
+        showPopup("Sucesso","Aluno excluído!");
         searchStudents();
       } else {
-        alert("Erro ao excluir aluno.");
+        //alert("Erro ao excluir aluno.");
+        showPopup("Erro","Erro ao excluir aluno.");
       }
     } catch (err) {
       console.error(err);

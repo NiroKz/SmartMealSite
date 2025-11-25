@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
 
   if (!userId) {
-    alert("Erro: usuário não identificado.");
+    //alert("Erro: usuário não identificado.");
+    showPopup("Erro","Usuário não identificado.");
     window.location.href = "/html/prelogin.html";
     return;
   }
