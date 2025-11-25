@@ -65,6 +65,9 @@ app.use("/class", classRoutes);
 const menuRoutes = require("./routes/menuRoutes");
 app.use("/menu", menuRoutes);
 
+const userRoutes = require("./routes/userRoutes");
+app.use("/user", userRoutes);
+
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

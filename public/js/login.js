@@ -46,18 +46,24 @@ form.addEventListener("submit", async (e) => {
     }
 
     const data = await response.json();
+
+    // Salva token e admin
     sessionStorage.setItem("token", data.token);
     sessionStorage.setItem("is_user_admin", data.usuario.is_user_admin);
 
+    // Salva usuário inteiro no localStorage
+    localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
-    // 🔹 Salva usuário + permissões no localStorage
-    localStorage.setItem("usuario", JSON.stringify({ ...data.usuario, permissions: data.permissions }));
+    // Salva SOMENTE o id do usuário
+    localStorage.setItem("userId", data.usuario.id_user);
 
     showPopup("Bem-vindo!", "Login realizado com sucesso.");
     console.log("Login bem-sucedido:", data);
+
     setTimeout(() => {
       window.location.href = "/html/hall.html";
     }, 2500);
+
   } catch (error) {
     console.error("Erro ao conectar:", error);
     showPopup("Erro de conexão", "Não foi possível se conectar ao servidor.");
