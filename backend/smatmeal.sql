@@ -413,6 +413,22 @@ join meal
 on student.id_rm= meal.id_rm 
 where student.id_rm = 10014;
 
+SELECT 
+        c.course,
+        COUNT(m.id_meal) AS total_students
+      FROM meal m
+      JOIN student s ON m.id_rm = s.id_rm
+      JOIN class c ON s.id_class = c.id_class
+      WHERE DATE(m.date_time) = '2025-11-24'
+      GROUP BY c.course;
+
+SELECT c.course, COUNT(s.id_rm) AS total_students
+      FROM student s
+      JOIN class c ON s.id_class = c.id_class
+      GROUP BY c.course;
+
+INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
+(55555, '2025-11-25 11:40:00', 'lunch', 'allowed');
 
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (10000, '2025-11-24 11:40:00', 'lunch', 'allowed'),
@@ -469,6 +485,16 @@ INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
 (10049, '2025-11-22 12:10:00', 'lunch', 'allowed');
 
 SELECT * FROM meal WHERE DATE(date_time) = CURDATE();
+
+SELECT 
+      DATE(date_time) AS day,
+      COUNT(DISTINCT id_rm) AS total,
+      SUM(CASE WHEN type_meal = 'lunch' THEN 1 ELSE 0 END) AS lunch_count,
+      SUM(CASE WHEN type_meal = 'dinner' THEN 1 ELSE 0 END) AS dinner_count
+    FROM meal
+    WHERE YEAR(date_time) = 2025 AND MONTH(date_time) = 11
+    GROUP BY DATE(date_time)
+    ORDER BY DATE(date_time);
 
 -- Refeições para teste de filtro
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES

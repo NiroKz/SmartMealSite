@@ -4,28 +4,21 @@ async function createGraphic() {
     const dados = await response.json();
 
     // Extrair labels e dados do resultado
-    const labels = dados.map((item) => item.course);
-    const totalAlunos = dados.map((item) => item.total_students);
+    const labels = dados.map(item => item.course);
+    const totalAlunos = dados.map(item => item.total_students);
 
-    const cores = {
-      INFO: "rgba(255, 99, 132, 0.6)",
-      MEC: "rgba(54, 162, 235, 0.6)",
-      ADM: "rgba(255, 206, 86, 0.6)",
-      PTEC: "rgba(75, 192, 192, 0.6)",
-      AUTO: "rgba(153, 102, 255, 0.6)",
-    };
+    // Gerar cores automáticas
+    const bgColors = generateColors(labels.length);
+    const borderColors = bgColors.map(c =>
+      c.replace("60%", "40%") // borda um pouco mais escura
+    );
 
-    const bgColors = labels.map((curso) => cores[curso] || "gray");
-    const borderColors = bgColors.map((c) => c.replace("0.6", "1"));
-
-    const ctx = document
-      .getElementById("graphicStudents")
-      .getContext("2d");
+    const ctx = document.getElementById("graphicStudents").getContext("2d");
 
     new Chart(ctx, {
-      type: "polarArea", // gráfico de barras
+      type: "polarArea",
       data: {
-        labels: labels,
+        labels,
         datasets: [
           {
             label: "Número de alunos",
@@ -42,5 +35,13 @@ async function createGraphic() {
   }
 }
 
-// Chama a função para criar o gráfico assim que a página carregar
+function generateColors(qtd) {
+  const colors = [];
+  for (let i = 0; i < qtd; i++) {
+    const hue = Math.floor((360 / qtd) * i);
+    colors.push(`hsl(${hue}, 55%, 75%)`);
+  }
+  return colors;
+}
+
 window.onload = createGraphic;
