@@ -8,29 +8,42 @@
     <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
     <link rel="stylesheet" href="../styles/accessControl.css">
     <link rel="stylesheet" href="../styles/popup.css">
-    <link rel="stylesheet" href="../styles/profile.css" />
+      <link rel="stylesheet" href="../styles/studentRegister.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 
 <body>
-    <!-- <header>
-        <div class="logo-container">
-            <img src="../images/SmartMealLogo.png">
-            <h1>Smart Meal</h1>
+    <body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/SmartMealLogo.png" alt="logo">
+      <h1>Smart Meal</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="./feedback.html"><b>Feedback</b></a></li>
+        <li><a href="../index.html"><b>Home</b></a></li>
+        <li><a href="../html/accessControl.html"><b>Voltar</b></a></li>
+        <li><a href="./profile.html"><b><i class="fas fa-user"></i></b></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-wrapper">
+      <div class="container">
+        <div class="left-panel">
+          <div class="logo">
+            <img src="../images/SmartMealLogo.png" alt="Smart Meal Logo" style="width:100%; height:100%;">
+          </div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="../index.html"><b>Home</b></a></li>
-            </ul>
-        </nav>
-    </header> -->
-        <div class="container">
 
-            <h1>Meu Perfil</h1>
+        <div class="right-panel">
+          <h1>Meu Perfil</h1>
 
-            <form id="profileForm">
+          <form id="profileForm">
 
                 <label>Nome:</label>
                 <input type="text" id="user_name" readonly />
@@ -53,11 +66,23 @@
             </form>
 
         </div>
-        <footer>
-            <div class="footer-container">
-                <p><b>&copy; 2025 Smart Meal</b></p>
-            </div>
-        </footer>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p><b>&copy; 2025 Smart Meal</b></p>
+    </div>
+  </footer>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h2 id="popup-title">Título</h2>
+      <p id="popup-message">Mensagem do sistema...</p>
+    </div>
+  </div>
 
         <div id="popup" class="popup hidden">
             <div class="popup-content">
