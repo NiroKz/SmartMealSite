@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <!-- <header>
+<header>
     <div class="logo-container">
       <img src="../images/SmartMealLogo.png">
       <h1>Smart Meal</h1>
@@ -23,18 +23,20 @@
         <li><a href="./feedback.html"><b>Feedback</b></a></li>
         <li><a href="../index.html"><b>Home</b></a></li>
         <li><a href="../html/accessControl.html"><b>Voltar</b></a></li>
+        <li><a href="./profile.html"><b><i class="fas fa-user"></i></b></a></li>
       </ul>
     </nav>
-  </header> -->
-  <h1>Gerenciar Alunos</h1>
+  </header><br><br><br><br><br><br><br><br><br>
+            <section class="access-control">
+                  <h1>Gerenciar Alunos</h1>
 
-  <!-- 🔍 Barra de pesquisa -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar por nome ou RM">
+<!-- 🔍 Barra de pesquisa -->
+  <div class="search-container"><br>
+    <input type="text" id="searchInput" placeholder="Buscar por nome ou RM"><br>
     <button id="searchBtn">Buscar</button>
     <button id="addBtn">Adicionar Aluno</button>
   </div>
-
+<br><br>
   <!-- 🟦 Onde aparecerão os cards dos alunos -->
   <div id="resultsContainer" class="results"></div>
 
@@ -46,7 +48,6 @@
       <span id="closeModal" class="close">&times;</span>
 
       <form id="studentForm">
-
         <input type="hidden" id="edit_id_student">
 
         <label for="nome">Nome:</label>
@@ -81,17 +82,13 @@
 
     </div>
   </div>
-  <!--<footer>
+            </section>
+
+
+  
     <div class="footer-container">
       <p><b>&copy; 2025 Smart Meal</b></p>
-      <nav>
-        <ul>
-          <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-          <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-        </ul>
-      </nav>
     </div>
-  </footer> -->
   <div id="popup" class="popup hidden">
     <div class="popup-content">
       <span class="close-btn" onclick="closePopup()">&times;</span>

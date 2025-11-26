@@ -22,8 +22,6 @@
         <nav>
             <ul>
                 <li><a href="../index.html"><b>Home</b></a></li>
-            </ul>
-            <ul>
                 <li><a href="./profile.html"><b><i class="fas fa-user"></i></b></a></li>
             </ul>
         </nav>
@@ -57,7 +55,8 @@
                 onclick="irParaSecao('estoque')">Controle de Estoque</a>
             <a href="#" id="btn-admin" class="tab" data-btn="btn-admin" data-target="admin-section"
                 onclick="irParaSecao('admin')">Administração</a>
-            <a href="#" id="btn-feedback" class="tab" onclick="irParaSecao('feedbacks')">Feedbacks</a>
+            <a href="#" id="btn-feedback" class="tab" 
+                onclick="irParaSecao('feedbacks')">Feedbacks</a>
             <!-- <a href="../html/mealRegister.html" id="btn-foodmenu" class="tab">Adicionar Refeição</a> -->
         </section>
 
@@ -132,8 +131,8 @@
 
         <section id="refeicao" class="tab-section">
             <section class="access-control">
-                <h2>Cardápio</h2>
-                <a href="../html/menuRegister.html" id="btn-foodmenu" class="tab">Adicionar Cardápio</a>
+                <h2>Cardápio</h2><br>
+                <a href="../html/menuRegister.html" id="btn-foodmenu"  class="btn-control">Adicionar Cardápio</a><br><br>
                 <!-- arrumar aq tigas-->
                 <br>
                 <h2>Controle de Refeições</h2>
@@ -366,9 +365,9 @@
                         <label>Telefone:<input type="text"></label>
                     </div>
                 </div> -->
-                <h2 class="admin-func-title">Gerenciar</h2>
-                <a href="../html/classRegister.html" id="btn-foodmenu" class="tab">Adicionar Turma</a>
-                <a href="../html/student.html" id="btn-student-register" class="tab">Adicionar Aluno</a>
+                <h2 class="admin-func-title">Gerenciar</h2><br>
+                <a href="../html/classRegister.html" id="btn-foodmenu" class="btn-control"> Turma</a>
+                <a href="../html/student.html" id="btn-student-register" class="btn-control"> Aluno</a><br>
                 <!-- arrumar aq tigas-->
                 <h2 class="admin-func-title">Funcionários</h2>
                 <div id="permissionsTableContainer">
@@ -406,7 +405,8 @@
                 <h2>Feedbacks</h2>
                 <div class="feedbacks-container">
                 </div>
-                <button id="loadMoreFeedbacks" class="load-more-btn">Carregar mais</button>
+                <br>
+                <button id="loadMoreFeedbacks" class="load-more-btn btn-control">Carregar mais</button>
             </section>
         </section>
 
