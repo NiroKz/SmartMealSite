@@ -189,7 +189,7 @@ WHERE c.course = 'INFO'
   AND c.period = 'M'
   AND c.grade = '1';
 
-/*
+
 SELECT 
     s.id_rm, 
     s.student_name, 
@@ -203,8 +203,8 @@ LEFT JOIN meal m
     AND DATE(m.date_time) = CURDATE()
 WHERE c.course = ?
   AND c.`period` = ?
-  AND c.`grade` = ?; */
-  /*
+  AND c.`grade` = ?; 
+
   -- logica do filtro com anabolizante
 SELECT
         s.id_rm,
@@ -272,7 +272,7 @@ SELECT
     LEFT JOIN meal m ON m.id_rm = s.id_rm AND DATE(m.date_time) = '2025-09-18'
     WHERE c.course = 'INFO' AND c.period = 'T' AND c.grade = '3'
     GROUP BY s.id_rm, s.student_name
-    ORDER BY s.student_name */
+    ORDER BY s.student_name;
     
     INSERT INTO biometrics (hash_digital1, hash_digital2, hash_digital3) VALUES
 ('abc123def456ghi789jkl000aaa111bbb222ccc333ddd444eee555fff666', 'eee999zzz888yyy777xxx666www555vvv444uuu333ttt222sss111rrr000', '123abc456def789ghi000jkl111mno222pqr333stu444vwx555yz666abc'),
@@ -337,7 +337,36 @@ INSERT INTO class (course, period, grade, date_registration) VALUES
 select * from class;
 
 
+SELECT
+        s.id_rm,
+        s.student_name,
+        MAX(CASE WHEN m.type_meal = 'lunch' THEN m.date_time END) AS lunch_time,
+        MAX(CASE WHEN m.type_meal = 'dinner' THEN m.date_time END) AS dinner_time,
+        GROUP_CONCAT(
+          CASE WHEN m.type_meal = 'lunch' AND m.id_meal <> (
+            SELECT MIN(m2.id_meal)
+            FROM meal m2
+            WHERE m2.id_rm = s.id_rm AND DATE(m2.date_time) = CURDATE() AND m2.type_meal = 'lunch'
+          ) THEN DATE_FORMAT(m.date_time, '%H:%i') END
+          SEPARATOR ', '
+        ) AS lunch_repeat_times,
+        GROUP_CONCAT(
+          CASE WHEN m.type_meal = 'dinner' AND m.id_meal <> (
+            SELECT MIN(m2.id_meal)
+            FROM meal m2
+            WHERE m2.id_rm = s.id_rm AND DATE(m2.date_time) = CURDATE() AND m2.type_meal = 'dinner'
+          ) THEN DATE_FORMAT(m.date_time, '%H:%i') END
+          SEPARATOR ', '
+        ) AS dinner_repeat_times
+      FROM student s
+      JOIN class c ON s.id_class = c.id_class
+      LEFT JOIN meal m ON m.id_rm = s.id_rm AND DATE(m.date_time) = CURDATE()
+      WHERE c.course = 'PTEC' AND c.period = 'T' AND c.grade = '3'
+      GROUP BY s.id_rm, s.student_name
+      ORDER BY s.student_name;
+
 -- Inserindo 50 alunos fictícios
+-- joxa
 INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_authorization, date_authorization, student_legal_guardian, food_restriction) VALUES
 (10000, 1, NULL, 'Lucas Pereira', TRUE, '2025-02-01', 'Carlos Pereira', 'Nenhuma'),
 (10001, 2, NULL, 'Ana Oliveira', TRUE, '2025-02-02', 'Maria Oliveira', 'Glúten'),
@@ -355,7 +384,6 @@ INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_au
 (10012, 13, NULL, 'Rodrigo Nunes', TRUE, '2025-02-13', 'Sônia Nunes', 'Lactose'),
 (10013, 14, NULL, 'Beatriz Ribeiro', TRUE, '2025-02-14', 'Hugo Ribeiro', 'Nenhuma'),
 (10014, 15, NULL, 'Matheus Carvalho', FALSE, '2025-02-15', 'Fernanda Carvalho', 'Ovos'),
-
 (10015, 1, NULL, 'Carolina Mendes', TRUE, '2025-02-16', 'Marcelo Mendes', 'Nenhuma'),
 (10016, 2, NULL, 'Thiago Lopes', FALSE, '2025-02-17', 'Patrícia Lopes', 'Glúten'),
 (10017, 3, NULL, 'Larissa Gomes', TRUE, '2025-02-18', 'José Gomes', 'Nenhuma'),
@@ -367,7 +395,6 @@ INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_au
 (10022, 8, NULL, 'Bruno Farias', FALSE, '2025-02-23', 'Henrique Farias', 'Nenhuma'),
 (10023, 9, NULL, 'Débora Silveira', TRUE, '2025-02-24', 'Luciana Silveira', 'Ovos'),
 (10024, 10, NULL, 'Gustavo Araújo', TRUE, '2025-02-25', 'Paulo Araújo', 'Nenhuma'),
-
 (10025, 11, NULL, 'Amanda Melo', TRUE, '2025-02-26', 'Silvia Melo', 'Glúten'),
 (10026, 12, NULL, 'Ricardo Monteiro', FALSE, '2025-02-27', 'Carlos Monteiro', 'Nenhuma'),
 (10027, 13, NULL, 'Juliana Batista', TRUE, '2025-02-28', 'Marta Batista', 'Nenhuma'),
@@ -379,7 +406,6 @@ INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_au
 (10032, 3, NULL, 'Felipe Cardoso', FALSE, '2025-03-05', 'Roberta Cardoso', 'Ovos'),
 (10033, 4, NULL, 'Natália Vieira', TRUE, '2025-03-06', 'Fernando Vieira', 'Nenhuma'),
 (10034, 5, NULL, 'Henrique Souza', TRUE, '2025-03-07', 'Carla Souza', 'Glúten'),
-
 (10035, 6, NULL, 'Alice Ribeiro', TRUE, '2025-03-11', 'Antônio Ribeiro', 'Nenhuma'),
 (10036, 7, NULL, 'Rafaela Lopes', FALSE, '2025-03-09', 'Daniel Lopes', 'Nenhuma'),
 (10037, 8, NULL, 'Caio Martins', TRUE, '2025-03-10', 'Tatiane Martins', 'Nenhuma'),
@@ -391,7 +417,6 @@ INSERT INTO student (id_rm, id_class, id_biometrics, student_name, biometrics_au
 (10042, 13, NULL, 'Tatiane Silva', FALSE, '2025-03-15', 'Mário Silva', 'Nenhuma'),
 (10043, 14, NULL, 'Paulo Henrique', TRUE, '2025-03-16', 'Sueli Henrique', 'Nenhuma'),
 (10044, 15, NULL, 'Letícia Rocha', TRUE, '2025-03-17', 'Márcio Rocha', 'Nenhuma'),
-
 (10045, 1, NULL, 'Vinícius Almeida', TRUE, '2025-03-18', 'Renata Almeida', 'Ovos'),
 (10046, 2, NULL, 'Carla Mendes', FALSE, '2025-03-19', 'Bruno Mendes', 'Nenhuma'),
 (10047, 3, NULL, 'Eduarda Castro', TRUE, '2025-03-20', 'Sérgio Castro', 'Glúten'),
@@ -419,7 +444,7 @@ SELECT
       FROM meal m
       JOIN student s ON m.id_rm = s.id_rm
       JOIN class c ON s.id_class = c.id_class
-      WHERE DATE(m.date_time) = '2025-11-24'
+      WHERE DATE(m.date_time) = '2025-11-25'
       GROUP BY c.course;
 
 SELECT c.course, COUNT(s.id_rm) AS total_students
@@ -428,61 +453,87 @@ SELECT c.course, COUNT(s.id_rm) AS total_students
       GROUP BY c.course;
 
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
-(55555, '2025-11-25 11:40:00', 'lunch', 'allowed');
+(55555, '2025-11-26 11:40:00', 'dinner', 'allowed');
 
+-- joxa
 INSERT INTO meal (id_rm, date_time, type_meal, access_status) VALUES
-(10000, '2025-11-24 11:40:00', 'lunch', 'allowed'),
-(10001, '2025-11-24 17:50:00', 'dinner', 'allowed'),
-(10002, '2025-11-24 11:45:00', 'lunch', 'blocked'),
-(10003, '2025-11-24 18:00:00', 'dinner', 'exception'),
-(10004, '2025-11-24 11:50:00', 'lunch', 'allowed'),
-(10005, '2025-11-24 17:55:00', 'dinner', 'allowed'),
-(10006, '2025-11-24 12:00:00', 'lunch', 'allowed'),
-(10007, '2025-11-24 18:05:00', 'dinner', 'blocked'),
-(10008, '2025-11-24 12:10:00', 'lunch', 'allowed'),
-(10009, '2025-11-24 18:10:00', 'dinner', 'exception'),
-(10010, '2025-11-24 18:10:00', 'dinner', 'exception'),
+(10000, '2025-11-26 11:40:00', 'lunch', 'allowed'),
+(10001, '2025-11-26 17:50:00', 'dinner', 'allowed'),
+(10002, '2025-11-26 11:45:00', 'lunch', 'blocked'),
+(10003, '2025-11-26 18:00:00', 'dinner', 'exception'),
+(10004, '2025-11-26 11:50:00', 'lunch', 'allowed'),
+(10005, '2025-11-26 17:55:00', 'dinner', 'allowed'),
+(10006, '2025-11-26 12:00:00', 'lunch', 'allowed'),
+(10007, '2025-11-26 18:05:00', 'dinner', 'blocked'),
+(10008, '2025-11-26 12:10:00', 'lunch', 'allowed'),
+(10009, '2025-11-26 18:10:00', 'dinner', 'exception'),
+(10010, '2025-11-26 18:10:00', 'dinner', 'exception'),
 
-(10011, '2025-11-23 11:40:00', 'lunch', 'allowed'),
-(10012, '2025-11-23 17:50:00', 'dinner', 'allowed'),
-(10013, '2025-11-23 11:45:00', 'lunch', 'blocked'),
-(10014, '2025-11-23 18:00:00', 'dinner', 'exception'),
-(10015, '2025-11-23 11:50:00', 'lunch', 'allowed'),
-(10016, '2025-11-23 17:55:00', 'dinner', 'allowed'),
-(10017, '2025-11-23 12:00:00', 'lunch', 'allowed'),
-(10018, '2025-11-23 18:05:00', 'dinner', 'blocked'),
-(10019, '2025-11-23 12:10:00', 'lunch', 'allowed'),
-(10020, '2025-11-23 18:10:00', 'dinner', 'exception'),
+(10011, '2025-11-26 11:40:00', 'lunch', 'allowed'),
+(10012, '2025-11-26 17:50:00', 'dinner', 'allowed'),
+(10013, '2025-11-26 11:45:00', 'lunch', 'blocked'),
+(10014, '2025-11-26 18:00:00', 'dinner', 'exception'),
+(10015, '2025-11-26 11:50:00', 'lunch', 'allowed'),
+(10016, '2025-11-26 17:55:00', 'dinner', 'allowed'),
+(10017, '2025-11-26 12:00:00', 'lunch', 'allowed'),
+(10018, '2025-11-26 18:05:00', 'dinner', 'blocked'),
+(10019, '2025-11-26 12:10:00', 'lunch', 'allowed'),
+(10020, '2025-11-26 18:10:00', 'dinner', 'exception'),
 
-(10021, '2025-11-22 11:40:00', 'lunch', 'allowed'),
-(10022, '2025-11-22 17:50:00', 'dinner', 'allowed'),
-(10023, '2025-11-22 11:45:00', 'lunch', 'blocked'),
-(10024, '2025-11-22 18:00:00', 'dinner', 'exception'),
-(10025, '2025-11-22 11:50:00', 'lunch', 'allowed'),
-(10026, '2025-11-22 17:55:00', 'dinner', 'allowed'),
-(10027, '2025-11-22 12:00:00', 'lunch', 'allowed'),
-(10028, '2025-11-22 18:05:00', 'dinner', 'blocked'),
-(10029, '2025-11-22 12:10:00', 'lunch', 'allowed'),
-(10030, '2025-11-22 18:10:00', 'dinner', 'exception'),
-(10031, '2025-11-22 11:40:00', 'lunch', 'allowed'),
-(10032, '2025-11-22 17:50:00', 'dinner', 'allowed'),
-(10033, '2025-11-22 11:45:00', 'lunch', 'blocked'),
-(10034, '2025-11-22 18:00:00', 'dinner', 'exception'),
-(10035, '2025-11-22 11:50:00', 'lunch', 'allowed'),
-(10036, '2025-11-22 17:55:00', 'dinner', 'allowed'),
-(10037, '2025-11-22 12:00:00', 'lunch', 'allowed'),
-(10038, '2025-11-22 18:05:00', 'dinner', 'blocked'),
-(10039, '2025-11-22 12:10:00', 'lunch', 'allowed'),
-(10040, '2025-11-22 18:10:00', 'dinner', 'exception'),
-(10041, '2025-11-22 11:40:00', 'lunch', 'allowed'),
-(10042, '2025-11-22 17:50:00', 'dinner', 'allowed'),
-(10043, '2025-11-22 11:45:00', 'lunch', 'blocked'),
-(10044, '2025-11-22 18:00:00', 'dinner', 'exception'),
-(10045, '2025-11-22 11:50:00', 'lunch', 'allowed'),
-(10046, '2025-11-22 17:55:00', 'dinner', 'allowed'),
-(10047, '2025-11-22 12:00:00', 'lunch', 'allowed'),
-(10048, '2025-11-22 18:05:00', 'dinner', 'blocked'),
-(10049, '2025-11-22 12:10:00', 'lunch', 'allowed');
+(10021, '2025-11-26 11:40:00', 'lunch', 'allowed'),
+(10022, '2025-11-26 17:50:00', 'dinner', 'allowed'),
+(10023, '2025-11-26 11:45:00', 'lunch', 'blocked'),
+(10024, '2025-11-26 18:00:00', 'dinner', 'exception'),
+(10025, '2025-11-26 11:50:00', 'lunch', 'allowed'),
+(10026, '2025-11-26 17:55:00', 'dinner', 'allowed'),
+(10027, '2025-11-26 12:00:00', 'lunch', 'allowed'),
+(10028, '2025-11-26 18:05:00', 'dinner', 'blocked'),
+(10029, '2025-11-26 12:10:00', 'lunch', 'allowed'),
+(10030, '2025-11-26 18:10:00', 'dinner', 'exception'),
+
+(10031, '2025-11-26 11:40:00', 'lunch', 'allowed'),
+(10032, '2025-11-26 17:50:00', 'dinner', 'allowed'),
+(10033, '2025-11-26 11:45:00', 'lunch', 'blocked'),
+(10034, '2025-11-26 18:00:00', 'dinner', 'exception'),
+(10035, '2025-11-26 11:50:00', 'lunch', 'allowed'),
+(10036, '2025-11-26 17:55:00', 'dinner', 'allowed'),
+(10037, '2025-11-26 12:00:00', 'lunch', 'allowed'),
+(10038, '2025-11-26 18:05:00', 'dinner', 'blocked'),
+(10039, '2025-11-26 12:10:00', 'lunch', 'allowed'),
+
+(10040, '2025-11-26 18:10:00', 'dinner', 'exception'),
+(10041, '2025-11-26 11:40:00', 'lunch', 'allowed'),
+(10042, '2025-11-26 17:50:00', 'dinner', 'allowed'),
+(10043, '2025-11-26 11:45:00', 'lunch', 'blocked'),
+(10044, '2025-11-26 18:00:00', 'dinner', 'exception'),
+(10045, '2025-11-26 11:50:00', 'lunch', 'allowed'),
+(10046, '2025-11-26 17:55:00', 'dinner', 'allowed'),
+(10047, '2025-11-26 12:00:00', 'lunch', 'allowed'),
+(10048, '2025-11-26 18:05:00', 'dinner', 'blocked'),
+(10049, '2025-11-26 12:10:00', 'lunch', 'allowed');
+
+-- joxa (fazer de outras comidas e outros dias
+select * from product;
+INSERT INTO production
+    (date_production, id_product, food, quantity_produced, meal_type, shift, remnant, note)
+    VALUES (CURDATE(), 1, 'Arroz', '60', 'lunch', 'morning', '8', 'Nada');
+    
+SELECT 
+      p.id_product,
+      COALESCE(p.food, pr.product_name) AS product_name,
+      p.food,
+      p.quantity_produced AS produced,  
+      p.remnant AS remnant,             
+      p.meal_type,
+      p.shift,
+      p.note
+    FROM production p
+    LEFT JOIN product pr ON pr.id_product = p.id_product
+    WHERE p.date_production = CURDATE();
+
+
+
+
 
 SELECT * FROM meal WHERE DATE(date_time) = CURDATE();
 
