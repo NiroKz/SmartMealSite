@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
       form.reset();
     } catch (error) {
       console.error(error);
-      alert("Error sending liberation request.");
+      //alert("Error sending liberation request.");
+      showPopup("Erro", "Error sao enviar liberação.");
     }
   };
 
@@ -63,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
   tempButton.addEventListener("click", () => {
     const data = getFormData();
     if (data.meals.length === 0) {
-      alert("Please select at least one meal.");
+      //alert("Please select at least one meal.");
+      showPopup("Erro","Selecione pelo menos uma refeição.");
       return;
     }
     sendLiberationRequest("temporary", data);
@@ -74,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     const data = getFormData();
     if (data.meals.length === 0) {
-      alert("Please select at least one meal.");
+      showPopup("Erro","Selecione pelo menos uma refeição.");
+      //alert("Please select at least one meal.");
       return;
     }
     sendLiberationRequest("permanent", data);

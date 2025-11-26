@@ -32,21 +32,13 @@ const AccessModel = {
     SET 
       access_stock = ?,
       access_production = ?,
-      access_accesses = ?,
-      access_student_register = ?,
-      access_reports = ?,
-      access_student_perm = ?,
-      access_class_register = ?
+      access_accesses = ?
     WHERE id_user = ?;
   `,
       [
         permissions.access_stock,
         permissions.access_production,
         permissions.access_accesses,
-        permissions.access_student_register,
-        permissions.access_reports,
-        permissions.access_student_perm,
-        permissions.access_class_register,
         id_user,
       ]
     );

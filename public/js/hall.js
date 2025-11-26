@@ -28,10 +28,11 @@ saveSchoolBtn.addEventListener("click", async (e) => {
   const nome_escola = document.getElementById("schoolName").value.trim();
   const rua_endereco = document.getElementById("schoolAddress").value.trim();
   const fone = document.getElementById("schoolPhone").value.trim();
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   if (!nome_escola || !rua_endereco || !fone) {
-    alert("Por favor, preencha todos os campos!");
+    //alert("Por favor, preencha todos os campos!");
+    showPopup("Por favor, preencha todos os campos!");
     return;
   }
 
@@ -63,11 +64,13 @@ saveSchoolBtn.addEventListener("click", async (e) => {
       // Fecha o formulário
       formBox.style.display = "none";
     } else {
-      alert(data.erro || "Erro ao cadastrar escola.");
+      //alert(data.erro || "Erro ao cadastrar escola.");
+      showPopup("Erro",data.erro || "Erro ao cadastrar escola.");
     }
   } catch (err) {
     console.error(err);
-    alert("Erro na conexão com o servidor.");
+    //alert("Erro na conexão com o servidor.");
+    showPopup("Erro","Erro na conexão com o servidor.");
   }
 });
 
@@ -94,7 +97,7 @@ function createSchoolCard(school) {
 
 // Ao carregar, mostrar escolas já salvas
 window.addEventListener("DOMContentLoaded", async () => {
-  const is_user_admin = sessionStorage.getItem("is_user_admin");
+  const is_user_admin = localStorage.getItem("is_user_admin");
 
   if (is_user_admin === "1") {
     // Admin → pode cadastrar escola
@@ -111,7 +114,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 // Carregar escolas já cadastradas
 async function carregarEscolas() {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   try {
     const response = await fetch("/school/listSchool", {

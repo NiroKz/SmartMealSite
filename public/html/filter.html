@@ -7,6 +7,7 @@
     <title>Filtro</title>
     <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
     <link rel="stylesheet" href="../styles/filter.css">
+    <link rel="stylesheet" href="../styles/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
@@ -55,7 +56,7 @@
                     <input type="date" id="filterDate">
                 </div>
                 <div>
-                    <button id="filterBtn" class="filter-apply">Aplicar Filtro</button>
+                    <button id="filterBtn" class="btn-control">Aplicar Filtro</button>
                 </div>
             </div>
 
@@ -72,7 +73,7 @@
                             <th>Aluno</th>
                             <th>Almoço</th>
                             <th>Janta</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody id="studentsTableBody">
@@ -88,8 +89,15 @@
             <p><b>&copy; 2025 Smart Meal</b></p>
         </div>
     </footer>
-
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title">Título</h2>
+            <p id="popup-message">Mensagem do sistema...</p>
+        </div>
+    </div>
     <!-- Script JS -->
+    <script src="../js/popup.js"></script>
     <script src="../js/filter.js"></script>
     <script src="../js/config.js"></script>
 </body>

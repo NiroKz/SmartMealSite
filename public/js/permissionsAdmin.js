@@ -24,10 +24,6 @@ window.loadPermissions = async function () {
         <td><input type="checkbox" ${user.access_stock ? "checked" : ""}></td>
         <td><input type="checkbox" ${user.access_production ? "checked" : ""}></td>
         <td><input type="checkbox" ${user.access_accesses ? "checked" : ""}></td>
-        <td><input type="checkbox" ${user.access_student_register ? "checked" : ""}></td>
-        <td><input type="checkbox" ${user.access_reports ? "checked" : ""}></td>
-        <td><input type="checkbox" ${user.access_student_perm ? "checked" : ""}></td>
-        <td><input type="checkbox" ${user.access_class_register ? "checked" : ""}></td>
         <td><button class="save-btn">Salvar</button></td>
       `;
 
@@ -37,11 +33,7 @@ window.loadPermissions = async function () {
         const updatedPermissions = {
           access_stock: inputs[0].checked,
           access_production: inputs[1].checked,
-          access_accesses: inputs[2].checked,
-          access_student_register: inputs[3].checked,
-          access_reports: inputs[4].checked,
-          access_student_perm: inputs[5].checked,
-          access_class_register: inputs[6].checked,
+          access_accesses: inputs[2].checked
         };
         await savePermissions(user.id_user, updatedPermissions);
       });
@@ -58,10 +50,6 @@ window.loadPermissions = async function () {
         <th>Estoque</th>
         <th>Produção</th>
         <th>Acessos</th>
-        <th>Cadastro Aluno</th>
-        <th>Relatórios</th>
-        <th>Cardápio</th>
-        <th>Administração</th>
         <th>Salvar</th>
       `;
     }
@@ -100,7 +88,8 @@ window.printPermissionsTable = function () {
     const container = document.getElementById('permissionsTableContainer');
     const table = document.getElementById('permissionsTable');
     if (!container || !table) {
-      alert('Tabela de permissões não encontrada. Abra a aba Administração antes de gerar o relatório.');
+      //alert('Tabela de permissões não encontrada. Abra a aba Administração antes de gerar o relatório.');
+      showPopup("Erro", "Tabela de permissões não encontrada.");
       return;
     }
 
@@ -122,7 +111,8 @@ window.printPermissionsTable = function () {
 
     const win = window.open('', '_blank');
     if (!win) {
-      alert('Não foi possível abrir a janela de impressão. Verifique se o bloqueador de pop-ups está ativo.');
+      //alert('Não foi possível abrir a janela de impressão. Verifique se o bloqueador de pop-ups está ativo.');
+      showPopup("Erro","Não foi possível abrir a janela de impressão.");
       return;
     }
 
@@ -165,7 +155,8 @@ window.printPermissionsTable = function () {
     }, 250);
   } catch (err) {
     console.error('Erro ao gerar janela de impressão:', err);
-    alert('Erro ao gerar relatório. Veja o console para mais detalhes.');
+    //alert('Erro ao gerar relatório. Veja o console para mais detalhes.');
+    showPopup("Erro", "Erro ao gerar relatório.");
   }
 };
 

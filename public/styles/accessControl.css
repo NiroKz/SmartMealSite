@@ -668,6 +668,20 @@ h2 {
     background: #2f3340;
 }
 
+.delete-btn {
+    background: #1a1e30;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.delete-btn:hover {
+    background: #2f3340;
+}
+
 @media (max-width: 900px) {
     #permissionsTable {
         min-width: 700px;

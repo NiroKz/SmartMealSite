@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hall</title>
     <link rel="shortcut icon" href="../images/SmartMealLogoIcon.png">
+    <link rel="stylesheet" href="../styles/popup.css">
     <link rel="stylesheet" href="../styles/hall.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -60,8 +61,16 @@
             </nav>
         </div>
     </footer>
-    <script src="../js/hall.js"></script>
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title">Título</h2>
+            <p id="popup-message">Mensagem do sistema...</p>
+        </div>
+    </div>
     <script src="../js/config.js"></script>
+    <script src="../js/popup.js"></script>
+    <script src="../js/hall.js"></script>
 </body>
 
 </html>

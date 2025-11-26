@@ -65,8 +65,27 @@ async function findUserByCPF(cpf) {
   return rows;
 }
 
+async function findUserById(id_user) {
+  const query = "SELECT id_user, user_name, cpf, phone, email, is_user_admin FROM school_user WHERE id_user = ?";
+  const [rows] = await db.execute(query, [id_user]);
+  return rows[0];
+}
+
+async function updateUser(id_user, user_name, email, phone) {
+  const query = `
+    UPDATE school_user 
+    SET user_name = ?, email = ?, phone = ?
+    WHERE id_user = ?
+  `;
+
+  const [result] = await db.execute(query, [user_name, email, phone, id_user]);
+  return result;
+}
+
 module.exports = {
   createUser,
   findUserByEmail,
   findUserByCPF,
+  findUserById,
+  updateUser
 };

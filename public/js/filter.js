@@ -50,7 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const date = dateInput.value;
 
     if (!course || !period || !grade || !date) {
-      alert("Preencha todos os filtros.");
+      //alert("Preencha todos os filtros.");
+      showPopup("Aviso","Preencha todos os filtros.");
       return;
     }
 
