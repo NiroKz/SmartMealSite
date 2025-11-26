@@ -68,9 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const students = await response.json();
       tableBody.innerHTML = "";
 
-      selectedDateDisplay.textContent = `Exibindo resultados para: ${new Date(
-        date
-      ).toLocaleDateString("pt-BR")}`;
+      selectedDateDisplay.textContent = `Exibindo resultados para: ${date.split("-").reverse().join("/")}`;
 
       if (!students.length) {
         tableBody.innerHTML = `<tr><td colspan="6">Nenhum aluno encontrado.</td></tr>`;
