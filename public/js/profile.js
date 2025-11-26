@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   localStorage.removeItem("is_user_admin");
   localStorage.removeItem("userId");
   localStorage.removeItem("usuario");
-  window.location.href = "/html/index.html";
+  window.location.href = "../../index.html";
 }
 
   const nameInput = document.getElementById("user_name");
