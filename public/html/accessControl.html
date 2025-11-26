@@ -55,9 +55,10 @@
             <a href="#" id="btn-admin" class="tab" data-btn="btn-admin" data-target="admin-section"
                 onclick="irParaSecao('admin')">Administração</a>
             <a href="#" id="btn-feedback" class="tab" onclick="irParaSecao('feedbacks')">Feedbacks</a>
-            
+            <a href="../html/studentRegister.html" id="btn-student-register" class="tab">Adicionar Aluno</a>
             <!-- <a href="../html/mealRegister.html" id="btn-foodmenu" class="tab">Adicionar Refeição</a> -->
-
+            <a href="../html/menuRegister.html" id="btn-foodmenu" class="tab">Adicionar Cardápio</a>
+            <a href="../html/classRegister.html" id="btn-foodmenu" class="tab">Adicionar Turma</a>
         </section>
 
         <br>
@@ -131,9 +132,6 @@
 
         <section id="refeicao" class="tab-section">
             <section class="access-control">
-                <h2>Cardápio</h2>
-                <a href="../html/menuRegister.html" id="btn-foodmenu" class="tab">Adicionar Cardápio</a> <!-- arrumar aq tigas-->
-                <br>
                 <h2>Controle de Refeições</h2>
 
                 <form class="meal-form" id="mealForm">
@@ -269,8 +267,11 @@
         </section>
         <section id="estoque" class="tab-section">
             <section class="access-control">
-                <h2>Controle de Estoque</h2>
+                <div class="access-controldiv">
+                <h2 class="access-controlh2">Controle de Estoque</h2>
                 <button class="reload-stock"><img src="../images/refresh.png" alt=""></button>
+                </div>
+
                 <!-- Botão -->
                 <button id="openModal" class="btn-control">Adicionar Produto</button>
 
@@ -360,9 +361,7 @@
                         <label>Telefone:<input type="text"></label>
                     </div>
                 </div> -->
-                <h2 class="admin-func-title">Gerenciar</h2>
-                <a href="../html/classRegister.html" id="btn-foodmenu" class="tab">Adicionar Turma</a>
-                <a href="../html/student.html" id="btn-student-register" class="tab">Adicionar Aluno</a> <!-- arrumar aq tigas-->
+
                 <h2 class="admin-func-title">Funcionários</h2>
                 <div id="permissionsTableContainer">
                     <h3>Gerenciar Permissões</h3>
@@ -403,7 +402,6 @@
                 <h2>Feedbacks</h2>
                 <div class="feedbacks-container">
                 </div>
-                <button id="loadMoreFeedbacks" class="load-more-btn">Carregar mais</button>
             </section>
         </section>
 
@@ -412,7 +410,7 @@
     </main>
     <div id="modulos-container" style="display:none;"></div>
     <script src="../js/permissionsAdmin.js"></script>
-    <script src="../js/accessControl.js"></script>
+    <script src="../js/accessControl.js"></script>    
     <script src="../js/graphicStudent.js"></script>
     <script src="../js/liberation.js"></script>
     <script src="../js/production.js"></script>

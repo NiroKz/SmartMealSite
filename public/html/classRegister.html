@@ -28,12 +28,15 @@
   </header>
 
   <main>
-    <div class="page-wrapper">
+    <div class="page-wrapper class-management">
+      <div class="class-container-up">
       <h1>Gerenciar Turmas</h1>
 
       <button id="openModal" class="btn-add">Nova Turma</button>
+      </div>
 
-      <div id="classContainer" class="class-container"></div>
+
+      <div id="classContainer" class="class-container-down"></div>
     </div>
   </main>
 
@@ -43,15 +46,15 @@
       <span class="close-btn" id="closeModal">&times;</span>
       <h2 id="modalTitle">Cadastrar Turma</h2>
 
-      <form id="classForm">
+      <form id="classForm" >
 
         <input type="hidden" id="classId">
 
         <label>Nome do curso (máx. 4 letras):</label>
-        <input type="text" id="nome" required maxlength="4">
+        <input class="modal-space" type="text" id="nome" required maxlength="4">
 
         <label>Período:</label>
-        <select id="period" required>
+        <select id="period" class="modal-space" required>
           <option value="">Selecione</option>
           <option value="M">Manhã</option>
           <option value="T">Tarde</option>
@@ -59,7 +62,7 @@
         </select>
 
         <label>Ano:</label>
-        <select id="grade" required>
+        <select id="grade" class="modal-space" required>
           <option value="">Selecione</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -74,12 +77,6 @@
   <footer>
     <div class="footer-container">
       <p><b>&copy; 2025 Smart Meal</b></p>
-      <nav>
-        <ul>
-          <li><a href="https://www.instagram.com/smartmeal_ejs/"><i class="fab fa-instagram"></i></a></li>
-          <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-        </ul>
-      </nav>
     </div>
   </footer>
   <div id="popup" class="popup hidden">
